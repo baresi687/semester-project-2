@@ -9,14 +9,42 @@
   <title>Norbid - Home</title>
 </head>
 <body class="font-inter">
-<header class="bg-blue-900">
-  <div class="container">
-    <div>
-      <img src="img/logo.svg" alt="logo">
+<header class="bg-blue-900 relative">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="sm:flex items-center justify-between gap-x-8">
+      <div class="flex justify-between py-6">
+        <div class="w-44"><img src="img/logo.svg" alt="logo"></div>
+        <div id="hamburger-btn" class="sm:hidden"><img src="img/hamburger-menu.svg" alt="Open hamburger menu"></div>
+      </div>
+      <div id="search-profile-container" class="flex flex-row gap-1.5 pb-6 sm:pb-0 grow max-w-xl">
+        <label for="search" class="grow">
+          <input class="w-full h-8 rounded indent-2.5" id="search" type="text" placeholder="Search for listings">
+        </label>
+        <button id="search-btn" class="bg-amber-50 h-8 px-3 rounded font-medium">Search</button>
+      </div>
+      <div id="sign-up-log-in-desktop" class="hidden sm:flex gap-3 ml-auto">
+        <button class="h-10 w-20 bg-amber-400 text-black rounded-md">Sign Up</button>
+        <button class="h-10 w-20 bg-blue-700 text-white rounded-md">Sign In</button>
+      </div>
     </div>
   </div>
+  <nav id="hamburger-menu"
+       class="ease-out duration-300 absolute w-full bg-gray-800 text-white translate-x-full sm:translate-x-0">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <ul id="menu" class="pt-2 pb-8 sm:flex flex-row gap-8 sm:py-3">
+        <li class="border-b border-slate-700 pt-7 pb-4 sm:border-0 sm:p-0"><a href="/">Home</a></li>
+        <li class="border-b border-slate-700 pt-7 pb-4 sm:border-0 sm:p-0">Categories</li>
+        <li class="border-b border-slate-700 pt-7 pb-4 sm:border-0 sm:p-0">Auctions</li>
+        <li class="border-b border-slate-700 pt-7 pb-4 sm:border-0 sm:p-0">Services & Support</li>
+        <li class="mt-8 font-medium sm:hidden">
+          <button class="h-10 bg-amber-400 text-black w-full rounded-md">Sign Up</button>
+        </li>
+        <li class="mt-8 font-medium sm:hidden">
+          <button class="h-10 bg-blue-700 text-white w-full rounded-md">Sign In</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </header>
-<h1 class="font-krub font-medium text-3xl">HEADING</h1>
-<p>Paragraph</p>
 </body>
 </html>
