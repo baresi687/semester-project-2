@@ -11,23 +11,25 @@
 </head>
 <body class="font-inter overflow-x-hidden">
 <header class="bg-blue-900 relative">
-  <div class="container mx-auto px-4 max-w-7xl xl:px-0">
-    <div class="sm:flex items-center justify-between gap-x-8">
-      <div class="flex justify-between py-6">
-        <div class="w-44"><img src="img/logo.svg" alt="logo"></div>
-        <div id="hamburger-btn" class="cursor-pointer sm:hidden"><img src="img/hamburger-menu.svg"
-                                                                      alt="Open hamburger menu"></div>
+  <div id="header-main">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      <div class="sm:flex items-center justify-between gap-x-8">
+        <div class="flex justify-between py-6">
+          <div class="w-44"><img src="img/logo.svg" alt="logo"></div>
+          <div id="hamburger-btn" class="cursor-pointer sm:hidden"><img src="img/hamburger-menu.svg"
+                                                                        alt="Open hamburger menu"></div>
+        </div>
+        <div id="search-profile-container" class="flex flex-row gap-1.5 pb-6 sm:pb-0 grow max-w-xl">
+          <label for="search" class="grow">
+            <input class="w-full h-8 rounded indent-2.5" id="search" type="text" placeholder="Search for listings">
+          </label>
+          <button id="search-btn" class="bg-amber-50 h-8 px-3 rounded font-medium">Search</button>
+        </div>
+        <nav id="sign-up-log-in-desktop" class="hidden sm:flex gap-3 ml-auto">
+          <a href="sign-up.html" class="bg-amber-400 text-black rounded-md py-2 px-4 whitespace-nowrap">Sign Up</a>
+          <a href="sign-in-html" class="bg-blue-700 text-white rounded-md py-2 px-4 whitespace-nowrap">Sign In</a>
+        </nav>
       </div>
-      <div id="search-profile-container" class="flex flex-row gap-1.5 pb-6 sm:pb-0 grow max-w-xl">
-        <label for="search" class="grow">
-          <input class="w-full h-8 rounded indent-2.5" id="search" type="text" placeholder="Search for listings">
-        </label>
-        <button id="search-btn" class="bg-amber-50 h-8 px-3 rounded font-medium">Search</button>
-      </div>
-      <nav id="sign-up-log-in-desktop" class="hidden sm:flex gap-3 ml-auto">
-        <a href="sign-up.html" class="bg-amber-400 text-black rounded-md py-2 px-4 whitespace-nowrap">Sign Up</a>
-        <a href="sign-in-html" class="bg-blue-700 text-white rounded-md py-2 px-4 whitespace-nowrap">Sign In</a>
-      </nav>
     </div>
   </div>
   <nav id="hamburger-menu"
