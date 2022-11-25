@@ -21,18 +21,20 @@
           <div id="hamburger-btn" class="cursor-pointer sm:hidden"><img src="img/hamburger-menu.svg"
                                                                         alt="Open hamburger menu"></div>
         </div>
-        <div id="search-profile-container" class="flex flex-row gap-1.5 pb-6 sm:pb-0 grow max-w-xl">
-          <label for="search" class="grow">
-            <input class="w-full h-8 rounded indent-2.5" id="search" type="text" placeholder="Search for listings">
-          </label>
-          <button id="search-btn" class="bg-amber-50 h-8 px-3 rounded font-medium hover:bg-amber-100">Search</button>
+        <div id="search-profile-container" class="flex flex-row sm:grow sm:justify-between sm:gap-4 sm:items-center">
+          <div id="search-container" class="flex flex-row gap-1.5 pb-6 sm:pb-0 grow max-w-xl sm:order-1">
+            <label for="search" class="grow">
+              <input class="w-full h-8 rounded indent-2.5" id="search" type="text" placeholder="Search for listings">
+            </label>
+            <button id="search-btn" class="bg-amber-50 h-8 px-3 rounded font-medium hover:bg-amber-100">Search</button>
+          </div>
+          <nav id="sign-up-log-in-desktop" class="hidden sm:flex gap-3 ml-auto order-2">
+            <a href="sign-up.html"
+               class="bg-amber-400 text-black rounded-md py-2 px-4 whitespace-nowrap hover:brightness-110">Sign Up</a>
+            <a href="sign-in-html"
+               class="bg-blue-700 text-white rounded-md py-2 px-4 whitespace-nowrap hover:bg-blue-600">Sign In</a>
+          </nav>
         </div>
-        <nav id="sign-up-log-in-desktop" class="hidden sm:flex gap-3 ml-auto">
-          <a href="sign-up.html"
-             class="bg-amber-400 text-black rounded-md py-2 px-4 whitespace-nowrap hover:brightness-110">Sign Up</a>
-          <a href="sign-in-html"
-             class="bg-blue-700 text-white rounded-md py-2 px-4 whitespace-nowrap hover:bg-blue-600">Sign In</a>
-        </nav>
       </div>
     </div>
   </div>
@@ -47,14 +49,6 @@
         <li class="border-b border-slate-700 pt-7 pb-4 sm:border-0 sm:p-0">Categories</li>
         <li class="border-b border-slate-700 pt-7 pb-4 sm:border-0 sm:p-0">Auctions</li>
         <li class="border-b border-slate-700 pt-7 pb-4 sm:border-0 sm:p-0">Services & Support</li>
-        <li class="mt-8 font-medium sm:hidden">
-          <a href="sign-up.html"
-             class="block bg-amber-400 text-black text-center w-full rounded-md py-2 hover:brightness-110">Sign Up</a>
-        </li>
-        <li class="mt-8 font-medium sm:hidden">
-          <a href="sign-in.html"
-             class="block bg-blue-700 text-white text-center w-full rounded-md py-2 hover:bg-blue-600">Sign In</a>
-        </li>
       </ul>
     </div>
   </nav>

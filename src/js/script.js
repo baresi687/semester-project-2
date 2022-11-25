@@ -1,6 +1,7 @@
 import "../css/style.css";
 import openMenu from "../img/hamburger-menu.svg"
 import closeMenu from "../img/close-hamburger-menu.svg"
+import {createNavHeaderBar} from "./components/createNavHeaderBar";
 
 const hamburgerBtn = document.querySelector('#hamburger-btn')
 const hamburgerMenu = document.querySelector('#hamburger-menu')
@@ -23,5 +24,6 @@ window.addEventListener('click', function (event) {
   }
 })
 
+createNavHeaderBar()
 
 
