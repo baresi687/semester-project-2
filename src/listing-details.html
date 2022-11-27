@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/script.js" type="module"></script>
+  <title>Norbid - </title>
+</head>
+<body class="font-inter">
+<header class="bg-blue-900 relative">
+  <div id="header-main">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      <div class="sm:flex items-center justify-between gap-x-8">
+        <div class="flex justify-between py-6">
+          <a href="/">
+            <div class="w-44"><img src="img/logo.svg" alt="logo" title="Home"></div>
+          </a>
+          <div id="hamburger-btn" class="cursor-pointer sm:hidden"><img src="img/hamburger-menu.svg"
+                                                                        alt="Open hamburger menu"></div>
+        </div>
+        <div id="search-profile-container" class="flex flex-row sm:grow sm:justify-between sm:gap-4 sm:items-center">
+          <div id="search-container" class="flex flex-row gap-1.5 pb-6 sm:pb-0 grow max-w-xl sm:order-1">
+            <label for="search" class="grow">
+              <input class="w-full h-8 rounded indent-2.5" id="search" type="text" placeholder="Search for listings">
+            </label>
+            <button id="search-btn" class="bg-amber-50 h-8 px-3 rounded font-medium hover:bg-amber-100">Search</button>
+          </div>
+          <nav id="sign-up-log-in-desktop" class="hidden sm:flex gap-3 ml-auto order-2">
+            <a href="sign-up.html"
+               class="bg-amber-400 text-black rounded-md py-2 px-4 whitespace-nowrap hover:brightness-110">Sign Up</a>
+            <a href="sign-in-html"
+               class="bg-blue-700 text-white rounded-md py-2 px-4 whitespace-nowrap hover:bg-blue-600">Sign In</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav id="hamburger-menu"
+       class="ease-out duration-300 absolute w-full bg-gray-800 text-white -translate-x-full sm:-translate-x-0 sm:relative">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      <ul id="menu" class="py-10 sm:flex flex-row gap-8 sm:py-3">
+        <li class="border-b border-slate-700 mb-8 pb-4 hover:underline underline-offset-8 decoration-2 sm:border-0 sm:p-0 sm:m-0">
+          <a href="/" class="block">Home</a>
+        </li>
+        <li class="border-b border-slate-700 mb-8 pb-4 sm:border-0 sm:p-0 sm:m-0">Categories</li>
+        <li class="border-b border-slate-700 mb-8 pb-4 sm:border-0 sm:p-0 sm:m-0">Auctions</li>
+        <li class="border-b border-slate-700 mb-8 pb-4 sm:border-0 sm:p-0 sm:m-0">Services & Support</li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<main class="mb-20">
+  <div id="breadcrumb" class="py-8">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      You are here: <a href="/"
+                       class="text-blue-700 font-medium hover:underline underline-offset-4 decoration-2">Home</a> >
+      Listing details
+    </div>
+  </div>
+  <section id="Listing-details" class="">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      <h2 id="listing-title" class="text-3xl font-krub font-semibold mb-4">NIZZAN ARIYA 2019</h2>
+      <div id="listing-details-container" class="flex flex-col gap-8 mb-10 sm:flex-row">
+        <div id="listing-img" class="max-h-96 overflow-hidden sm:flex-1">
+          <img
+              src="img/placeholder-image.svg"
+              alt="placeholder img" class="w-full">
+        </div>
+        <div id="listing-bid-description" class="flex flex-col gap-6 sm:flex-1">
+          <div id="listing-description" class="sm:order-2">
+            <h3 class="text-xl font-krub font-semibold my-2">Description</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas pulvinar nunc a porttitor.
+              Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas pulvinar nunc a porttitor.
+              Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+          </div>
+          <div id="listing-bid" class="flex flex-col gap-4 bg-gray-200 py-10 px-8 lg:px-32">
+            <h3 class="text-2xl font-krub font-semibold">NIZZAN ARIYA 2019</h3>
+            <p>Current bid: <span class="text-emerald-700 font-bold">100 NOK</span></p>
+            <p>Time left: <span class="text-amber-500 font-bold">1 days two hours</span></p>
+            <div id="bid" class="flex items-center gap-2">
+              <p class="whitespace-nowrap">Your bid: </p>
+              <label for="bid-on-listing" class="grow">
+                <input id="bid-on-listing" class="w-full h-8 rounded indent-2.5" type="text"
+                       placeholder="Enter your bid">
+              </label>
+            </div>
+            <button id="bid-btn" class="bg-amber-400 w-full rounded-md py-2 hover:brightness-110">Place Bid</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="bg-gray-800 pt-16 pb-4 text-white">
+  <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+    <div id="footer-content" class="flex flex-col gap-14 pb-28 sm:flex-row justify-between">
+      <div id="footer-logo-description" class="sm:w-40">
+        <a href="/">
+          <div class="pb-4"><img src="img/logo.svg" alt="logo"></div>
+        </a>
+        <p class="font-extralight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas pulvinar
+          nunc
+          a
+          porttitor. </p>
+      </div>
+      <div>
+        <p class="pb-2 font-bold">About Us</p>
+        <ul class="font-extralight">
+          <li>Our History</li>
+          <li>How it works</li>
+          <li>Careers</li>
+          <li>Community</li>
+        </ul>
+      </div>
+      <div>
+        <p class="pb-2 font-bold">Services</p>
+        <ul class="font-extralight">
+          <li>FAQ</li>
+          <li>Resources</li>
+          <li>Shipping</li>
+          <li>Videos</li>
+          <li>Licensing</li>
+          <li>Terms</li>
+        </ul>
+      </div>
+      <div>
+        <p class="pb-2 font-bold">Connect with us</p>
+        <ul class="font-extralight">
+          <li>Facebook</li>
+          <li>Twitter</li>
+          <li>Youtube</li>
+          <li>Instagram</li>
+          <li>TikTok</li>
+          <li>LinkedIn</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="text-center">This website is for educational purpose only</p>
+</footer>
+</body>
+</html>
