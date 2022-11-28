@@ -60,47 +60,23 @@
       Listing details
     </div>
   </div>
-  <section id="Listing-details" class="">
+  <section id="listing-details" class="">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
-      <h2 id="listing-title" class="text-3xl font-krub font-semibold mb-4">NIZZAN ARIYA 2019</h2>
+      <h2 id="listing-title" class="text-3xl font-krub font-semibold mb-4"></h2>
       <div id="listing-details-container" class="flex flex-col gap-8 mb-10 sm:flex-row">
         <div id="listing-img" class="flex flex-col gap-6 sm:flex-1">
           <div id="listing-img-main" class="h-96 w-full bg-cover bg-top"
                style="background-image: url('img/placeholder-image.svg')"></div>
-          <div id="listing-img-gallery" class="grid grid-cols-5 flex-wrap gap-4">
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-            <div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
-                 style="background-image: url('img/placeholder-image.svg')"></div>
-          </div>
+          <div id="listing-img-gallery" class="grid grid-cols-5 flex-wrap gap-4"></div>
         </div>
         <div id="listing-bid-description" class="flex flex-col gap-12 sm:flex-1">
           <div id="listing-description" class="sm:order-2">
             <h3 class="text-xl font-krub font-semibold my-2">Description</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas pulvinar nunc a porttitor.
-              Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas pulvinar nunc a porttitor.
-              Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            <p></p>
           </div>
           <div id="listing-bid" class="flex flex-col gap-4 bg-gray-200 py-10 px-8 lg:px-32">
-            <h3 class="text-2xl font-krub font-semibold">NIZZAN ARIYA 2019</h3>
-            <p>Current bid: <span class="text-emerald-700 font-bold">100 NOK</span></p>
+            <h3 id="listing-bid-title" class="text-2xl font-krub font-semibold"></h3>
+            <p>Current bid: <span id="current-bid" class="text-emerald-700 font-bold"></span></p>
             <p>Time left: <span class="text-amber-500 font-bold">1 days two hours</span></p>
             <div id="bid" class="flex items-center gap-2">
               <p class="whitespace-nowrap">Your bid: </p>
@@ -113,6 +89,7 @@
           </div>
         </div>
       </div>
+      <div id="general-error" class="text-2xl pb-24 text-red-500 text-center hidden"></div>
     </div>
   </section>
 </main>
