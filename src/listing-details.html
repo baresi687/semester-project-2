@@ -6,10 +6,10 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="js/script.js" type="module"></script>
-  <script src="js/index.js" type="module"></script>
-  <title>Norbid - Home</title>
+  <script src="js/listingDetails.js" type="module"></script>
+  <title>Norbid - </title>
 </head>
-<body class="font-inter">
+<body class="flex flex-col min-h-screen overflow-y-scroll font-inter">
 <header class="bg-blue-900 relative">
   <div id="header-main">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
@@ -52,32 +52,45 @@
     </div>
   </nav>
 </header>
-<main>
+<main class="flex-1 mb-20">
   <div id="breadcrumb" class="py-8">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
-      You are here: Home
+      You are here: <a href="/"
+                       class="text-blue-700 font-medium hover:underline underline-offset-4 decoration-2">Home</a> >
+      Listing details
     </div>
   </div>
-  <section id="headline">
-    <div class="container mx-auto max-w-sm px-4 max-w-7xl bg-blue-900 text-white px-12 py-12 sm:max-w-7xl">
-      <h1 class="text-3xl font-krub font-semibold pb-6 sm:text-center">Fastest growing auction site in the world</h1>
-      <div id="headlines-reasons" class="flex flex-col gap-1 sm:flex-row justify-center sm:gap-8">
-        <h2 class="text-lg">Easy to use <img class="inline align-top ml-2" src="img/checkmark.svg"
-                                             alt="Headline checkmark"></h2>
-        <h2 class="text-lg">Free <img class="inline align-top ml-2" src="img/checkmark.svg"
-                                      alt="Headline checkmark"></h2>
-        <h2 class="text-lg">Wide selection <img class="inline align-top ml-2" src="img/checkmark.svg"
-                                                alt="Headline checkmark"></h2>
-      </div>
-    </div>
-  </section>
-  <section id="listings">
+  <section id="listing-details" class="">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
-      <h2 class="text-3xl font-krub font-semibold mt-24">Latest Listings</h2>
-      <div id="listings-container"
-           class="flex flex-col gap-16 mt-8 mb-16 sm:gap-x-8 gap-y-16 sm:grid grid-cols-3 lg:grid-cols-4"></div>
+      <h2 id="listing-title" class="text-3xl font-krub font-semibold mb-4"></h2>
+      <div id="listing-details-container" class="flex flex-col gap-8 mb-10 sm:flex-row">
+        <div id="listing-img" class="flex flex-col gap-6 sm:flex-1">
+          <div id="listing-img-main" class="h-96 w-full bg-cover bg-top"
+               style="background-image: url('img/placeholder-image.svg')"></div>
+          <div id="listing-img-gallery" class="grid grid-cols-5 flex-wrap gap-4"></div>
+        </div>
+        <div id="listing-bid-description" class="flex flex-col gap-12 sm:flex-1">
+          <div id="listing-description" class="sm:order-2">
+            <h3 class="text-xl font-krub font-semibold my-2">Description</h3>
+            <p></p>
+          </div>
+          <div id="listing-bid" class="flex flex-col gap-4 bg-gray-200 py-10 px-8 lg:px-32">
+            <h3 id="listing-bid-title" class="text-2xl font-krub font-semibold"></h3>
+            <p>Current bid: <span id="current-bid" class="text-emerald-700 font-bold"></span></p>
+            <p>Time left: <span id="bid-remaining" class="text-amber-500 font-bold">1 days two hours</span></p>
+            <div id="bid" class="flex items-center gap-2">
+              <p class="whitespace-nowrap">Your bid: </p>
+              <label for="bid-on-listing" class="grow">
+                <input id="bid-on-listing" class="w-full h-8 rounded indent-2.5" type="text"
+                       placeholder="Enter your bid">
+              </label>
+            </div>
+            <button id="bid-btn" class="bg-amber-400 w-full rounded-md py-2 hover:brightness-110">Place Bid</button>
+          </div>
+        </div>
+      </div>
+      <div id="general-error" class="text-2xl pb-24 text-red-500 text-center hidden"></div>
     </div>
-    <div id="general-error" class="text-2xl pb-24 text-red-500 text-center hidden"></div>
   </section>
 </main>
 <footer class="bg-gray-800 pt-16 pb-4 text-white">
