@@ -5,6 +5,7 @@ import {showErrorMsg} from "./utils/errorMessages";
 import {DateTime} from "luxon";
 
 const now = DateTime.now()
+const pageTitle = document.querySelector('title')
 const listingID = new URLSearchParams(window.location.search).get('id')
 const titleOfListing = document.querySelector('#listing-title')
 const listingBidContainerTitle = document.querySelector('#listing-bid-title')
@@ -35,6 +36,7 @@ getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bid
     !isDescription ? isDescription = 'No Description' : null
     !listingImg ? listingImg = listingPlaceholderImg : null
 
+    pageTitle.innerText = `Norbid - ${isTitle}`
     timeLeft.textContent = timeRemaining
     titleOfListing.textContent = isTitle
     listingDescription.textContent = isDescription
