@@ -5,6 +5,8 @@ import {createNavHeaderBar} from "./components/createNavHeaderBar";
 
 const hamburgerBtn = document.querySelector('#hamburger-btn')
 const hamburgerMenu = document.querySelector('#hamburger-menu')
+const searchInput = document.querySelector('#search')
+const searchBtn = document.querySelector('#search-btn')
 
 hamburgerBtn.onclick = function () {
   hamburgerMenu.classList.toggle('-translate-x-0')
@@ -26,4 +28,14 @@ window.addEventListener('click', function (event) {
 
 createNavHeaderBar()
 
+searchBtn.addEventListener('click', function () {
+  if (searchInput.value.trim()) {
+    location.href = `../search-listings.html?search=${searchInput.value}`
+  }
+})
 
+searchInput.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter' && searchInput.value.trim()) {
+    location.href = `../search-listings.html?search=${searchInput.value}`
+  }
+})
