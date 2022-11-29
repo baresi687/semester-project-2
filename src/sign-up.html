@@ -67,21 +67,21 @@
         <form id="sign-up" class="flex flex-col gap-5 sm:max-w-xs sm:m-0 sm:m-auto">
           <div class="flex flex-col gap-2">
             <label for="name" class="block font-bold">Name</label>
-              <input id="name" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="text" placeholder="Your name">
+            <input id="name" name="name" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="text" placeholder="Your name">
             <div class="hidden validation-error text-rose-700 py-1.5">
               Name must not contain punctuation symbols apart from underscore
             </div>
           </div>
           <div class="flex flex-col gap-2">
             <label for="email" class="block font-bold">Email address</label>
-            <input id="email" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="text" placeholder="Your email address">
+            <input id="email" name="email"  required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="text" placeholder="Your email address">
             <div class="hidden validation-error text-rose-700 py-1.5">
               Email must be a stud.noroff.no address
             </div>
           </div>
           <div class="flex flex-col gap-2">
             <label for="password" class="block font-bold">Password</label>
-            <input id="password" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="password" placeholder="Password">
+            <input id="password" name="password" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="password" placeholder="Password">
             <div class="hidden validation-error text-rose-700 py-1.5">
               Password must 8 characters or more
             </div>
@@ -94,7 +94,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <button class="bg-blue-700 text-white rounded-md py-2 w-full hover:bg-blue-600">Sign Up</button>
+            <button type="submit" class="bg-blue-700 text-white rounded-md py-2 w-full hover:bg-blue-600">Sign Up</button>
           </div>
           <p class="text-center mt-2">Already have an account? <a href="sign-in.html" class="text-blue-700 font-medium hover:underline underline-offset-4 decoration-2">Sign In</a> </p>
         </form>

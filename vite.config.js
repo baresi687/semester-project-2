@@ -8,7 +8,8 @@ export default defineConfig({
       input: {
         index: resolve(__dirname, './src/index.html'),
         listingDetails: resolve(__dirname, './src/listing-details.html'),
-        searchListings: resolve(__dirname, './src/search-listings.html')
+        searchListings: resolve(__dirname, './src/search-listings.html'),
+        signUp: resolve(__dirname, './src/sign-up.html')
       }
     },
     outDir: '../dist'
