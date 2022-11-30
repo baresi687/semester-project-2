@@ -26,4 +26,13 @@ function checkConfirmPassword(elem, password) {
   return elem.value.trim() === password.value.trim();
 }
 
-export {validateString, checkName, checkEmail, checkLength, checkConfirmPassword}
+function isImage(url) {
+  const imgRegex = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
+  if (typeof url === 'object') {
+    return imgRegex.test(url.value)
+  } else {
+    return imgRegex.test(url);
+  }
+}
+
+export {validateString, checkName, checkEmail, checkLength, checkConfirmPassword, isImage}

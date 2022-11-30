@@ -2,6 +2,7 @@ import {validateString, checkName, checkEmail, checkLength, checkConfirmPassword
 import {API_BASE_URL, SIGN_UP} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
+import {redDirect} from "./utils/reDirect";
 
 const signUpForm = document.querySelector('#sign-up')
 const name = document.querySelector('#name')
@@ -9,6 +10,7 @@ const email = document.querySelector('#email')
 const password = document.querySelector('#password')
 const confirmPassword = document.querySelector('#confirm-password')
 
+redDirect()
 signUpForm.addEventListener('submit', function (event) {
   event.preventDefault()
   document.querySelector('#general-error').classList.add('hidden')

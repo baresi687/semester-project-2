@@ -2,10 +2,14 @@ import {validateString, checkLength, checkEmail} from "./utils/validation";
 import {API_BASE_URL, SIGN_IN} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
+import {saveToStorage} from "./utils/storage";
+import {redDirect} from "./utils/reDirect";
 
 const signInForm = document.querySelector('#sign-in')
 const email = document.querySelector('#email')
 const password = document.querySelector('#password')
+
+redDirect()
 
 signInForm.addEventListener('submit', function (event) {
   event.preventDefault()
@@ -38,13 +42,19 @@ async function signIn(url, postData) {
     const responseJSON = await response.json()
 
     if (response.ok) {
-      console.log(response)
-      console.log(responseJSON)
+      saveToStorage('accessToken', responseJSON.accessToken)
+      const userKey = {
+        name: responseJSON.name,
+        email: responseJSON.email,
+        credits: responseJSON.credits,
+        avatar: responseJSON.avatar
+      }
+      saveToStorage('userKey', userKey)
+      location.href = '/'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message)
       signInForm.querySelector('button').innerHTML = 'Sign In'
     }
-
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
   }
