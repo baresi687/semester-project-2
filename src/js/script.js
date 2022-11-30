@@ -9,6 +9,8 @@ const hamburgerMenu = document.querySelector('#hamburger-menu')
 const searchInput = document.querySelector('#search')
 const searchBtn = document.querySelector('#search-btn')
 
+hamburgerMenu.classList.add('z-10')
+
 hamburgerBtn.onclick = function () {
   hamburgerMenu.classList.toggle('-translate-x-0')
   if (hamburgerMenu.classList.contains('-translate-x-0')) {

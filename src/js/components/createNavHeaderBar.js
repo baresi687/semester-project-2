@@ -20,10 +20,10 @@ export function createNavHeaderBar() {
      </a>`
 
   const navItemsSignedIn =
-    `<li class="border-b border-slate-700 mb-8 pb-4 hover:underline underline-offset-8 decoration-2 sm:border-0 sm:p-0 sm:m-0 text-amber-400">
+    `<li class="border-b border-slate-700 mb-8 pb-4 hover:text-amber-300 sm:border-0 sm:p-0 sm:m-0 text-amber-400">
        <a href="create-listing.html" class="block">Create Listing</a>
      </li>
-     <li id="sign-out" class="border-b border-slate-700 pb-4 hover:underline underline-offset-8 decoration-2 sm:border-0 sm:p-0">
+     <li id="sign-out" class="border-b border-slate-700 pb-4 hover:text-slate-300 sm:border-0 sm:p-0">
        <a href="/" class="block">Sign Out</a>
      </li>`
 
