@@ -6,8 +6,7 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="js/script.js" type="module"></script>
-  <script src="js/searchListings.js" type="module"></script>
-  <title>Norbid - Search Results</title>
+  <title>Norbid - Sign In</title>
 </head>
 <body class="flex flex-col min-h-screen overflow-y-scroll font-inter">
 <header class="bg-blue-900 relative">
@@ -57,14 +56,50 @@
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
       You are here: <a href="/"
                        class="text-blue-700 font-medium hover:underline underline-offset-4 decoration-2">Home</a> >
-      Search Results
+      Sign In
     </div>
   </div>
   <section id="search-results" class="">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
-      <h1 class="text-3xl font-krub font-semibold mb-4">Search Results</h1>
-      <div id="search-results-container"
-           class="flex flex-col gap-16 mt-8 mb-16 sm:gap-x-8 gap-y-16 sm:grid grid-cols-3 lg:grid-cols-4"></div>
+      <h1 class="text-3xl font-krub font-semibold mb-4 sm:text-center">Sign In</h1>
+      <div id="sign-in-container" class="mt-8 mb-14">
+        <!--<form id="sign-up" class="flex flex-col gap-5 sm:max-w-xs sm:m-0 sm:m-auto">
+          <div class="flex flex-col gap-2">
+            <label for="name" class="block font-bold">Name</label>
+            <input id="name" name="name" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="text" placeholder="Your name">
+            <div class="hidden validation-error text-rose-700 py-1.5">
+              Name must not contain punctuation symbols apart from underscore
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="email" class="block font-bold">Email address</label>
+            <input id="email" name="email"  required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="text" placeholder="Your email address">
+            <div class="hidden validation-error text-rose-700 py-1.5">
+              Email must be a stud.noroff.no address
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="password" class="block font-bold">Password</label>
+            <input id="password" name="password" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="password" placeholder="Password">
+            <div class="hidden validation-error text-rose-700 py-1.5">
+              Password must 8 characters or more
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="confirm-password" class="block font-bold">Confirm Password</label>
+            <input id="confirm-password" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" type="password" placeholder="Password">
+            <div class="hidden validation-error text-rose-700 py-1.5">
+              Confirmed password does not match password
+            </div>
+          </div>
+          <div class="mt-4">
+            <button type="submit" class="relative bg-blue-700 text-white rounded-md py-2 w-full hover:bg-blue-600">
+              Sign Up
+            </button>
+          </div>
+          <p class="text-center mt-2">Already have an account? <a href="sign-in.html" class="text-blue-700 font-medium hover:underline underline-offset-4 decoration-2">Sign In</a> </p>
+        </form>-->
+      </div>
       <div id="general-error" class="text-2xl pb-24 text-red-500 text-center hidden"></div>
     </div>
   </section>
