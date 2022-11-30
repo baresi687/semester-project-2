@@ -1,38 +1,35 @@
-import {validateString, checkName, checkEmail, checkLength, checkConfirmPassword} from "./utils/validation";
-import {API_BASE_URL, SIGN_UP} from "./settings/api";
+import {validateString, checkLength, checkEmail} from "./utils/validation";
+import {API_BASE_URL, SIGN_IN} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
+import {saveToStorage} from "./utils/storage";
 import {redDirect} from "./utils/reDirect";
 
-const signUpForm = document.querySelector('#sign-up')
-const name = document.querySelector('#name')
+const signInForm = document.querySelector('#sign-in')
 const email = document.querySelector('#email')
 const password = document.querySelector('#password')
-const confirmPassword = document.querySelector('#confirm-password')
 
 redDirect()
-signUpForm.addEventListener('submit', function (event) {
+
+signInForm.addEventListener('submit', function (event) {
   event.preventDefault()
   document.querySelector('#general-error').classList.add('hidden')
 
   const isFormValid =
-    validateString(name, checkName) &&
     validateString(email, checkEmail) &&
-    validateString(password, checkLength, 8) &&
-    validateString(confirmPassword, checkConfirmPassword, password);
+    validateString(password, checkLength, 8);
 
   if (isFormValid) {
     const formData = {
-      name: name.value,
       email: email.value,
       password: password.value
     }
-    signUp(API_BASE_URL + SIGN_UP, formData)
+    signIn(API_BASE_URL + SIGN_IN, formData)
   }
 })
 
-async function signUp(url, postData) {
-  signUpForm.querySelector('button').innerHTML = buttonProcessing
+async function signIn(url, postData) {
+  signInForm.querySelector('button').innerHTML = buttonProcessing
   try {
     const options = {
       method: 'POST',
@@ -45,12 +42,19 @@ async function signUp(url, postData) {
     const responseJSON = await response.json()
 
     if (response.ok) {
-      location.href = '../sign-in.html'
+      saveToStorage('accessToken', responseJSON.accessToken)
+      const userKey = {
+        name: responseJSON.name,
+        email: responseJSON.email,
+        credits: responseJSON.credits,
+        avatar: responseJSON.avatar
+      }
+      saveToStorage('userKey', userKey)
+      location.href = '/'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message)
-      signUpForm.querySelector('button').innerHTML = 'Sign Up'
+      signInForm.querySelector('button').innerHTML = 'Sign In'
     }
-
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
   }
