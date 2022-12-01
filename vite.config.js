@@ -10,7 +10,8 @@ export default defineConfig({
         listingDetails: resolve(__dirname, './src/listing-details.html'),
         searchListings: resolve(__dirname, './src/search-listings.html'),
         signUp: resolve(__dirname, './src/sign-up.html'),
-        signIn: resolve(__dirname, './src/sign-in.html')
+        signIn: resolve(__dirname, './src/sign-in.html'),
+        profile: resolve(__dirname, './src/profile.html')
       }
     },
     outDir: '../dist'
