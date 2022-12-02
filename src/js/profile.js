@@ -80,7 +80,7 @@ function getProfileListings() {
     })
     .catch(error => {
       noListingsElement.classList.add('hidden')
-      showErrorMsg(document.querySelector('#general-error-listings'), `${error}: Could not get listings. Please try again later`)
+      showErrorMsg(document.querySelector('#general-error-listings'), `Could not get listings... Please try again later`)
     })
     .finally(item => {
       const deleteListingBtn = document.querySelectorAll('.delete-listing')
@@ -118,12 +118,16 @@ async function updateAvatar(url, putData) {
       }
       saveToStorage('userKey', userKey)
       location.href = '/profile.html'
-    } else {
-      avatarUpdateForm.querySelector('button').innerHTML = 'Update Avatar'
+    } else if (response.status === 400) {
       showErrorMsg(document.querySelector('#general-error-avatar'), responseJSON.errors[0].message)
+    } else {
+      showErrorMsg(document.querySelector('#general-error-avatar'))
     }
+
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error-avatar'))
+  } finally {
+    avatarUpdateForm.querySelector('button').innerHTML = 'Update Avatar'
   }
 }
 
