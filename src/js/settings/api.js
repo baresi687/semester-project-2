@@ -7,5 +7,6 @@ const GET_LISTING_DETAILS = '/listings/'
 const SIGN_UP = '/auth/register'
 const SIGN_IN = '/auth/login'
 const AVATAR_UPDATE = `/profiles/${userName}/media`
+const PROFILE_LISTINGS = `/profiles/${userName}/listings`
 
-export {API_BASE_URL, GET_LISTINGS, GET_LISTING_DETAILS, SIGN_UP, SIGN_IN, AVATAR_UPDATE}
+export {API_BASE_URL, GET_LISTINGS, GET_LISTING_DETAILS, SIGN_UP, SIGN_IN, AVATAR_UPDATE, PROFILE_LISTINGS}

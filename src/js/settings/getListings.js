@@ -1,4 +1,4 @@
-export async function getListings(url) {
-  const response = await fetch(url)
+export async function getListings(url, options) {
+  const response = await fetch(url, options)
   return await response.json()
 }

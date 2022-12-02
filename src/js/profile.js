@@ -1,8 +1,10 @@
 import {getFromStorage, saveToStorage} from "./utils/storage";
 import {isImage, validateString} from "./utils/validation";
-import {API_BASE_URL, AVATAR_UPDATE} from "./settings/api";
+import {API_BASE_URL, AVATAR_UPDATE, PROFILE_LISTINGS} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
+import {getListings} from "./settings/getListings";
+import placeHolderImg from "../img/placeholder-image.svg"
 
 const {name, credits, avatar} = getFromStorage('userKey')
 const accessToken = getFromStorage('accessToken')
@@ -11,6 +13,9 @@ const userName = document.querySelector('#user-name')
 const availableCredits = document.querySelector('#credits')
 const avatarUpdateForm = document.querySelector('#avatar-update')
 const avatarUpdate = document.querySelector('#avatar')
+const getlistingsOptions = {method: 'GET', headers: {Authorization: `Bearer ${accessToken}`}}
+const profileListingsContainer = document.querySelector('#listings-container')
+const noListingsElement = document.querySelector('#no-listings')
 
 availableCredits.textContent = credits
 userName.textContent = name
@@ -70,4 +75,36 @@ document.querySelectorAll('form input').forEach((item) => {
   }
 })
 
+getListings(API_BASE_URL+PROFILE_LISTINGS, getlistingsOptions)
+  .then(response => {
+    if (response.errors) {
+      throw new Error
+    } else {
+      if (response.length) {
+        profileListingsContainer.classList.remove('hidden')
+        noListingsElement.classList.add('hidden')
 
+        response.forEach(({id, title, media}) => {
+          let isMedia = media[0]
+          !isMedia ? isMedia = placeHolderImg : isMedia
+
+          profileListingsContainer.innerHTML +=
+            `<div class="flex flex-col gap-4 py-6 px-6 shadow shadow-gray-400 rounded-lg">
+               <div class=" flex flex-row gap-2 justify-between items-center">
+                 <h3 class="text-xl font-krub font-semibold">${title}</h3>
+                 <button data-id=${id} class="delete-listing bg-red-700 shrink-0 text-white rounded-md py-2 w-20 hover:bg-red-600">Delete</button>
+               </div>
+               <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
+                 <div class="rounded w-full h-56 bg-cover bg-center bg-no-repeat" style="background-image: url(${isMedia})"></div>
+                 <div class="block bg-blue-700 text-white text-center w-full rounded-md py-2 group-hover:bg-blue-600">Details</div>
+               </a>
+             </div>`
+        })
+      }
+    }
+
+  })
+  .catch(error => {
+    noListingsElement.classList.add('hidden')
+    showErrorMsg(document.querySelector('#general-error-listings'), `${error}: Could not get listings. Please try again later`)
+  })
