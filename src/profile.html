@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/script.js" type="module"></script>
+  <script src="js/profile.js" type="module"></script>
+  <title>Norbid - Profile</title>
+</head>
+<body class="flex flex-col min-h-screen overflow-y-scroll font-inter">
+<header class="bg-blue-900 relative">
+  <div id="header-main">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      <div class="sm:flex items-center justify-between gap-x-8">
+        <div class="flex justify-between py-6">
+          <a href="/">
+            <div class="w-44"><img src="img/logo.svg" alt="logo" title="Home"></div>
+          </a>
+          <div id="hamburger-btn" class="cursor-pointer sm:hidden"><img src="img/hamburger-menu.svg"
+                                                                        alt="Open hamburger menu"></div>
+        </div>
+        <div id="search-profile-container" class="flex flex-row sm:grow sm:justify-between sm:gap-4 sm:items-center">
+          <div id="search-container" class="flex flex-row gap-1.5 pb-6 sm:pb-0 grow max-w-xl sm:order-1">
+            <label for="search" class="grow">
+              <input class="w-full h-8 rounded indent-2.5" id="search" type="text" placeholder="Search for listings">
+            </label>
+            <button id="search-btn" class="bg-amber-50 h-8 px-3 rounded font-medium hover:bg-amber-100">Search</button>
+          </div>
+          <nav id="sign-up-log-in-desktop" class="hidden sm:flex gap-3 ml-auto order-2">
+            <a href="sign-up.html"
+               class="bg-amber-400 text-black rounded-md py-2 px-4 whitespace-nowrap hover:brightness-110">Sign Up</a>
+            <a href="sign-in.html"
+               class="bg-blue-700 text-white rounded-md py-2 px-4 whitespace-nowrap hover:bg-blue-600">Sign In</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav id="hamburger-menu"
+       class="ease-out duration-300 absolute w-full bg-gray-800 text-white -translate-x-full sm:-translate-x-0 sm:relative">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      <ul id="menu" class="py-10 sm:flex flex-row gap-8 sm:py-3">
+        <li class="border-b border-slate-700 mb-8 pb-4 hover:text-slate-300 sm:border-0 sm:p-0 sm:m-0">
+          <a href="/" class="block">Home</a>
+        </li>
+        <li class="border-b border-slate-700 mb-8 pb-4 sm:border-0 sm:p-0 sm:m-0">Categories</li>
+        <li class="border-b border-slate-700 mb-8 pb-4 sm:border-0 sm:p-0 sm:m-0">Auctions</li>
+        <li class="border-b border-slate-700 mb-8 pb-4 sm:border-0 sm:p-0 sm:m-0">Services & Support</li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<main class="flex-1">
+  <div id="breadcrumb" class="py-8">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      You are here: <a href="/"
+                       class="text-blue-700 font-medium hover:underline underline-offset-4 decoration-2">Home</a> >
+      Profile
+    </div>
+  </div>
+  <section id="profile" class="mb-10">
+    <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+      <div id="profile-container" class="flex flex-col gap-16 sm:flex-row sm:gap-10">
+        <div>
+          <h1 class="text-2xl mb-4 font-krub font-semibold">Profile</h1>
+          <div id="profile-info" class="px-10 py-12 shadow shadow-gray-400 rounded-lg sm:max-w-xs h-max">
+            <div id="avatar-img" style="background-image: url('img/profile.svg')" class="m-auto w-40 rounded-full h-40 bg-no-repeat bg-center bg-cover"></div>
+            <h2 id="user-name" class="text-3xl my-6 font-krub italic text-center">John</h2>
+            <p class="text-center mb-12">Total Credit: <span id="credits" class="font-semibold"></span></p>
+            <div id="avatar-update-container" class="">
+              <form id="avatar-update">
+                <label for="avatar" class="block my-2 font-bold">Update Avatar</label>
+                <input id="avatar" type="text" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" placeholder="Avatar URL">
+                <div class="hidden validation-error text-rose-700 py-1.5">
+                  Avatar URL must have an image ending (eg .jpg .gif .png etc)
+                </div>
+                <button type="submit" class="mt-4 relative bg-blue-700 text-white rounded-md py-2 w-full hover:bg-blue-600">Update Avatar</button>
+              </form>
+              <div id="general-error-avatar" class="text-xl mt-8 text-red-500 text-center hidden"></div>
+            </div>
+          </div>
+        </div>
+        <div id="profile-listings" class="pb-8 rounded-lg sm:grow sm:mt-0">
+          <h2 class="text-2xl mb-4 font-krub font-semibold">My Listings</h2>
+          <div id="no-listings" class="shadow shadow-gray-400 rounded-lg w-full p-6 sm:w-fit">
+            <p class="mb-2">You have no listings yet</p>
+            <a href="create-listing.html"
+               class="text-blue-700 font-medium hover:underline underline-offset-4 decoration-2">Create a Listing</a>
+          </div>
+          <div id="listings-container" class="hidden grid grid-cols gap-8 lg:grid-cols-2 lg:gap-y-12"></div>
+          <div id="general-error-listings" class="text-xl py-8 text-red-500 text-center hidden"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="bg-gray-800 pt-16 pb-4 text-white">
+  <div class="container mx-auto px-4 max-w-7xl xl:px-0">
+    <div id="footer-content" class="flex flex-col gap-14 pb-28 sm:flex-row justify-between">
+      <div id="footer-logo-description" class="sm:w-40">
+        <a href="/">
+          <div class="pb-4"><img src="img/logo.svg" alt="logo"></div>
+        </a>
+        <p class="font-extralight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas pulvinar
+          nunc
+          a
+          porttitor. </p>
+      </div>
+      <div>
+        <p class="pb-2 font-bold">About Us</p>
+        <ul class="font-extralight">
+          <li>Our History</li>
+          <li>How it works</li>
+          <li>Careers</li>
+          <li>Community</li>
+        </ul>
+      </div>
+      <div>
+        <p class="pb-2 font-bold">Services</p>
+        <ul class="font-extralight">
+          <li>FAQ</li>
+          <li>Resources</li>
+          <li>Shipping</li>
+          <li>Videos</li>
+          <li>Licensing</li>
+          <li>Terms</li>
+        </ul>
+      </div>
+      <div>
+        <p class="pb-2 font-bold">Connect with us</p>
+        <ul class="font-extralight">
+          <li>Facebook</li>
+          <li>Twitter</li>
+          <li>Youtube</li>
+          <li>Instagram</li>
+          <li>TikTok</li>
+          <li>LinkedIn</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="text-center">This website is for educational purpose only</p>
+</footer>
+</body>
+</html>
