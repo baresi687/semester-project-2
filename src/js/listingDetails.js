@@ -18,19 +18,32 @@ const listingImgGallery = document.querySelector('#listing-img-gallery')
 getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bids=true')
   .then(({title, media, bids, description, endsAt}) => {
     const listingEndsAt = DateTime.fromISO(endsAt);
-    const diffInDays = listingEndsAt.diff(now, ['days', 'hours', "minutes"]).toObject();
-    const {days, hours, minutes} = diffInDays
-    let timeRemaining = `${days} days, ${hours} hours & ${parseInt(minutes)} minutes`
+    const diffObject = listingEndsAt.diff(now, ['days', 'hours', 'minutes']).toObject();
+    let timeRemaining = ''
 
-    let isTitle = title
+    for (const property in diffObject) {
+      if (diffObject[property] > 0) {
+        switch (property) {
+          case 'days':
+            timeRemaining += `${diffObject[property]} day(s), `
+            break;
+          case 'hours':
+            timeRemaining += `${diffObject[property]} hour(s) & `
+            break;
+          case 'minutes':
+            timeRemaining += `${parseInt(diffObject[property])} ${property}`
+            break;
+        }
+      } else if (diffObject[property] < 0) {
+        timeRemaining = 'BIDDING HAS ENDED'
+        timeLeft.classList.add('text-red-400')
+        document.querySelector('#bid-btn').disabled = true
+      }
+    }
+
+    let isTitle = title;
     let isDescription = description
     let listingImg = media[0]
-
-    if (days < 0 || hours < 0 || minutes < 0) {
-      timeRemaining = 'BIDDING HAS ENDED'
-      timeLeft.classList.add('text-red-400')
-      document.querySelector('#bid-btn').disabled = true
-    }
 
     !isTitle ? isTitle = 'No Title' : null
     !isDescription ? isDescription = 'No Description' : null
@@ -57,12 +70,12 @@ getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bid
       })
     }
   })
-  .catch(error => {
+  .catch(() => {
     document.querySelector('#listing-details-container').innerHTML = ''
     titleOfListing.innerHTML = ''
     showErrorMsg(document.querySelector('#general-error'))
   })
-  .finally(item => {
+  .finally(() => {
     const galleryImgs = document.querySelectorAll('.gallery-img')
     galleryImgs.forEach((item) => {
       item.onclick = function (event) {
