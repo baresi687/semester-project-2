@@ -62,20 +62,20 @@
   </div>
   <section id="listing-details" class="">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
-      <h1 id="listing-title" class="text-3xl font-krub font-semibold mb-4"></h1>
+      <h1 id="listing-title" class="capitalize text-3xl font-krub font-semibold mb-4"></h1>
       <div id="listing-details-container" class="flex flex-col gap-8 mb-10 sm:flex-row">
         <div id="listing-img" class="flex flex-col gap-6 sm:flex-1">
-          <div id="listing-img-main" class="h-96 w-full bg-cover bg-top"
+          <div id="listing-img-main" class="h-96 w-full bg-cover bg-top rounded"
                style="background-image: url('img/placeholder-image.svg')"></div>
           <div id="listing-img-gallery" class="grid grid-cols-5 flex-wrap gap-4"></div>
         </div>
         <div id="listing-bid-description" class="flex flex-col gap-12 sm:flex-1">
           <div id="listing-description" class="sm:order-2">
             <h2 class="text-xl font-krub font-semibold my-2">Description</h2>
-            <p></p>
+            <p class="first-letter:capitalize"></p>
           </div>
-          <div id="listing-bid" class="flex flex-col gap-4 bg-gray-200 py-10 px-8 lg:px-32">
-            <h2 id="listing-bid-title" class="text-2xl font-krub font-semibold"></h2>
+          <div id="listing-bid" class="flex flex-col gap-4 bg-gray-200 py-10 px-8 lg:px-32 rounded">
+            <h2 id="listing-bid-title" class="capitalize text-2xl font-krub font-semibold"></h2>
             <p>Current bid: <span id="current-bid" class="text-emerald-700 font-bold"></span></p>
             <p>Time left: <span id="bid-remaining" class="text-amber-500 font-bold">1 days two hours</span></p>
             <form id="bid-listing-form">
