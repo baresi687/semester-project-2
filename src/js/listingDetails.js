@@ -22,6 +22,7 @@ const bidBtn = document.querySelector('#bid-btn')
 const accessToken = getFromStorage('accessToken')
 const userKey = getFromStorage('userKey')
 const bidModal = document.querySelector('#modal')
+const bidsMadeOnListing = document.querySelector('#bid-list')
 
 getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bids=true')
   .then(({id, title, media, bids, description, endsAt}) => {
@@ -79,6 +80,14 @@ getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bid
     }
 
     accessToken.length ? bidOnListingInput.setAttribute('required', '') : null
+
+    if (accessToken.length && bids.length) {
+      bidsMadeOnListing.classList.remove('hidden')
+      bids.reverse().forEach(({amount, bidderName}) => {
+        bidsMadeOnListing.querySelector('#bid-list-details').innerHTML +=
+          `<li class="my-1 w-full"><span class="text-emerald-700 font-semibold">${amount} credits</span> by ${bidderName}</li>`
+      })
+    }
 
     bidListingForm.addEventListener('submit', function (event) {
       event.preventDefault()
