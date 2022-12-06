@@ -3,7 +3,7 @@ import {getListings} from "./settings/getListings";
 import listingPlaceholderImg from "../img/placeholder-image.svg";
 import {showErrorMsg} from "./utils/errorMessages";
 import {DateTime} from "luxon";
-import {getFromStorage} from "./utils/storage";
+import {getFromStorage, saveToStorage} from "./utils/storage";
 import {buttonProcessing} from "./components/loader";
 
 const now = DateTime.now()
@@ -20,6 +20,7 @@ const bidListingForm = document.querySelector('#bid-listing-form')
 const bidOnListingInput = document.querySelector('#bid-on-listing')
 const bidBtn = document.querySelector('#bid-btn')
 const accessToken = getFromStorage('accessToken')
+const userKey = getFromStorage('userKey')
 const bidModal = document.querySelector('#modal')
 
 getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bids=true')
@@ -127,6 +128,8 @@ async function bidOnlisting(url, postData) {
     const responseJSON = await response.json()
 
     if (response.status === 200) {
+      userKey.credits = userKey.credits - postData.amount
+      saveToStorage('userKey', userKey)
       location.reload()
     } else if (response.status === 400 || response.status === 403) {
       showErrorMsg(document.querySelector('.bidding-error'), responseJSON.errors[0].message)
