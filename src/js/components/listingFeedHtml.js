@@ -16,7 +16,7 @@ export function listingFeedHtml(arr) {
 
     return `<a href="listing-details.html?id=${id}" class="group">
                 <div class="flex flex-col gap-4">
-                  <div class="h-64 w-full bg-gray-800 bg-cover bg-center"
+                  <div class="h-64 w-full bg-cover bg-center"
                        style="background-image: url(${listingImg})"></div>
                   <h3 class="text-xl font-medium">${titleOFListing}</h3>
                   <p>Current Bid: <span class="text-emerald-700 font-bold">${currentBid}</span></p>

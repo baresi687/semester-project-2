@@ -73,7 +73,7 @@ getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bid
     if (media.length > 1) {
       media.forEach(item => {
         listingImgGallery.innerHTML +=
-          `<div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
+          `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-top lg:h-20"
                 style="background-image: url(${item})"></div>`
       })
     }
