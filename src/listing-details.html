@@ -78,18 +78,39 @@
             <h2 id="listing-bid-title" class="text-2xl font-krub font-semibold"></h2>
             <p>Current bid: <span id="current-bid" class="text-emerald-700 font-bold"></span></p>
             <p>Time left: <span id="bid-remaining" class="text-amber-500 font-bold">1 days two hours</span></p>
-            <div id="bid" class="flex items-center gap-2">
-              <p class="whitespace-nowrap">Your bid: </p>
-              <label for="bid-on-listing" class="grow">
-                <input id="bid-on-listing" class="w-full h-8 rounded indent-2.5" type="text"
-                       placeholder="Enter your bid">
-              </label>
-            </div>
-            <button id="bid-btn" class="bg-amber-400 w-full rounded-md py-2 hover:brightness-110">Place Bid</button>
+            <form id="bid-listing-form">
+              <div id="bid" class="flex items-center gap-2">
+                <p class="whitespace-nowrap">Your bid: </p>
+                <div class="grow">
+                  <label for="bid-on-listing">
+                    <input id="bid-on-listing" class="w-full h-8 rounded indent-2.5" type="number"
+                           placeholder="Enter your bid">
+                  </label>
+                </div>
+              </div>
+              <button id="bid-btn" type="submit" class="bg-amber-400 w-full rounded-md py-2 mt-4 hover:brightness-110">Place Bid</button>
+            </form>
+            <div class="hidden bidding-error text-rose-700 bg-rose-100 border-rose-700 border-2 rounded-md py-2 mt-2 text-center"></div>
           </div>
         </div>
       </div>
       <div id="general-error" class="text-2xl pb-24 text-red-500 text-center hidden"></div>
+    </div>
+  </section>
+  <section id="modal" class="hidden fixed z-10 w-full h-full top-0 bg-neutral-900/90">
+    <div id="modal-content" class="max-w-sm mt-48 m-auto">
+      <div class="rounded-xl bg-white">
+        <div class="flex justify-between bg-blue-700 py-3 px-4 text-white">
+          <p class="text-lg font-semibold">Place Bid</p>
+          <img src="img/close-hamburger-menu.svg" id="close-modal" class="cursor-pointer hover:opacity-70" alt="Close Modal">
+        </div>
+        <div class="flex flex-col gap-4 px-6 py-10">
+          <h4 class="text-lg font-krub font-semibold mb-4">You have to be Signed In to place bids</h4>
+          <a href="sign-in.html" class="block bg-blue-700 text-white text-center w-full rounded-md py-2 hover:bg-blue-600">Sign In</a>
+          <p class="text-center">Don't have an account?</p>
+          <a href="sign-up.html" class="block bg-amber-400 text-black text-center w-full rounded-md py-2 hover:brightness-110">Sign Up</a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
