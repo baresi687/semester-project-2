@@ -5,6 +5,7 @@ import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
 import {getListings} from "./settings/getListings";
 import placeHolderImg from "../img/placeholder-image.svg"
+import profileImg from "../img/profile.svg"
 import {redirectNoToken} from "./utils/reDirect";
 
 const {name} = getFromStorage('userKey')
@@ -28,6 +29,8 @@ getListings(API_BASE_URL + GET_PROFILE, getlistingsOptions )
       availableCredits.textContent = credits
       if (avatar && isImage(avatar)) {
         avatarImg.style.backgroundImage = `url(${avatar})`
+      } else {
+        avatarImg.style.backgroundImage =  `url(${profileImg})`
       }
     } else {
       showErrorMsg(document.querySelector('#general-error-profile'), 'Error getting profile information. Please try again later')
