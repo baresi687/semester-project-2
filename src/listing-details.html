@@ -9,7 +9,7 @@
   <script src="js/listingDetails.js" type="module"></script>
   <title>Norbid - </title>
 </head>
-<body class="flex flex-col min-h-screen overflow-y-scroll font-inter">
+<body class="flex flex-col min-h-screen overflow-y-scroll font-inter text-gray-800">
 <header class="bg-blue-900 relative">
   <div id="header-main">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
@@ -72,12 +72,12 @@
         <div id="listing-bid-description" class="flex flex-col gap-12 sm:flex-1">
           <div id="listing-description" class="sm:order-2">
             <h2 class="text-xl font-krub font-semibold my-2">Description</h2>
-            <p class="first-letter:capitalize"></p>
+            <p class="first-letter:capitalize whitespace-pre-line"></p>
           </div>
-          <div id="listing-bid" class="relative flex flex-col gap-4 bg-gray-200 py-10 px-8 lg:px-32 rounded">
+          <div id="listing-bid" class="relative flex flex-col gap-4 bg-slate-200 py-10 px-8 lg:px-28 rounded">
             <h2 id="listing-bid-title" class="capitalize text-2xl font-krub font-semibold"></h2>
             <div class="relative">
-              <p>Current bid: <span id="current-bid" class="text-emerald-700 font-bold"></span></p>
+              <p class="flex gap-3">Current bid:<span id="current-bid" class="text-emerald-700 font-semibold"></span></p>
               <div id="bid-list" class="absolute top-0 right-0 group hidden">
                 <span class="bg-emerald-700 text-white text-sm rounded p-1.5 cursor-pointer">View Bids</span>
                 <div class="relative w-full">
@@ -85,7 +85,8 @@
                 </div>
               </div>
             </div>
-            <p>Time left: <span id="bid-remaining" class="text-amber-500 font-bold">1 days two hours</span></p>
+            <p class="flex gap-14">Seller: <span id="listing-seller" class="font-bold"></span></p>
+            <p class="flex gap-8 whitespace-nowrap">Time left: <span id="bid-remaining" class="text-red-400 font-bold whitespace-normal">1 days two hours</span></p>
             <form id="bid-listing-form">
               <div id="bid" class="flex items-center gap-2">
                 <p class="whitespace-nowrap">Your bid: </p>
