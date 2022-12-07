@@ -5,7 +5,7 @@ import {buttonProcessing} from "./components/loader";
 import {saveToStorage} from "./utils/storage";
 import {redDirect} from "./utils/reDirect";
 
-const signInForm = document.querySelector('#sign-in')
+const signInForm = document.querySelector('#sign-in-form')
 const email = document.querySelector('#email')
 const password = document.querySelector('#password')
 

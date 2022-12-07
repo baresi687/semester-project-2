@@ -4,7 +4,7 @@ import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
 import {redDirect} from "./utils/reDirect";
 
-const signUpForm = document.querySelector('#sign-up')
+const signUpForm = document.querySelector('#sign-up-form')
 const name = document.querySelector('#name')
 const email = document.querySelector('#email')
 const password = document.querySelector('#password')
