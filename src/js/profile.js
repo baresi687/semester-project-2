@@ -1,13 +1,13 @@
 import {getFromStorage, saveToStorage} from "./utils/storage";
 import {isImage, validateString} from "./utils/validation";
-import {API_BASE_URL, AVATAR_UPDATE, PROFILE_LISTINGS, GET_LISTING_DETAILS} from "./settings/api";
+import {API_BASE_URL, AVATAR_UPDATE, PROFILE_LISTINGS, GET_PROFILE, GET_LISTING_DETAILS} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
 import {getListings} from "./settings/getListings";
 import placeHolderImg from "../img/placeholder-image.svg"
 import {redirectNoToken} from "./utils/reDirect";
 
-const {name, credits, avatar} = getFromStorage('userKey')
+const {name} = getFromStorage('userKey')
 const accessToken = getFromStorage('accessToken')
 const avatarImg = document.querySelector('#avatar-img')
 const userName = document.querySelector('#user-name')
@@ -20,15 +20,25 @@ const noListingsElement = document.querySelector('#no-listings')
 
 redirectNoToken()
 
-availableCredits.textContent = credits
 userName.textContent = name
-
-if (avatar && isImage(avatar)) {
-  avatarImg.style.backgroundImage = `url(${avatar})`
-}
+getListings(API_BASE_URL + GET_PROFILE, getlistingsOptions )
+  .then(response => {
+    if (response.name) {
+      const {avatar, credits} = response
+      availableCredits.textContent = credits
+      if (avatar && isImage(avatar)) {
+        avatarImg.style.backgroundImage = `url(${avatar})`
+      }
+    } else {
+      showErrorMsg(document.querySelector('#general-error-profile'), 'Error getting profile information. Please try again later')
+    }
+  })
+  .catch(() => {
+    showErrorMsg(document.querySelector('#general-error-profile'))
+  })
 
 avatarUpdateForm.addEventListener('submit', function (event) {
-  document.querySelector('#general-error-avatar').classList.add('hidden')
+  document.querySelector('#general-error-profile').classList.add('hidden')
   event.preventDefault()
 
   if (validateString(avatarUpdate, isImage)) {
@@ -65,7 +75,7 @@ function getProfileListings() {
             profileListingsContainer.innerHTML +=
               `<div class="flex flex-col gap-4 py-6 px-6 shadow shadow-gray-400 rounded-lg">
                  <div class=" flex flex-row gap-2 justify-between items-center">
-                   <h3 class="text-xl font-krub font-semibold">${title}</h3>
+                   <h3 class="text-xl font-krub font-semibold capitalize">${title}</h3>
                    <button data-id=${id} class="delete-listing bg-red-700 shrink-0 text-white rounded-md py-2 w-20 hover:bg-red-600">Delete</button>
                  </div>
                  <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
@@ -78,11 +88,11 @@ function getProfileListings() {
       }
 
     })
-    .catch(error => {
+    .catch(() => {
       noListingsElement.classList.add('hidden')
       showErrorMsg(document.querySelector('#general-error-listings'), `Could not get listings... Please try again later`)
     })
-    .finally(item => {
+    .finally(() => {
       const deleteListingBtn = document.querySelectorAll('.delete-listing')
       deleteListingBtn.forEach(listing => {
         listing.onclick = function () {
@@ -119,13 +129,13 @@ async function updateAvatar(url, putData) {
       saveToStorage('userKey', userKey)
       location.href = '/profile.html'
     } else if (response.status === 400) {
-      showErrorMsg(document.querySelector('#general-error-avatar'), responseJSON.errors[0].message)
+      showErrorMsg(document.querySelector('#general-error-profile'), responseJSON.errors[0].message)
     } else {
-      showErrorMsg(document.querySelector('#general-error-avatar'))
+      showErrorMsg(document.querySelector('#general-error-profile'))
     }
 
   } catch (error) {
-    showErrorMsg(document.querySelector('#general-error-avatar'))
+    showErrorMsg(document.querySelector('#general-error-profile'))
   } finally {
     avatarUpdateForm.querySelector('button').innerHTML = 'Update Avatar'
   }
