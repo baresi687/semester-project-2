@@ -8,5 +8,6 @@ const SIGN_UP = '/auth/register'
 const SIGN_IN = '/auth/login'
 const AVATAR_UPDATE = `/profiles/${userName}/media`
 const PROFILE_LISTINGS = `/profiles/${userName}/listings`
+const GET_PROFILE = PROFILE_LISTINGS.slice(0, -9)
 
-export {API_BASE_URL, GET_LISTINGS, GET_LISTING_DETAILS, SIGN_UP, SIGN_IN, AVATAR_UPDATE, PROFILE_LISTINGS}
+export {API_BASE_URL, GET_LISTINGS, GET_LISTING_DETAILS, SIGN_UP, SIGN_IN, AVATAR_UPDATE, PROFILE_LISTINGS, GET_PROFILE}
