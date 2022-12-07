@@ -75,7 +75,7 @@ function getProfileListings() {
             profileListingsContainer.innerHTML +=
               `<div class="flex flex-col gap-4 py-6 px-6 shadow shadow-gray-400 rounded-lg">
                  <div class=" flex flex-row gap-2 justify-between items-center">
-                   <h3 class="text-xl font-krub font-semibold">${title}</h3>
+                   <h3 class="text-xl font-krub font-semibold capitalize">${title}</h3>
                    <button data-id=${id} class="delete-listing bg-red-700 shrink-0 text-white rounded-md py-2 w-20 hover:bg-red-600">Delete</button>
                  </div>
                  <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
