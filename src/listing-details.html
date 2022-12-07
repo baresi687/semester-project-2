@@ -52,7 +52,7 @@
     </div>
   </nav>
 </header>
-<main class="flex-1 mb-20">
+<main class="flex-1 mb-12">
   <div id="breadcrumb" class="py-8">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
       You are here: <a href="/"
@@ -63,13 +63,13 @@
   <section id="listing-details" class="">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
       <h1 id="listing-title" class="capitalize text-3xl font-krub font-semibold mb-4"></h1>
-      <div id="listing-details-container" class="flex flex-col gap-8 mb-10 sm:flex-row">
-        <div id="listing-img" class="flex flex-col gap-6 sm:flex-1">
-          <div id="listing-img-main" class="h-96 w-full bg-cover bg-top rounded"
+      <div id="listing-details-container" class="flex flex-col gap-12 sm:flex-row sm:gap-8 lg:mb-10">
+        <div id="listing-img" class="flex flex-col sm:flex-1">
+          <div id="listing-img-main" class="h-96 w-full bg-cover bg-center bg-no-repeat rounded lg:h-full"
                style="background-image: url('img/placeholder-image.svg')"></div>
           <div id="listing-img-gallery" class="grid grid-cols-5 flex-wrap gap-4"></div>
         </div>
-        <div id="listing-bid-description" class="flex flex-col gap-12 sm:flex-1">
+        <div id="listing-bid-description" class="flex flex-col gap-12 sm:flex-1 sm:gap-8">
           <div id="listing-description" class="p-8 shadow shadow-gray-400 rounded sm:order-2">
             <h2 class="text-xl font-krub font-semibold mb-2">Description</h2>
             <p class="first-letter:capitalize whitespace-pre-line"></p>
@@ -81,7 +81,7 @@
               <div id="bid-list" class="absolute top-0 right-0 group hidden">
                 <span class="bg-emerald-700 text-white text-sm rounded p-1.5 cursor-pointer">View Bids</span>
                 <div class="relative w-full">
-                  <ul id="bid-list-details" class="absolute w-max top-2 right-0 text-black bg-yellow-400 px-4 py-2 rounded hidden group-hover:block"></ul>
+                  <ul id="bid-list-details" class="absolute z-10 w-max top-2 right-0 text-black bg-yellow-400 px-4 py-2 rounded hidden group-hover:block"></ul>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
                   </label>
                 </div>
               </div>
-              <button id="bid-btn" type="submit" class="bg-amber-400 w-full rounded-md py-2 mt-4 hover:brightness-110">Place Bid</button>
+              <button id="bid-btn" type="submit" class="relative bg-amber-400 w-full rounded-md py-2 mt-4 hover:brightness-110">Place Bid</button>
             </form>
             <div class="hidden bidding-error text-rose-700 bg-rose-100 border-rose-700 border-2 rounded-md py-2 mt-2 text-center"></div>
           </div>
