@@ -13,6 +13,7 @@ const titleOfListing = document.querySelector('#listing-title')
 const listingBidContainerTitle = document.querySelector('#listing-bid-title')
 const listingDescription = document.querySelector('#listing-description p')
 const currentBid = document.querySelector('#current-bid')
+const listingSeller = document.querySelector('#listing-seller')
 const timeLeft = document.querySelector('#bid-remaining')
 const listingImgMain = document.querySelector('#listing-img-main')
 const listingImgGallery = document.querySelector('#listing-img-gallery')
@@ -22,9 +23,10 @@ const bidBtn = document.querySelector('#bid-btn')
 const accessToken = getFromStorage('accessToken')
 const userKey = getFromStorage('userKey')
 const bidModal = document.querySelector('#modal')
+const bidsMadeOnListing = document.querySelector('#bid-list')
 
 getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bids=true')
-  .then(({id, title, media, bids, description, endsAt}) => {
+  .then(({id, title, media, bids, description, endsAt, seller}) => {
     const listingEndsAt = DateTime.fromISO(endsAt);
     const diffObject = listingEndsAt.diff(now, ['days', 'hours', 'minutes']).toObject();
     let timeRemaining = ''
@@ -64,6 +66,7 @@ getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bid
     listingBidContainerTitle.textContent = isTitle
     listingImgMain.style.backgroundImage = `url(${listingImg})`
     currentBid.textContent = 'NO BIDS'
+    listingSeller.textContent = seller.name
 
     if (bids.length) {
       const highestBid = Math.max(...bids.map(bid => bid.amount))
@@ -71,14 +74,23 @@ getListings(API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bid
     }
 
     if (media.length > 1) {
+      document.querySelector('#listing-img').classList.add('gap-6')
       media.forEach(item => {
         listingImgGallery.innerHTML +=
-          `<div class="gallery-img cursor-pointer h-14 w-full bg-gray-800 bg-cover bg-top lg:h-20"
+          `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-center lg:h-20"
                 style="background-image: url(${item})"></div>`
       })
     }
 
     accessToken.length ? bidOnListingInput.setAttribute('required', '') : null
+
+    if (accessToken.length && bids.length) {
+      bidsMadeOnListing.classList.remove('hidden')
+      bids.reverse().forEach(({amount, bidderName}) => {
+        bidsMadeOnListing.querySelector('#bid-list-details').innerHTML +=
+          `<li class="my-1 w-full"><span class="text-emerald-700 font-semibold">${amount} credits</span> by ${bidderName}</li>`
+      })
+    }
 
     bidListingForm.addEventListener('submit', function (event) {
       event.preventDefault()
