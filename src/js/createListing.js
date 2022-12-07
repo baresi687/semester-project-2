@@ -61,10 +61,10 @@ createListingForm.addEventListener('submit', function (event) {
           showErrorMsg(document.querySelector('#general-error'))
         }
       })
-      .catch(error => {
+      .catch(() => {
         showErrorMsg(document.querySelector('#general-error'))
       })
-      .finally(item => {
+      .finally(() => {
         createListingForm.querySelector('button').innerHTML = 'Create Listing'
       })
   }

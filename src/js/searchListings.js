@@ -27,6 +27,6 @@ getListings(API_BASE_URL+GET_LISTINGS)
     }
 
   })
-  .catch(error => {
+  .catch(() => {
     showErrorMsg(document.querySelector('#general-error'))
   })

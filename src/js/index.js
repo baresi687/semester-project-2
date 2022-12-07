@@ -10,6 +10,6 @@ getListings(API_BASE_URL + GET_LISTINGS)
     const html = listingFeedHtml(response)
     listingsContainer.innerHTML = html.join(' ')
   })
-  .catch(error => {
+  .catch(() => {
     showErrorMsg(document.querySelector('#general-error'))
   })
