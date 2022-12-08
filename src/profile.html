@@ -66,19 +66,24 @@
         <div>
           <h1 class="text-2xl mb-4 font-krub font-semibold">Profile</h1>
           <div id="profile-info" class="px-10 py-12 shadow shadow-gray-400 rounded-lg sm:max-w-xs h-max">
-            <div id="avatar-img" style="background-image: url('img/profile.svg')" class="m-auto w-40 rounded-full h-40 bg-no-repeat bg-center bg-cover"></div>
+            <div id="avatar-img" class="m-auto w-40 rounded-full h-40 bg-no-repeat bg-center bg-cover"></div>
             <h2 id="user-name" class="text-3xl my-6 font-krub italic text-center">John</h2>
             <p class="text-center mb-12">Total Credit: <span id="credits" class="font-semibold"></span></p>
-            <div id="avatar-update-container" class="">
+            <div id="avatar-update-container">
               <form id="avatar-update">
                 <label for="avatar" class="block my-2 font-bold">Update Avatar</label>
-                <input id="avatar" type="text" required class="bg-zinc-100 rounded indent-2.5 w-full h-8" placeholder="Avatar URL">
+                <input id="avatar" type="text" required class="bg-zinc-100 rounded indent-2.5 w-full h-8"
+                       placeholder="Avatar URL">
                 <div class="hidden validation-error text-rose-700 py-1.5">
                   Avatar URL must have an image ending (eg .jpg .gif .png etc)
                 </div>
-                <button type="submit" class="mt-4 relative bg-blue-700 text-white rounded-md py-2 w-full hover:bg-blue-600">Update Avatar</button>
+                <button type="submit"
+                        class="mt-4 relative bg-blue-700 text-white rounded-md py-2 w-full hover:bg-blue-600">Update
+                  Avatar
+                </button>
               </form>
-              <div id="general-error-profile" class="text-xl mt-8 text-red-500 text-center hidden overflow-hidden"></div>
+              <div id="general-error-profile"
+                   class="text-xl mt-8 text-rose-700 text-center bg-rose-100 border-rose-700 border-2 rounded-md p-4 w-fit hidden overflow-hidden"></div>
             </div>
           </div>
         </div>
@@ -90,7 +95,8 @@
                class="text-blue-700 font-medium hover:underline underline-offset-4 decoration-2">Create a Listing</a>
           </div>
           <div id="listings-container" class="hidden grid grid-cols gap-8 lg:grid-cols-2 lg:gap-y-12"></div>
-          <div id="general-error-listings" class="text-xl py-8 text-red-500 text-center hidden"></div>
+          <div id="general-error-listings"
+               class="text-xl text-rose-700 text-center bg-rose-100 border-rose-700 border-2 rounded-md p-4 w-fit hidden"></div>
         </div>
       </div>
     </div>

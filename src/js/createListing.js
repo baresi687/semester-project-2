@@ -1,5 +1,5 @@
 import {API_BASE_URL, GET_LISTING_DETAILS as POST_LISTING} from "./settings/api";
-import {isImage, validateString} from "./utils/validation";
+import {clearFormErrorsOnKeyUp, isImage, validateString} from "./utils/validation";
 import {getListings as createListing} from "./settings/getListings";
 import {getFromStorage} from "./utils/storage";
 import {DateTime} from "luxon";
@@ -34,11 +34,11 @@ createListingForm.addEventListener('submit', function (event) {
     const postData = {
       title: document.querySelector('#item-title').value.trim(),
       description: document.querySelector('#item-description').value.trim(),
-      media: [listingImgOne.value],
+      media: [listingImgOne.value.trim()],
       endsAt: dateValue
     }
     document.querySelectorAll('.optional-img').forEach(item => {
-      item.value ? postData.media.push(item.value) : null
+      item.value ? postData.media.push(item.value.trim()) : null
     })
 
     const options = {
@@ -50,7 +50,7 @@ createListingForm.addEventListener('submit', function (event) {
       body: JSON.stringify(postData)
     }
 
-    createListing(API_BASE_URL+POST_LISTING, options)
+    createListing(API_BASE_URL + POST_LISTING, options)
       .then(response => {
         if (response.id) {
           location.href = `listing-details.html?id=${response.id}`
@@ -61,18 +61,13 @@ createListingForm.addEventListener('submit', function (event) {
           showErrorMsg(document.querySelector('#general-error'))
         }
       })
-      .catch(error => {
+      .catch(() => {
         showErrorMsg(document.querySelector('#general-error'))
       })
-      .finally(item => {
+      .finally(() => {
         createListingForm.querySelector('button').innerHTML = 'Create Listing'
       })
   }
 })
 
-document.querySelectorAll('form .input-val').forEach((item) => {
-  item.onkeyup = function () {
-    this.classList.remove('bg-red-50')
-    this.nextElementSibling.classList.add('hidden')
-  }
-})
+clearFormErrorsOnKeyUp('form .input-val', '#general-error')

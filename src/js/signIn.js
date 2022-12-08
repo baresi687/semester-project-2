@@ -1,11 +1,16 @@
-import {validateString, checkLength, checkEmail} from "./utils/validation";
+import {
+  validateString,
+  checkLength,
+  checkEmail,
+  clearFormErrorsOnKeyUp
+} from "./utils/validation";
 import {API_BASE_URL, SIGN_IN} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
 import {saveToStorage} from "./utils/storage";
 import {redDirect} from "./utils/reDirect";
 
-const signInForm = document.querySelector('#sign-in')
+const signInForm = document.querySelector('#sign-in-form')
 const email = document.querySelector('#email')
 const password = document.querySelector('#password')
 
@@ -21,8 +26,8 @@ signInForm.addEventListener('submit', function (event) {
 
   if (isFormValid) {
     const formData = {
-      email: email.value,
-      password: password.value
+      email: email.value.trim(),
+      password: password.value.trim()
     }
     signIn(API_BASE_URL + SIGN_IN, formData)
   }
@@ -53,16 +58,14 @@ async function signIn(url, postData) {
       location.href = '/'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message)
-      signInForm.querySelector('button').innerHTML = 'Sign In'
     }
+
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
+
+  } finally {
+    signInForm.querySelector('button').innerHTML = 'Sign In'
   }
 }
 
-document.querySelectorAll('form input').forEach((item) => {
-  item.onkeyup = function () {
-    this.classList.remove('bg-red-50')
-    this.nextElementSibling.classList.add('hidden')
-  }
-})
+clearFormErrorsOnKeyUp('form input', '#general-error')

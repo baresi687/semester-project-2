@@ -9,7 +9,7 @@
   <script src="js/searchListings.js" type="module"></script>
   <title>Norbid - Search Results</title>
 </head>
-<body class="flex flex-col min-h-screen overflow-y-scroll font-inter">
+<body class="flex flex-col min-h-screen overflow-y-scroll font-inter text-gray-800">
 <header class="bg-blue-900 relative">
   <div id="header-main">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
@@ -60,12 +60,13 @@
       Search Results
     </div>
   </div>
-  <section id="search-results" class="">
+  <section id="search-results">
     <div class="container mx-auto px-4 max-w-7xl xl:px-0">
       <h1 class="text-3xl font-krub font-semibold mb-4">Search Results</h1>
       <div id="search-results-container"
            class="flex flex-col gap-16 mt-8 mb-16 sm:gap-x-8 gap-y-16 sm:grid grid-cols-3 lg:grid-cols-4"></div>
-      <div id="general-error" class="text-2xl pb-24 text-red-500 text-center hidden"></div>
+      <div id="general-error"
+           class="text-2xl mb-64 text-rose-700 text-center bg-rose-100 border-rose-700 border-2 rounded-md p-4 w-fit m-auto hidden"></div>
     </div>
   </section>
 </main>

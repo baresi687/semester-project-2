@@ -23,10 +23,10 @@ getListings(API_BASE_URL+GET_LISTINGS)
       const html = listingFeedHtml(filteredResponse)
       searchResultsContainer.innerHTML = html.join(' ')
     } else {
-      searchResultsContainer.innerHTML += `<h2 class="text-xl italic font-extralight font-krub mb-4">No Results Found</h2>`
+      searchResultsContainer.innerHTML += `<h2 class="text-xl italic font-extralight font-krub mb-60">No Results Found</h2>`
     }
 
   })
-  .catch(error => {
+  .catch(() => {
     showErrorMsg(document.querySelector('#general-error'))
   })

@@ -1,10 +1,11 @@
 import {getFromStorage, saveToStorage} from "./utils/storage";
-import {isImage, validateString} from "./utils/validation";
+import {clearFormErrorsOnKeyUp, isImage, validateString} from "./utils/validation";
 import {API_BASE_URL, AVATAR_UPDATE, PROFILE_LISTINGS, GET_PROFILE, GET_LISTING_DETAILS} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
 import {getListings} from "./settings/getListings";
 import placeHolderImg from "../img/placeholder-image.svg"
+import profileImg from "../img/profile.svg"
 import {redirectNoToken} from "./utils/reDirect";
 
 const {name} = getFromStorage('userKey')
@@ -21,13 +22,15 @@ const noListingsElement = document.querySelector('#no-listings')
 redirectNoToken()
 
 userName.textContent = name
-getListings(API_BASE_URL + GET_PROFILE, getlistingsOptions )
+getListings(API_BASE_URL + GET_PROFILE, getlistingsOptions)
   .then(response => {
     if (response.name) {
       const {avatar, credits} = response
       availableCredits.textContent = credits
       if (avatar && isImage(avatar)) {
         avatarImg.style.backgroundImage = `url(${avatar})`
+      } else {
+        avatarImg.style.backgroundImage = `url(${profileImg})`
       }
     } else {
       showErrorMsg(document.querySelector('#general-error-profile'), 'Error getting profile information. Please try again later')
@@ -43,16 +46,9 @@ avatarUpdateForm.addEventListener('submit', function (event) {
 
   if (validateString(avatarUpdate, isImage)) {
     const putData = {
-      avatar: avatarUpdate.value
+      avatar: avatarUpdate.value.trim()
     }
     updateAvatar(API_BASE_URL + AVATAR_UPDATE, putData)
-  }
-})
-
-document.querySelectorAll('form input').forEach((item) => {
-  item.onkeyup = function () {
-    this.classList.remove('bg-red-50')
-    this.nextElementSibling.classList.add('hidden')
   }
 })
 
@@ -156,3 +152,5 @@ async function deleteListing(url) {
     showErrorMsg(document.querySelector('#general-error-listings'))
   }
 }
+
+clearFormErrorsOnKeyUp('form input', '#general-error-profile')
