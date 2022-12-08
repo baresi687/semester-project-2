@@ -55,11 +55,13 @@ async function signUp(url, postData) {
       location.href = '../sign-in.html'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message)
-      signUpForm.querySelector('button').innerHTML = 'Sign Up'
     }
 
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
+
+  } finally {
+    signUpForm.querySelector('button').innerHTML = 'Sign Up'
   }
 }
 

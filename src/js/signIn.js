@@ -58,10 +58,13 @@ async function signIn(url, postData) {
       location.href = '/'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message)
-      signInForm.querySelector('button').innerHTML = 'Sign In'
     }
+
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
+
+  } finally {
+    signInForm.querySelector('button').innerHTML = 'Sign In'
   }
 }
 
