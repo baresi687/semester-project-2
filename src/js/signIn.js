@@ -1,4 +1,9 @@
-import {validateString, checkLength, checkEmail} from "./utils/validation";
+import {
+  validateString,
+  checkLength,
+  checkEmail,
+  clearFormErrorsOnKeyUp
+} from "./utils/validation";
 import {API_BASE_URL, SIGN_IN} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
@@ -21,8 +26,8 @@ signInForm.addEventListener('submit', function (event) {
 
   if (isFormValid) {
     const formData = {
-      email: email.value,
-      password: password.value
+      email: email.value.trim(),
+      password: password.value.trim()
     }
     signIn(API_BASE_URL + SIGN_IN, formData)
   }
@@ -60,9 +65,4 @@ async function signIn(url, postData) {
   }
 }
 
-document.querySelectorAll('form input').forEach((item) => {
-  item.onkeyup = function () {
-    this.classList.remove('bg-red-50')
-    this.nextElementSibling.classList.add('hidden')
-  }
-})
+clearFormErrorsOnKeyUp('form input', '#general-error')

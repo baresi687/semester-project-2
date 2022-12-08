@@ -15,7 +15,7 @@ function checkName(elem) {
 
 function checkEmail(elem) {
   const regex = /^[\w\-.]+@stud.noroff.no$/
-  return regex.test(elem.value)
+  return regex.test(elem.value.trim())
 }
 
 function checkLength(elem, length) {
@@ -29,10 +29,20 @@ function checkConfirmPassword(elem, password) {
 function isImage(url) {
   const imgRegex = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
   if (typeof url === 'object') {
-    return imgRegex.test(url.value)
+    return imgRegex.test(url.value.trim())
   } else {
-    return imgRegex.test(url);
+    return imgRegex.test(url.trim());
   }
 }
 
-export {validateString, checkName, checkEmail, checkLength, checkConfirmPassword, isImage}
+function clearFormErrorsOnKeyUp(inPutElems, apiError) {
+  document.querySelectorAll(inPutElems).forEach((item) => {
+    item.onkeyup = function () {
+      this.classList.remove('bg-red-50')
+      this.nextElementSibling.classList.add('hidden')
+      document.querySelector(apiError).classList.add('hidden')
+    }
+  })
+}
+
+export {validateString, checkName, checkEmail, checkLength, checkConfirmPassword, isImage, clearFormErrorsOnKeyUp}

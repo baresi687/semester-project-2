@@ -1,4 +1,11 @@
-import {validateString, checkName, checkEmail, checkLength, checkConfirmPassword} from "./utils/validation";
+import {
+  validateString,
+  checkName,
+  checkEmail,
+  checkLength,
+  checkConfirmPassword,
+  clearFormErrorsOnKeyUp
+} from "./utils/validation";
 import {API_BASE_URL, SIGN_UP} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
 import {buttonProcessing} from "./components/loader";
@@ -23,9 +30,9 @@ signUpForm.addEventListener('submit', function (event) {
 
   if (isFormValid) {
     const formData = {
-      name: name.value,
-      email: email.value,
-      password: password.value
+      name: name.value.trim(),
+      email: email.value.trim(),
+      password: password.value.trim()
     }
     signUp(API_BASE_URL + SIGN_UP, formData)
   }
@@ -56,9 +63,4 @@ async function signUp(url, postData) {
   }
 }
 
-document.querySelectorAll('form input').forEach((item) => {
-  item.onkeyup = function () {
-    this.classList.remove('bg-red-50')
-    this.nextElementSibling.classList.add('hidden')
-  }
-})
+clearFormErrorsOnKeyUp('form input', '#general-error')
