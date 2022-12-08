@@ -11,8 +11,9 @@ export function listingFeedHtml(arr) {
       currentBid = `${highestBid} Credits`
     }
 
-    let titleOFListing = title
+    let titleOFListing = title.substring(0, 28)
     !titleOFListing ? titleOFListing = 'No Title' : null
+    titleOFListing.length === 28 ? titleOFListing += '..' : null
 
     return `<a href="listing-details.html?id=${id}" class="group">
               <div class="flex flex-col gap-4">
