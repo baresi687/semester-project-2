@@ -2,12 +2,13 @@ import {getFromStorage, saveToStorage} from "./utils/storage";
 import {clearFormErrorsOnKeyUp, isImage, validateString} from "./utils/validation";
 import {API_BASE_URL, AVATAR_UPDATE, PROFILE_LISTINGS, GET_PROFILE, GET_LISTING_DETAILS} from "./settings/api";
 import {showErrorMsg} from "./utils/errorMessages";
-import {buttonProcessing} from "./components/loader";
+import {buttonProcessing, removeLoader} from "./components/loader";
 import {getListings} from "./settings/getListings";
 import placeHolderImg from "../img/placeholder-image.svg"
 import profileImg from "../img/profile.svg"
 import {redirectNoToken} from "./utils/reDirect";
 
+const profileSection = document.querySelector('#profile')
 const {name} = getFromStorage('userKey')
 const accessToken = getFromStorage('accessToken')
 const avatarImg = document.querySelector('#avatar-img')
@@ -21,8 +22,9 @@ const noListingsElement = document.querySelector('#no-listings')
 
 redirectNoToken()
 
+profileSection.classList.add('hidden')
 userName.textContent = name
-getListings(API_BASE_URL + GET_PROFILE, getlistingsOptions)
+getListings(API_BASE_URL + GET_PROFILE, getlistingsOptions, 'loader', profileSection)
   .then(response => {
     if (response.name) {
       const {avatar, credits} = response
@@ -38,6 +40,10 @@ getListings(API_BASE_URL + GET_PROFILE, getlistingsOptions)
   })
   .catch(() => {
     showErrorMsg(document.querySelector('#general-error-profile'))
+  })
+  .finally(() => {
+    profileSection.classList.remove('hidden')
+    removeLoader()
   })
 
 avatarUpdateForm.addEventListener('submit', function (event) {
