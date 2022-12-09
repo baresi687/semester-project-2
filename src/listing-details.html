@@ -75,11 +75,9 @@
             <p class="first-letter:capitalize whitespace-pre-line"></p>
           </div>
           <div id="listing-bid" class="relative flex flex-col gap-4 bg-slate-200 py-10 px-8 lg:px-28 rounded">
-            <h2 id="listing-bid-title" class="capitalize text-2xl font-krub font-semibold"></h2>
-            <div class="relative">
-              <p class="flex gap-3">Current bid:<span id="current-bid" class="text-emerald-700 font-semibold"></span>
-              </p>
-              <div id="bid-list" class="absolute top-0 right-0 group hidden">
+            <div class="flex justify-between gap-4">
+              <h2 id="listing-bid-title" class="capitalize text-2xl font-krub font-semibold"></h2>
+              <div id="bid-list" class="min-w-max mt-1 group hidden">
                 <span class="bg-emerald-700 text-white text-sm rounded p-1.5 cursor-pointer">View Bids</span>
                 <div class="relative w-full">
                   <ul id="bid-list-details"
@@ -87,9 +85,10 @@
                 </div>
               </div>
             </div>
-            <p class="flex gap-14">Seller: <span id="listing-seller" class="font-bold"></span></p>
-            <p class="flex gap-8 whitespace-nowrap">Time left: <span id="bid-remaining"
-                                                                     class="text-red-400 font-bold whitespace-normal">1 days two hours</span>
+            <p class="flex gap-5">Current bid:<span id="current-bid" class="text-emerald-700 font-semibold"></span></p>
+            <p class="flex gap-16">Seller: <span id="listing-seller" class="font-bold"></span></p>
+            <p class="flex gap-10 whitespace-nowrap">Time left: <span id="bid-remaining"
+                                                                      class="text-red-400 font-bold whitespace-normal">1 days two hours</span>
             </p>
             <form id="bid-listing-form">
               <div id="bid" class="flex items-center gap-2">
