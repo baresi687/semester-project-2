@@ -2,6 +2,7 @@ import {getListings} from "./settings/getListings";
 import {API_BASE_URL, GET_LISTINGS} from "./settings/api";
 import {listingFeedHtml} from "./components/listingFeedHtml";
 import {showErrorMsg} from "./utils/errorMessages";
+import {removeLoader} from "./components/loader";
 
 const searchInput = document.querySelector('#search')
 const searchParam = new URLSearchParams(window.location.search).get('search')
@@ -9,7 +10,7 @@ const searchResultsContainer = document.querySelector('#search-results-container
 searchInput.value = searchParam
 searchInput.focus()
 
-getListings(API_BASE_URL+GET_LISTINGS)
+getListings(API_BASE_URL + GET_LISTINGS, null, 'loader', searchResultsContainer)
   .then(response => {
     const filteredResponse = response.filter(item => {
       if (item.description) {
@@ -29,4 +30,7 @@ getListings(API_BASE_URL+GET_LISTINGS)
   })
   .catch(() => {
     showErrorMsg(document.querySelector('#general-error'))
+  })
+  .finally(() => {
+    removeLoader()
   })
