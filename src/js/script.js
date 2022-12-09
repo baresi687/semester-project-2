@@ -9,7 +9,7 @@ const hamburgerMenu = document.querySelector('#hamburger-menu')
 const searchInput = document.querySelector('#search')
 const searchBtn = document.querySelector('#search-btn')
 
-hamburgerMenu.classList.add('z-10')
+createNavHeaderBar()
 
 hamburgerBtn.onclick = function () {
   hamburgerMenu.classList.toggle('-translate-x-0')
@@ -28,8 +28,6 @@ window.addEventListener('click', function (event) {
     hamburgerBtn.querySelector('img').src = openMenu
   }
 })
-
-createNavHeaderBar()
 
 searchBtn.addEventListener('click', function () {
   if (searchInput.value.trim()) {
@@ -50,3 +48,15 @@ if (document.querySelector('#sign-out')) {
     clearStorage()
   }
 }
+
+let prevScrollPos = window.scrollY
+
+window.addEventListener('scroll', function () {
+  let currScrollPos = window.scrollY
+  if (currScrollPos > prevScrollPos) {
+    document.querySelector('header').style.top = '-100%'
+  } else {
+    document.querySelector('header').style.top = '0'
+  }
+  prevScrollPos = currScrollPos
+})
