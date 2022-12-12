@@ -62,7 +62,9 @@ function getListingDetails() {
       !isDescription ? isDescription = 'No Description' : null
       !listingImg ? listingImg = listingPlaceholderImg : null
 
-      pageTitle.innerText = `Norbid - ${isTitle}`
+      const capitalizedTitle = isTitle.split(' ').map((word) => word[0].toUpperCase() + word.substring(1)).join(' ')
+
+      pageTitle.innerText = `Norbid - ${capitalizedTitle}`
       timeLeft.textContent = timeRemaining
       titleOfListing.textContent = isTitle
       listingDescription.textContent = isDescription
