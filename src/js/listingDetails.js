@@ -62,7 +62,9 @@ function getListingDetails() {
       !isDescription ? isDescription = 'No Description' : null
       !listingImg ? listingImg = listingPlaceholderImg : null
 
-      pageTitle.innerText = `Norbid - ${isTitle}`
+      const capitalizedTitle = isTitle.split(' ').map((word) => word[0].toUpperCase() + word.substring(1)).join(' ')
+
+      pageTitle.innerText = `Norbid - ${capitalizedTitle}`
       timeLeft.textContent = timeRemaining
       titleOfListing.textContent = isTitle
       listingDescription.textContent = isDescription
@@ -78,11 +80,12 @@ function getListingDetails() {
 
       if (media.length > 1) {
         document.querySelector('#listing-img').classList.add('gap-6')
-        media.forEach(item => {
-          listingImgGallery.innerHTML +=
-            `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-center lg:h-20"
-                style="background-image: url(${item})"></div>`
-        })
+        listingImgGallery.innerHTML = ''
+        for (let i = 0; i < media.length; i++) {
+          if (i > 4) {break}
+          listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-center rounded lg:h-20"
+                                               style="background-image: url(${media[i]})"></div>`
+        }
       }
 
       accessToken.length ? bidOnListingInput.setAttribute('required', '') : null
@@ -99,9 +102,9 @@ function getListingDetails() {
 
       listingDetails.querySelector('.container').classList.remove('hidden')
 
-      bidOnListingInput.onfocus = function () {
-        document.querySelector('.bidding-error').classList.add('hidden')
-      }
+      bidOnListingInput.onfocus = clearBiddingErrorMsg
+      bidOnListingInput.onkeydown = clearBiddingErrorMsg
+      function clearBiddingErrorMsg() {document.querySelector('.bidding-error').classList.add('hidden')}
 
     })
     .catch(() => {
