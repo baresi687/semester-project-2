@@ -5,6 +5,7 @@ import { showErrorMsg } from './utils/errorMessages';
 import { DateTime } from 'luxon';
 import { getFromStorage, saveToStorage } from './utils/storage';
 import { buttonProcessing, removeLoader } from './components/loader';
+import { isImage } from './utils/validation';
 
 const now = DateTime.now();
 const listingDetails = document.querySelector('#listing-details');
@@ -67,7 +68,10 @@ function getListingDetails() {
 
       !isTitle ? (isTitle = 'No Title') : null;
       !isDescription ? (isDescription = 'No Description') : null;
-      !listingImg ? (listingImg = listingPlaceholderImg) : null;
+
+      if (!listingImg || !isImage(listingImg)) {
+        listingImg = listingPlaceholderImg;
+      }
 
       const capitalizedTitle = isTitle
         .split(' ')
@@ -95,8 +99,10 @@ function getListingDetails() {
           if (i > 4) {
             break;
           }
-          listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-center rounded lg:h-20"
+          if (isImage(media[i])) {
+            listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-center rounded lg:h-20"
                                                style="background-image: url(${media[i]})"></div>`;
+          }
         }
       }
 
@@ -119,6 +125,7 @@ function getListingDetails() {
 
       bidOnListingInput.onfocus = clearBiddingErrorMsg;
       bidOnListingInput.onkeydown = clearBiddingErrorMsg;
+
       function clearBiddingErrorMsg() {
         document.querySelector('.bidding-error').classList.add('hidden');
       }

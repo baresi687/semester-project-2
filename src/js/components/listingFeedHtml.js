@@ -1,9 +1,12 @@
 import listingPlaceholderImg from '../../img/placeholder-image.svg';
+import { isImage } from '../utils/validation';
 
 export function listingFeedHtml(arr) {
   return arr.map(({ id, media, title, bids }) => {
     let listingImg = media[0];
-    !listingImg ? (listingImg = listingPlaceholderImg) : null;
+    if (!listingImg || !isImage(listingImg)) {
+      listingImg = listingPlaceholderImg;
+    }
 
     let currentBid = 'NO BIDS';
     if (bids.length) {
