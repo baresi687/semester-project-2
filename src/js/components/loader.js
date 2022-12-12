@@ -2,8 +2,8 @@ const buttonProcessing = `<svg id="form-loader" class="absolute top-2.5 left-1 r
 
 function addLoader(elem) {
   const loader = `
-   <div id="loader" class="flex justify-center">
-     <svg class="rounded-full border-4 border-slate-200 border-t-slate-700 animate-spin h-8 w-8 mr-6 ..." viewBox="0 0 24 24"></svg>     
+   <div id="loader" class="flex justify-center h-screen">
+     <svg class="rounded-full border-4 border-slate-200 border-t-slate-700 animate-spin h-8 w-8 my-4 ..." viewBox="0 0 24 24"></svg>     
    </div>`;
   elem.insertAdjacentHTML('beforebegin', loader);
 }
