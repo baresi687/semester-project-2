@@ -5,8 +5,9 @@ An Auction website where users can add items to be bid on and bid on items other
 ## Description
 
 A website where users can add items to be bid on and bid on items other users have put up for auction.
-When a new user joins the website, they are given 1000 credits to use on the site. They can get credits by selling items and use credit by buying items. Non-registered users can search through the listings, but only registered users can make bids on listings.
-
+When a new user joins the website, they are given 1000 credits to use on the site. They can get credits by selling items
+and use credit by buying items. Non-registered users can search through the listings, but only registered users can make
+bids on listings.
 
 - A user with a stud.noroff.no email may register
 - A registered user may log in
@@ -18,7 +19,6 @@ When a new user joins the website, they are given 1000 credits to use on the sit
 - A registered user may view Bids made on a Listing
 - A registered user may use credit to make a Bid on another user’s Listing
 - An unregistered user may search through Listings
-
 
 ## Built With
 
@@ -35,7 +35,7 @@ When a new user joins the website, they are given 1000 credits to use on the sit
 1. Clone the repo:
 
 ```bash
-git clone  git@github.com:baresi687/semester-project-2.git
+git clone git@github.com:baresi687/semester-project-2.git
 ```
 
 2. Install the dependencies:
@@ -53,12 +53,12 @@ npm run build
 npm run preview
 ```
 
-Note: On signing up the email does not have to be a real email address. It just needs to have the ending '@stud.noroff.no'
-
+Note: On signing up the email does not have to be a real email address. It just needs to have the ending '
+@stud.noroff.no'
 
 ## Deployed site
 
-[Norbid](https://www.placeholder.com/)
+[Placeholder](https://www.github.com/)
 
 ## Contact
 
