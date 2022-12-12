@@ -78,6 +78,7 @@ function getListingDetails() {
 
       if (media.length > 1) {
         document.querySelector('#listing-img').classList.add('gap-6')
+        listingImgGallery.innerHTML = ''
         for (let i = 0; i < media.length; i++) {
           if (i > 4) {break}
           listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-center rounded lg:h-20"
@@ -99,9 +100,9 @@ function getListingDetails() {
 
       listingDetails.querySelector('.container').classList.remove('hidden')
 
-      bidOnListingInput.onfocus = function () {
-        document.querySelector('.bidding-error').classList.add('hidden')
-      }
+      bidOnListingInput.onfocus = clearBiddingErrorMsg
+      bidOnListingInput.onkeydown = clearBiddingErrorMsg
+      function clearBiddingErrorMsg() {document.querySelector('.bidding-error').classList.add('hidden')}
 
     })
     .catch(() => {
