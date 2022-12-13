@@ -103,9 +103,12 @@ function getListingDetails() {
                                                style="background-image: url(${media[i]})"></div>`;
           }
         }
-        listingImgGallery.hasChildNodes()
-          ? document.querySelector('#listing-img').classList.add('gap-6')
-          : null;
+
+        if (listingImgGallery.childElementCount > 1) {
+          document.querySelector('#listing-img').classList.add('gap-4');
+        } else {
+          listingImgGallery.classList.add('hidden');
+        }
       }
 
       accessToken.length
