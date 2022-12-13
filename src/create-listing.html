@@ -151,50 +151,30 @@
                   placeholder="Description of item"
                 ></textarea>
               </div>
-              <div class="flex flex-col gap-2">
+              <div class="flex flex-col gap-2" id="main-img">
                 <label for="item-img-1" class="block font-bold"
-                  >Image URL 1</label
+                  >Image URL</label
                 >
-                <input
-                  id="item-img-1"
-                  name="item-img-1"
-                  required
-                  class="input-val bg-zinc-100 rounded indent-2.5 w-full h-8"
-                  type="text"
-                  placeholder="Image URL"
-                />
-                <div class="hidden validation-error text-rose-700 py-1.5">
-                  Image URL must have an image ending (eg .jpg .gif .png etc)
-                </div>
-              </div>
-              <div class="flex flex-col gap-2">
-                <label for="item-img-2" class="block font-bold"
-                  >Image URL 2 (Optional)</label
-                >
-                <input
-                  id="item-img-2"
-                  name="item-img-2"
-                  class="input-val optional-img bg-zinc-100 rounded indent-2.5 w-full h-8"
-                  type="text"
-                  placeholder="Image URL"
-                />
-                <div class="hidden validation-error text-rose-700 py-1.5">
-                  Image URL must have an image ending (eg .jpg .gif .png etc)
-                </div>
-              </div>
-              <div class="flex flex-col gap-2">
-                <label for="item-img-3" class="block font-bold"
-                  >Image URL 3 (Optional)</label
-                >
-                <input
-                  id="item-img-3"
-                  name="item-img-3"
-                  class="input-val optional-img bg-zinc-100 rounded indent-2.5 w-full h-8"
-                  type="text"
-                  placeholder="Image URL"
-                />
-                <div class="hidden validation-error text-rose-700 py-1.5">
-                  Image URL must have an image ending (eg .jpg .gif .png etc)
+                <div class="flex flex-row flex-wrap gap-2">
+                  <div
+                    id="add-img"
+                    class="order-2 cursor-pointer flex items-center justify-center w-8 h-8 bg-amber-400 text-xl rounded"
+                  >
+                    <span>+</span>
+                  </div>
+                  <input
+                    id="item-img-1"
+                    name="item-img-1"
+                    required
+                    class="input-val bg-zinc-100 rounded indent-2.5 h-8 flex-1 w-full"
+                    type="text"
+                    placeholder="Image URL"
+                  />
+                  <div
+                    class="hidden order-3 validation-error text-rose-700 py-1.5"
+                  >
+                    Image URL must have an image ending (eg .jpg .gif .png etc)
+                  </div>
                 </div>
               </div>
               <div class="flex flex-col gap-2">
