@@ -100,7 +100,7 @@ function getListingDetails() {
             break;
           }
           if (isImage(media[i])) {
-            listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-center rounded lg:h-20"
+            listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-12 w-full bg-cover bg-center rounded lg:h-20"
                                                style="background-image: url(${media[i]})"></div>`;
           }
         }

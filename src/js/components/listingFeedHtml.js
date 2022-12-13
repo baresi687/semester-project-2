@@ -14,9 +14,9 @@ export function listingFeedHtml(arr) {
       currentBid = `${highestBid} Credits`;
     }
 
-    let titleOFListing = title.substring(0, 28);
+    let titleOFListing = title.substring(0, 25);
     !titleOFListing ? (titleOFListing = 'No Title') : null;
-    titleOFListing.length === 28 ? (titleOFListing += '..') : null;
+    titleOFListing.length === 25 ? (titleOFListing += '..') : null;
     let escapedLessThanTitle = titleOFListing.replace(/</g, '&lt');
 
     return `<a href="listing-details.html?id=${id}" class="group">
