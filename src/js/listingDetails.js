@@ -93,17 +93,19 @@ function getListingDetails() {
       }
 
       if (media.length > 1) {
-        document.querySelector('#listing-img').classList.add('gap-6');
         listingImgGallery.innerHTML = '';
         for (let i = 0; i < media.length; i++) {
           if (i > 4) {
             break;
           }
           if (isImage(media[i])) {
-            listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-14 w-full bg-cover bg-center rounded lg:h-20"
+            listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-12 w-full bg-cover bg-center rounded lg:h-20"
                                                style="background-image: url(${media[i]})"></div>`;
           }
         }
+        listingImgGallery.hasChildNodes()
+          ? document.querySelector('#listing-img').classList.add('gap-6')
+          : null;
       }
 
       accessToken.length

@@ -58,7 +58,7 @@ Note: On signing up the email does not have to be a real email address. It just 
 
 ## Deployed site
 
-[Placeholder](https://www.github.com/)
+[Norbid](https://semester-project-2-hreinn.netlify.app/)
 
 ## Contact
 

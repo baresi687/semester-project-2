@@ -102,7 +102,7 @@ function getProfileListings() {
                    <button data-id=${id} class="delete-listing bg-red-700 shrink-0 text-white rounded-md py-2 w-20 hover:bg-red-600">Delete</button>
                  </div>
                  <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
-                   <div class="rounded w-full h-56 bg-cover bg-center bg-no-repeat" style="background-image: url(${isMedia})"></div>
+                   <div class="rounded w-full h-64 bg-cover bg-center" style="background-image: url(${isMedia})"></div>
                    <div class="block bg-blue-700 text-white text-center w-full rounded-md py-2 group-hover:bg-blue-600">Details</div>
                  </a>
                </div>`;
