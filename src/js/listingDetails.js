@@ -28,7 +28,6 @@ const bidModal = document.querySelector('#modal');
 const bidsMadeOnListing = document.querySelector('#bid-list');
 
 function getListingDetails(elemScrollTo) {
-  listingDetails.querySelector('.container').classList.add('hidden');
   getListings(
     API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bids=true',
     null,
@@ -142,7 +141,6 @@ function getListingDetails(elemScrollTo) {
     })
     .finally(() => {
       removeLoader();
-      listingDetails.querySelector('.container').classList.remove('hidden');
       const galleryImgs = document.querySelectorAll('.gallery-img');
       galleryImgs.forEach((item) => {
         item.onclick = function (event) {
