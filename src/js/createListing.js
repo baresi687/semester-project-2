@@ -28,18 +28,19 @@ listingDatePicker.min = now.slice(0, -13);
 createListingForm.addEventListener('submit', function (event) {
   event.preventDefault();
 
-  let isImageValid = validateString(listingImgOne, isImage);
-  let optionalImgValid = true;
+  const isImageValid = validateString(listingImgOne, isImage);
   const optionalImg = document.querySelectorAll('.optional-img');
+  let optionalImgBool = [];
 
   if (optionalImg.length) {
     for (let i = 0; i < optionalImg.length; i++) {
-      optionalImgValid =
-        !optionalImg[i].value || validateString(optionalImg[i], isImage);
+      optionalImgBool.push(
+        !optionalImg[i].value || validateString(optionalImg[i], isImage)
+      );
     }
   }
 
-  if (isImageValid && optionalImgValid) {
+  if (isImageValid && optionalImgBool.every((item) => item)) {
     createListingForm.querySelector('button').innerHTML = buttonProcessing;
     const dateValue = DateTime.fromISO(listingDatePicker.value)
       .minus({ hour: 1 })
