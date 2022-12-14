@@ -27,7 +27,7 @@ const userKey = getFromStorage('userKey');
 const bidModal = document.querySelector('#modal');
 const bidsMadeOnListing = document.querySelector('#bid-list');
 
-function getListingDetails() {
+function getListingDetails(elemScrollTo) {
   listingDetails.querySelector('.container').classList.add('hidden');
   getListings(
     API_BASE_URL + GET_LISTING_DETAILS + listingID + '?_seller=true&_bids=true',
@@ -150,6 +150,11 @@ function getListingDetails() {
             event.target.style.backgroundImage;
         };
       });
+      elemScrollTo
+        ? document.querySelector('#listing-bid').scrollIntoView({
+            block: 'center',
+          })
+        : null;
     });
 }
 
@@ -190,7 +195,7 @@ async function bidOnlisting(url, postData) {
     if (response.status === 200) {
       userKey.credits = userKey.credits - postData.amount;
       saveToStorage('userKey', userKey);
-      getListingDetails();
+      getListingDetails('scrollTo');
     } else if (response.status === 400 || response.status === 403) {
       showErrorMsg(
         document.querySelector('.bidding-error'),
