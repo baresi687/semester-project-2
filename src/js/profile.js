@@ -94,18 +94,20 @@ function getProfileListings() {
           response.forEach(({ id, title, media }) => {
             let isMedia = media[0];
             let isTitle = title.replace(/</g, '&lt');
+            isTitle = isTitle.substring(0, 40);
+            isTitle.length === 40 ? (isTitle += ' ..') : null;
             !isMedia ? (isMedia = placeHolderImg) : isMedia;
 
             profileListingsContainer.innerHTML += `<div class="flex flex-col gap-4 py-6 px-6 shadow shadow-gray-400 rounded-lg">
-                 <div class=" flex flex-row gap-2 justify-between items-center">
-                   <h3 class="break-words overflow-hidden text-xl font-krub font-semibold capitalize">${isTitle}</h3>
-                   <button data-id=${id} class="delete-listing bg-red-700 shrink-0 text-white rounded-md py-2 w-20 hover:bg-red-600">Delete</button>
-                 </div>
-                 <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
-                   <div class="rounded w-full h-64 bg-cover bg-center" style="background-image: url(${isMedia})"></div>
-                   <div class="block bg-blue-700 text-white text-center w-full rounded-md py-2 group-hover:bg-blue-600">Details</div>
-                 </a>
-               </div>`;
+                                                     <div class="flex flex-row gap-2 justify-between items-center h-10">
+                                                       <h3 class="break-words overflow-hidden text-xl font-krub font-semibold capitalize">${isTitle}</h3>
+                                                       <button data-id=${id} class="delete-listing bg-red-700 shrink-0 text-white rounded-md py-2 w-20 hover:bg-red-600">Delete</button>
+                                                     </div>
+                                                     <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
+                                                       <div class="rounded w-full h-64 bg-cover bg-center" style="background-image: url(${isMedia})"></div>
+                                                       <div class="block bg-blue-700 text-white text-center w-full rounded-md py-2 group-hover:bg-blue-600">Details</div>
+                                                     </a>
+                                                   </div>`;
           });
         }
       }
