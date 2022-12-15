@@ -67,6 +67,10 @@ function getListingDetails(elemScrollTo) {
 
       !isTitle ? (isTitle = 'No Title') : null;
       !isDescription ? (isDescription = 'No Description') : null;
+      isTitle = isTitle.substring(0, 70);
+      isTitle.length === 70 ? (isTitle += ' ..') : null;
+      isDescription = isDescription.substring(0, 200);
+      isDescription.length === 200 ? (isDescription += ' ..') : null;
 
       if (!listingImg || !isImage(listingImg)) {
         listingImg = listingPlaceholderImg;
