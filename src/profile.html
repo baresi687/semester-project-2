@@ -196,6 +196,110 @@
           </div>
         </div>
       </section>
+      <section
+        id="modal"
+        class="hidden fixed flex justify-center items-center overflow-auto z-10 w-full h-full top-0 bg-neutral-900/90"
+      >
+        <div id="modal-content" class="max-w-md w-full m-auto">
+          <div class="rounded-md overflow-hidden">
+            <div
+              class="flex justify-between items-center bg-amber-400 py-3 px-4"
+            >
+              <p class="text-lg">Edit Listing</p>
+              <svg
+                id="close-edit-modal"
+                class="cursor-pointer hover:text-gray-600"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 2.41714L21.5829 0L12 9.58286L2.41714 0L0 2.41714L9.58286 12L0 21.5829L2.41714 24L12 14.4171L21.5829 24L24 21.5829L14.4171 12L24 2.41714Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div class="bg-white">
+              <div id="edit-listing-container" class="">
+                <form
+                  id="edit-listing-form"
+                  class="flex flex-col gap-6 p-12 shadow shadow-gray-400 rounded-lg sm:max-w-md sm:m-0 sm:m-auto"
+                >
+                  <h1 class="text-3xl font-krub font-semibold mb-4">
+                    Edit Listing
+                  </h1>
+                  <div class="flex flex-col gap-2">
+                    <label for="item-title" class="block font-bold">Item</label>
+                    <input
+                      id="item-title"
+                      name="item-title"
+                      required
+                      class="bg-zinc-100 rounded indent-2.5 w-full h-8 capitalize"
+                      type="text"
+                      placeholder="Item name"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label for="item-description" class="block font-bold"
+                      >Description</label
+                    >
+                    <textarea
+                      id="item-description"
+                      name="item-description"
+                      rows="7"
+                      required
+                      class="bg-zinc-100 rounded w-full py-1 px-2.5"
+                      type="text"
+                      placeholder="Description of item"
+                    ></textarea>
+                  </div>
+                  <div class="flex flex-col gap-2" id="main-img">
+                    <label for="item-img-1" class="block font-bold"
+                      >Image URL</label
+                    >
+                    <div class="flex flex-row flex-wrap gap-2">
+                      <div
+                        id="add-img"
+                        class="order-2 cursor-pointer flex items-center justify-center w-8 h-8 bg-amber-400 text-xl rounded"
+                      >
+                        <span>+</span>
+                      </div>
+                      <input
+                        id="item-img-1"
+                        name="item-img-1"
+                        required
+                        class="input-val bg-zinc-100 rounded indent-2.5 h-8 flex-1 w-full"
+                        type="text"
+                        placeholder="Image URL"
+                      />
+                      <div
+                        class="hidden order-3 validation-error text-rose-700 py-1.5"
+                      >
+                        Image URL must have an image ending (eg .jpg .gif .png
+                        etc)
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <button
+                      type="submit"
+                      class="relative bg-amber-400 rounded-md py-2 w-full hover:brightness-110"
+                    >
+                      Edit Listing
+                    </button>
+                  </div>
+                  <div
+                    id="general-error-edit-listing"
+                    class="text-xl text-rose-700 text-center bg-rose-100 border-rose-700 border-2 rounded-md p-4 mt-8 w-fit m-auto overflow-hidden hidden sm:max-w-sm"
+                  ></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <footer class="bg-gray-800 pt-16 pb-4 text-white">
       <div class="container mx-auto px-4 max-w-7xl xl:px-0">
