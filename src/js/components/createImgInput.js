@@ -9,7 +9,7 @@ function createImginput(
   const imageId = imageInputs.length + 1;
   if (imageInputs.length < 5) {
     let divContainer = document.createElement('div');
-    divContainer.classList.add('flex', 'flex-col', 'gap-2', 'opt-img');
+    divContainer.classList.add('flex', 'flex-col', 'gap-2', 'opt-img', 'mt-2');
 
     let labelImg = document.createElement('label');
     labelImg.setAttribute('for', `item-img-${imageId}`);
@@ -62,7 +62,7 @@ function createImginput(
 
     divContainer.append(labelImg);
 
-    elem.insertAdjacentElement('afterend', divContainer);
+    elem.insertAdjacentElement('beforeend', divContainer);
   }
   document.querySelectorAll('.remove-input').forEach((item) => {
     item.onclick = function () {

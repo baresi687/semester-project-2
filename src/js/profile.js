@@ -141,11 +141,9 @@ function getProfileListings() {
           const editImgArr = this.dataset.media.split(',');
           editListingTitle.value = this.dataset.title;
           editListingDesc.value = this.dataset.description;
+          editListingDesc.value = editListingDesc.value.charAt(0).toUpperCase() + editListingDesc.value.slice(1)
           editListingImg.value = editImgArr[0];
-          /* console.log(this.dataset.id);
-          console.log(this.dataset.title);
-          console.log(this.dataset.description);
-          console.log(editImgArr.length);*/
+
           if (editImgArr.length) {
             for (let i = 1; i < editImgArr.length; i++) {
               createImginput(
@@ -157,7 +155,7 @@ function getProfileListings() {
                 editImgArr[i];
             }
           }
-          /* console.log(editImgArr);*/
+
           editListingModal.classList.remove('hidden');
           editListingForm.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -178,12 +176,6 @@ function getProfileListings() {
             if (isImageValid && optionalImgBool.every((item) => item)) {
               editListingForm.querySelector('button').innerHTML =
                 buttonProcessing;
-              console.log(editListingTitle.value);
-              console.log(editListingDesc.value);
-              console.log(editListingImg.value);
-              for (let i = 0; i < optionalImg.length; i++) {
-                console.log(optionalImg[i].value);
-              }
 
               const putData = {
                 title: editListingTitle.value.trim(),
@@ -203,15 +195,17 @@ function getProfileListings() {
                 body: JSON.stringify(putData),
               };
 
-              console.log(API_BASE_URL + GET_LISTING_DETAILS + listingId);
-
               getProfileListingsAndUpdate(
                 API_BASE_URL + GET_LISTING_DETAILS + listingId,
                 options
               )
                 .then((response) => {
                   if (response.id) {
-                    location.href = `listing-details.html?id=${response.id}`;
+                    editListingModal.classList.add('hidden')
+                    document.querySelectorAll('.opt-img').forEach((item) => {
+                      item.remove();
+                    });
+                    getProfileListings()
                   }
                   if (response.statusCode === 400) {
                     showErrorMsg(
