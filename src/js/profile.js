@@ -35,6 +35,13 @@ const profileListingsContainer = document.querySelector('#listings-container');
 const noListingsElement = document.querySelector('#no-listings');
 const editListingModal = document.querySelector('#modal');
 const editListingForm = document.querySelector('#edit-listing-form');
+const editListingTitle = document.querySelector('#item-title');
+const editListingDesc = document.querySelector('#item-description');
+const editListingImg = document.querySelector('#item-img-1');
+let editlistingId = '';
+let editImgArr = '';
+const mainEditImgContainer = document.querySelector('#main-img');
+const addImgInput = document.querySelector('#add-img');
 
 redirectNoToken();
 
@@ -131,23 +138,22 @@ function getProfileListings() {
       );
     })
     .finally(() => {
-      const editListingTitle = document.querySelector('#item-title');
-      const editListingDesc = document.querySelector('#item-description');
-      const editListingImg = document.querySelector('#item-img-1');
       const editListingBtn = document.querySelectorAll('.edit-listing');
       editListingBtn.forEach((listing) => {
         listing.onclick = function () {
-          const listingId = this.dataset.id;
-          const editImgArr = this.dataset.media.split(',');
+          editlistingId = this.dataset.id;
+          editImgArr = this.dataset.media.split(',');
           editListingTitle.value = this.dataset.title;
           editListingDesc.value = this.dataset.description;
-          editListingDesc.value = editListingDesc.value.charAt(0).toUpperCase() + editListingDesc.value.slice(1)
+          editListingDesc.value =
+            editListingDesc.value.charAt(0).toUpperCase() +
+            editListingDesc.value.slice(1);
           editListingImg.value = editImgArr[0];
 
           if (editImgArr.length) {
             for (let i = 1; i < editImgArr.length; i++) {
               createImginput(
-                mainImgContainer,
+                mainEditImgContainer,
                 '#edit-listing-container form .input-val',
                 '#general-error-edit-listing'
               );
@@ -155,80 +161,7 @@ function getProfileListings() {
                 editImgArr[i];
             }
           }
-
           editListingModal.classList.remove('hidden');
-          editListingForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const isImageValid = validateString(editListingImg, isImage);
-            const optionalImg = document.querySelectorAll('.optional-img');
-            let optionalImgBool = [];
-
-            if (optionalImg.length) {
-              for (let i = 0; i < optionalImg.length; i++) {
-                optionalImgBool.push(
-                  !optionalImg[i].value ||
-                    validateString(optionalImg[i], isImage)
-                );
-              }
-            }
-
-            if (isImageValid && optionalImgBool.every((item) => item)) {
-              editListingForm.querySelector('button').innerHTML =
-                buttonProcessing;
-
-              const putData = {
-                title: editListingTitle.value.trim(),
-                description: editListingDesc.value.trim(),
-                media: [editListingImg.value.trim()],
-              };
-              optionalImg.forEach((item) => {
-                item.value ? putData.media.push(item.value.trim()) : null;
-              });
-
-              const options = {
-                method: 'PUT',
-                headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${accessToken}`,
-                },
-                body: JSON.stringify(putData),
-              };
-
-              getProfileListingsAndUpdate(
-                API_BASE_URL + GET_LISTING_DETAILS + listingId,
-                options
-              )
-                .then((response) => {
-                  if (response.id) {
-                    editListingModal.classList.add('hidden')
-                    document.querySelectorAll('.opt-img').forEach((item) => {
-                      item.remove();
-                    });
-                    getProfileListings()
-                  }
-                  if (response.statusCode === 400) {
-                    showErrorMsg(
-                      document.querySelector('#general-error-edit-listing'),
-                      response.errors[0].message
-                    );
-                  } else if (response.statusCode === 404) {
-                    showErrorMsg(
-                      document.querySelector('#general-error-edit-listing')
-                    );
-                  }
-                })
-                .catch(() => {
-                  showErrorMsg(
-                    document.querySelector('#general-error-edit-listing')
-                  );
-                })
-                .finally(() => {
-                  editListingForm.querySelector('button').innerHTML =
-                    'Edit Listing';
-                });
-            }
-          });
         };
       });
 
@@ -244,6 +177,72 @@ function getProfileListings() {
 
 getProfileListings();
 
+editListingForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const isImageValid = validateString(editListingImg, isImage);
+  const optionalImg = document.querySelectorAll('.optional-img');
+  let optionalImgBool = [];
+
+  if (optionalImg.length) {
+    for (let i = 0; i < optionalImg.length; i++) {
+      optionalImgBool.push(
+        !optionalImg[i].value || validateString(optionalImg[i], isImage)
+      );
+    }
+  }
+
+  if (isImageValid && optionalImgBool.every((item) => item)) {
+    editListingForm.querySelector('button').innerHTML = buttonProcessing;
+
+    const putData = {
+      title: editListingTitle.value.trim(),
+      description: editListingDesc.value.trim(),
+      media: [editListingImg.value.trim()],
+    };
+    optionalImg.forEach((item) => {
+      item.value ? putData.media.push(item.value.trim()) : null;
+    });
+
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(putData),
+    };
+
+    getProfileListingsAndUpdate(
+      API_BASE_URL + GET_LISTING_DETAILS + editlistingId,
+      options
+    )
+      .then((response) => {
+        if (response.id) {
+          editListingModal.classList.add('hidden');
+          document.querySelectorAll('.opt-img').forEach((item) => {
+            item.remove();
+          });
+          getProfileListings();
+        }
+        if (response.statusCode === 400) {
+          showErrorMsg(
+            document.querySelector('#general-error-edit-listing'),
+            response.errors[0].message
+          );
+        } else if (response.statusCode === 404) {
+          showErrorMsg(document.querySelector('#general-error-edit-listing'));
+        }
+      })
+      .catch(() => {
+        showErrorMsg(document.querySelector('#general-error-edit-listing'));
+      })
+      .finally(() => {
+        editListingForm.querySelector('button').innerHTML = 'Edit Listing';
+      });
+  }
+});
+
 editListingModal.querySelector('#close-edit-modal').onclick = function () {
   editListingModal.classList.add('hidden');
   document.querySelector('#general-error-edit-listing').classList.add('hidden');
@@ -252,11 +251,9 @@ editListingModal.querySelector('#close-edit-modal').onclick = function () {
   });
 };
 
-const mainImgContainer = document.querySelector('#main-img');
-const addImgInput = document.querySelector('#add-img');
 addImgInput.onclick = function () {
   createImginput(
-    mainImgContainer,
+    mainEditImgContainer,
     '#edit-listing-container form .input-val',
     '#general-error-edit-listing'
   );
