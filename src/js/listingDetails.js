@@ -5,7 +5,6 @@ import { showErrorMsg } from './utils/errorMessages';
 import { DateTime } from 'luxon';
 import { getFromStorage, saveToStorage } from './utils/storage';
 import { buttonProcessing, removeLoader } from './components/loader';
-import { isImage } from './utils/validation';
 
 const now = DateTime.now();
 const listingDetails = document.querySelector('#listing-details');
@@ -72,7 +71,7 @@ function getListingDetails(elemScrollTo) {
       isDescription = isDescription.substring(0, 200);
       isDescription.length === 200 ? (isDescription += ' ..') : null;
 
-      if (!listingImg || !isImage(listingImg)) {
+      if (!listingImg) {
         listingImg = listingPlaceholderImg;
       }
 
@@ -86,7 +85,7 @@ function getListingDetails(elemScrollTo) {
       titleOfListing.textContent = isTitle;
       listingDescription.textContent = isDescription;
       listingBidContainerTitle.textContent = isTitle;
-      listingImgMain.style.backgroundImage = `url(${listingImg})`;
+      listingImgMain.style.backgroundImage = `url('${listingImg}')`;
       currentBid.textContent = 'NO BIDS';
       listingSeller.textContent = seller.name;
 
@@ -101,10 +100,8 @@ function getListingDetails(elemScrollTo) {
           if (i > 4) {
             break;
           }
-          if (isImage(media[i])) {
-            listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-12 w-full bg-cover bg-center rounded lg:h-20"
-                                               style="background-image: url(${media[i]})"></div>`;
-          }
+          listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-12 w-full bg-cover bg-center rounded lg:h-20"
+                                               style="background-image: url('${media[i]}')"></div>`;
         }
 
         if (listingImgGallery.childElementCount > 1) {

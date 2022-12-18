@@ -58,9 +58,9 @@ getProfileListingsAndUpdate(
       const { avatar, credits } = response;
       availableCredits.textContent = credits;
       if (avatar && isImage(avatar)) {
-        avatarImg.style.backgroundImage = `url(${avatar})`;
+        avatarImg.style.backgroundImage = `url('${avatar}')`;
       } else {
-        avatarImg.style.backgroundImage = `url(${profileImg})`;
+        avatarImg.style.backgroundImage = `url('${profileImg}')`;
       }
     } else {
       showErrorMsg(
@@ -122,7 +122,7 @@ function getProfileListings() {
                                                        </div>
                                                      </div>
                                                      <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
-                                                       <div class="rounded w-full h-64 bg-cover bg-center" style="background-image: url(${isMedia})"></div>
+                                                       <div class="rounded w-full h-64 bg-cover bg-center" style="background-image: url('${isMedia}')"></div>
                                                        <div class="block bg-blue-700 text-white text-center w-full rounded-md py-2 group-hover:bg-blue-600">Details</div>
                                                      </a>
                                                    </div>`;
