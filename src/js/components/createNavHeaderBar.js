@@ -17,7 +17,7 @@ export function createNavHeaderBar() {
 
   const profileIcon = `<a href="profile.html" title="Profile" class="h-full mr-3 sm:flex flex-row items-center gap-3 sm:mr-0 sm:order-2">
                          <span class="hidden sm:block text-white">${userName}</span>
-                         <div class="h-8 w-8 rounded-full bg-center bg-cover" style="background-image: url(${userAvatar})"></div>
+                         <div class="h-8 w-8 rounded-full bg-center bg-cover" style="background-image: url('${userAvatar}')"></div>
                        </a>`;
 
   const navItemsSignedIn = `<li class="border-b border-slate-700 mb-8 pb-4 hover:text-amber-300 sm:border-0 sm:p-0 sm:m-0 text-amber-400">
