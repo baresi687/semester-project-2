@@ -40,8 +40,10 @@ export function createNavHeaderBar() {
   if (localStorage.getItem('accessToken')) {
     navItems.innerHTML += navItemsSignedIn;
     searchProfileContainer.insertAdjacentHTML('afterbegin', profileIcon);
-    document.querySelector('#sign-up-log-in-desktop').style.display = 'none';
   } else {
     navItems.innerHTML += navItemsNotSignedIn;
+    document
+      .querySelector('#sign-up-log-in-desktop')
+      .classList.add('sm:flex', 'gap-3', 'ml-auto', 'order-2');
   }
 }
