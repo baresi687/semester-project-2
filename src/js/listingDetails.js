@@ -44,13 +44,13 @@ function getListingDetails(elemScrollTo) {
         if (diffObject[property] > 0) {
           switch (property) {
             case 'days':
-              timeRemaining += `${diffObject[property]} day(s), `;
+              timeRemaining += `${diffObject[property]}d `;
               break;
             case 'hours':
-              timeRemaining += `${diffObject[property]} hour(s) & `;
+              timeRemaining += `${diffObject[property]}h `;
               break;
             case 'minutes':
-              timeRemaining += `${parseInt(diffObject[property])} ${property}`;
+              timeRemaining += `${parseInt(diffObject[property])}min`;
               break;
           }
         } else if (diffObject[property] < 0) {
