@@ -55,7 +55,6 @@ function getListingDetails(elemScrollTo) {
           }
         } else if (diffObject[property] < 0) {
           timeRemaining = 'BIDDING HAS ENDED';
-          timeLeft.classList.add('text-red-400');
           document.querySelector('#bid-btn').disabled = true;
         }
       }
