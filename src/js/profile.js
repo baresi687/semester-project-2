@@ -22,7 +22,7 @@ import { createImginput } from './components/createImgInput';
 const profileSection = document.querySelector('#profile');
 const { name } = getFromStorage('userKey');
 const accessToken = getFromStorage('accessToken');
-const avatarImg = document.querySelector('#avatar-img');
+let avatarImgSrc;
 const userName = document.querySelector('#user-name');
 const availableCredits = document.querySelector('#credits');
 const avatarUpdateForm = document.querySelector('#avatar-update');
@@ -47,6 +47,7 @@ redirectNoToken();
 
 profileSection.classList.add('hidden');
 userName.textContent = name;
+
 getProfileListingsAndUpdate(
   API_BASE_URL + GET_PROFILE,
   getlistingsOptions,
@@ -57,11 +58,9 @@ getProfileListingsAndUpdate(
     if (response.name) {
       const { avatar, credits } = response;
       availableCredits.textContent = credits;
-      if (avatar && isImage(avatar)) {
-        avatarImg.style.backgroundImage = `url('${avatar}')`;
-      } else {
-        avatarImg.style.backgroundImage = `url('${profileImg}')`;
-      }
+      avatar && isImage(avatar)
+        ? (avatarImgSrc = avatar)
+        : (avatarImgSrc = profileImg);
     } else {
       showErrorMsg(
         document.querySelector('#general-error-profile'),
@@ -73,6 +72,12 @@ getProfileListingsAndUpdate(
     showErrorMsg(document.querySelector('#general-error-profile'));
   })
   .finally(() => {
+    profileSection
+      .querySelector('#profile-info')
+      .insertAdjacentHTML(
+        'afterbegin',
+        `<img src="${avatarImgSrc}" alt="${name}" id="avatar-img" class="object-cover m-auto w-40 h-40 rounded-full"/>`
+      );
     profileSection.classList.remove('hidden');
     removeLoader();
   });
@@ -122,7 +127,7 @@ function getProfileListings() {
                                                        </div>
                                                      </div>
                                                      <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
-                                                       <div class="rounded w-full h-64 bg-cover bg-center" style="background-image: url('${isMedia}')"></div>
+                                                       <img src="${isMedia}" alt="${isTitle}" class="object-cover h-56 rounded sm:h-64 lg:h-72">
                                                        <div class="block bg-blue-700 text-white text-center w-full rounded-md py-2 group-hover:bg-blue-600">Details</div>
                                                      </a>
                                                    </div>`;

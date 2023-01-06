@@ -84,7 +84,8 @@ function getListingDetails(elemScrollTo) {
       titleOfListing.textContent = isTitle;
       listingDescription.textContent = isDescription;
       listingBidContainerTitle.textContent = isTitle;
-      listingImgMain.style.backgroundImage = `url('${listingImg}')`;
+      listingImgMain.setAttribute('src', listingImg);
+      listingImgMain.setAttribute('alt', isTitle);
       currentBid.textContent = 'NO BIDS';
       listingSeller.textContent = seller.name;
 
@@ -99,8 +100,7 @@ function getListingDetails(elemScrollTo) {
           if (i > 4) {
             break;
           }
-          listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-12 w-full bg-cover bg-center rounded lg:h-20"
-                                               style="background-image: url('${media[i]}')"></div>`;
+          listingImgGallery.innerHTML += `<img src="${media[i]}" alt="${isTitle}" class="gallery-img w-full object-cover cursor-pointer h-12 rounded lg:h-20">`;
         }
 
         if (listingImgGallery.childElementCount > 1) {
@@ -144,8 +144,7 @@ function getListingDetails(elemScrollTo) {
       const galleryImgs = document.querySelectorAll('.gallery-img');
       galleryImgs.forEach((item) => {
         item.onclick = function (event) {
-          listingImgMain.style.backgroundImage =
-            event.target.style.backgroundImage;
+          listingImgMain.src = event.target.src;
         };
       });
       elemScrollTo
