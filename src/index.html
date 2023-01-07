@@ -31,9 +31,26 @@
                   />
                 </div>
               </a>
-              <div id="hamburger-btn" class="cursor-pointer sm:hidden">
-                <img src="img/hamburger-menu.svg" alt="Open hamburger menu" />
-              </div>
+              <button
+                id="hamburger-btn"
+                aria-label="Menu"
+                class="cursor-pointer sm:hidden"
+              >
+                <svg
+                  aria-hidden="true"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="ease-out duration-300 pointer-events-none"
+                >
+                  <path
+                    d="M0 24.35H24V20.35H0V24.35ZM0 14.35H24V10.35H0V14.35ZM0 0.349976V4.34998H24V0.349976H0Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
             </div>
             <div
               id="search-profile-container"
@@ -122,17 +139,17 @@
             class="flex flex-col gap-3 sm:flex-row justify-center sm:gap-8 sm:m-0"
           >
             <h2
-              class="text-lg flex flex-row justify-between mr-16 sm:m-0 sm:items-start sm:gap-3.5 after:content-[url('img/checkmark.svg')] after:h-6"
+              class="text-lg flex flex-row justify-between mr-16 sm:m-0 sm:items-start sm:gap-3.5 after:content-checkMark after:h-6"
             >
               Easy to use
             </h2>
             <h2
-              class="text-lg flex flex-row justify-between mr-16 sm:m-0 sm:items-start sm:gap-3.5 after:content-[url('img/checkmark.svg')] after:h-6"
+              class="text-lg flex flex-row justify-between mr-16 sm:m-0 sm:items-start sm:gap-3.5 after:content-checkMark after:h-6"
             >
               Free
             </h2>
             <h2
-              class="text-lg flex flex-row justify-between mr-16 sm:m-0 sm:items-start sm:gap-3.5 after:content-[url('img/checkmark.svg')] after:h-6"
+              class="text-lg flex flex-row justify-between mr-16 sm:m-0 sm:items-start sm:gap-3.5 after:content-checkMark after:h-6"
             >
               Wide selection
             </h2>
