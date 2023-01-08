@@ -60,8 +60,10 @@ function getListingDetails(elemScrollTo) {
         }
       }
 
-      let isTitle = title ? title : 'No Title';
       let isDescription = description ? description : 'No Description';
+      isDescription === 'No Description'
+        ? listingDescription.classList.add('italic', 'text-gray-400')
+        : null;
       let listingImg = media[0] ? media[0] : listingPlaceholderImg;
 
       listingImgMain.classList.add(
@@ -77,18 +79,18 @@ function getListingDetails(elemScrollTo) {
       isDescription = isDescription.substring(0, 200);
       isDescription.length === 200 ? (isDescription += ' ...') : null;
 
-      const capitalizedTitle = isTitle
+      const capitalizedTitle = title
         .split(' ')
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ');
 
       pageTitle.innerText = `Norbid - ${capitalizedTitle}`;
       timeLeft.textContent = timeRemaining;
-      titleOfListing.textContent = isTitle;
+      titleOfListing.textContent = title;
       listingDescription.textContent = isDescription;
-      listingBidContainerTitle.textContent = isTitle;
+      listingBidContainerTitle.textContent = title;
       listingImgMain.setAttribute('src', listingImg);
-      listingImgMain.setAttribute('alt', isTitle);
+      listingImgMain.setAttribute('alt', title);
       currentBid.textContent = 'NO BIDS';
       listingSeller.textContent = seller.name;
 
@@ -103,7 +105,7 @@ function getListingDetails(elemScrollTo) {
           if (i > 4) {
             break;
           }
-          listingImgGallery.innerHTML += `<img src="${media[i]}" alt="${isTitle}" class="gallery-img w-full object-cover cursor-pointer h-12 rounded lg:h-20">`;
+          listingImgGallery.innerHTML += `<img src="${media[i]}" alt="${title}" class="gallery-img w-full object-cover cursor-pointer h-12 rounded lg:h-20">`;
         }
 
         if (listingImgGallery.childElementCount > 1) {
