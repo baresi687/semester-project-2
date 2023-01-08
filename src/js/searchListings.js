@@ -3,6 +3,7 @@ import { API_BASE_URL, GET_LISTINGS } from './settings/api';
 import { listingFeedHtml } from './components/listingFeedHtml';
 import { showErrorMsg } from './utils/errorMessages';
 import { removeLoader } from './components/loader';
+import { handleImgErrors } from './utils/validation';
 
 const searchInput = document.querySelector('#search');
 const searchParam = new URLSearchParams(window.location.search).get('search');
@@ -40,5 +41,8 @@ getListings(API_BASE_URL + GET_LISTINGS, null, 'loader', searchResultsContainer)
     showErrorMsg(document.querySelector('#general-error'));
   })
   .finally(() => {
+    searchResultsContainer.querySelectorAll('img').forEach((img) => {
+      img.addEventListener('error', handleImgErrors);
+    });
     removeLoader();
   });

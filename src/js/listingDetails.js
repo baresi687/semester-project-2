@@ -5,6 +5,7 @@ import { showErrorMsg } from './utils/errorMessages';
 import { DateTime } from 'luxon';
 import { getFromStorage, saveToStorage } from './utils/storage';
 import { buttonProcessing, removeLoader } from './components/loader';
+import { handleImgErrors } from './utils/validation';
 
 const now = DateTime.now();
 const listingDetails = document.querySelector('#listing-details');
@@ -16,7 +17,7 @@ const listingDescription = document.querySelector('#listing-description p');
 const currentBid = document.querySelector('#current-bid');
 const listingSeller = document.querySelector('#listing-seller');
 const timeLeft = document.querySelector('#bid-remaining');
-const listingImgMain = document.querySelector('#listing-img-main');
+const listingImgMain = document.createElement('img');
 const listingImgGallery = document.querySelector('#listing-img-gallery');
 const bidListingForm = document.querySelector('#bid-listing-form');
 const bidOnListingInput = document.querySelector('#bid-on-listing');
@@ -59,20 +60,22 @@ function getListingDetails(elemScrollTo) {
         }
       }
 
-      let isTitle = title;
-      let isDescription = description;
-      let listingImg = media[0];
+      let isTitle = title ? title : 'No Title';
+      let isDescription = description ? description : 'No Description';
+      let listingImg = media[0] ? media[0] : listingPlaceholderImg;
 
-      !isTitle ? (isTitle = 'No Title') : null;
-      !isDescription ? (isDescription = 'No Description') : null;
-      isTitle = isTitle.substring(0, 70);
-      isTitle.length === 70 ? (isTitle += ' ..') : null;
+      listingImgMain.classList.add(
+        'object-cover',
+        'h-72',
+        'rounded',
+        'lg:grow'
+      );
+      document
+        .querySelector('#listing-img')
+        .insertAdjacentElement('afterbegin', listingImgMain);
+
       isDescription = isDescription.substring(0, 200);
-      isDescription.length === 200 ? (isDescription += ' ..') : null;
-
-      if (!listingImg) {
-        listingImg = listingPlaceholderImg;
-      }
+      isDescription.length === 200 ? (isDescription += ' ...') : null;
 
       const capitalizedTitle = isTitle
         .split(' ')
@@ -156,6 +159,8 @@ function getListingDetails(elemScrollTo) {
 }
 
 getListingDetails();
+
+listingImgMain.addEventListener('error', handleImgErrors);
 
 bidListingForm.addEventListener('submit', function (event) {
   event.preventDefault();
