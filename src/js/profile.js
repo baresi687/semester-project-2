@@ -114,14 +114,12 @@ function getProfileListings() {
             let isMedia = media[0];
             let isTitle = title.replace(/</g, '&lt');
             media.forEach((item) => forEditListing.push(item.toString()));
-            isTitle = isTitle.substring(0, 40);
-            isTitle.length === 40 ? (isTitle += ' ..') : null;
             !isMedia ? (isMedia = placeHolderImg) : isMedia;
 
             profileListingsContainer.innerHTML += `<div class="flex flex-col gap-4 py-6 px-6 shadow shadow-gray-400 rounded-lg">
                                                      <div class="flex flex-row gap-2 justify-between items-center h-18">
-                                                       <h3 class="break-words overflow-hidden text-xl font-archivo font-medium capitalize">${isTitle}</h3>
-                                                       <div class="flex flex-col gap-2">
+                                                       <h3 class="overflow-hidden whitespace-nowrap text-ellipsis text-xl font-archivo font-medium capitalize">${isTitle}</h3>
+                                                       <div class="flex flex-row gap-2">
                                                          <button data-id=${id} class="delete-listing bg-red-700 shrink-0 text-white rounded py-1 w-16 text-sm hover:bg-red-600">Delete</button>
                                                          <button data-id=${id} data-title="${title}" data-description="${description}" data-media="${forEditListing}" class="edit-listing bg-amber-400 shrink-0 rounded py-1 w-16 text-sm text-gray-900 hover:brightness-110">Edit</button> 
                                                        </div>
