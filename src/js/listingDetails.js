@@ -19,6 +19,7 @@ const listingSeller = document.querySelector('#listing-seller');
 const timeLeft = document.querySelector('#bid-remaining');
 const listingImgMain = document.createElement('img');
 const listingImgGallery = document.querySelector('#listing-img-gallery');
+const sellerAvatar = document.createElement('img');
 const bidListingForm = document.querySelector('#bid-listing-form');
 const bidOnListingInput = document.querySelector('#bid-on-listing');
 const bidBtn = document.querySelector('#bid-btn');
@@ -35,11 +36,63 @@ function getListingDetails(elemScrollTo) {
     listingDetails
   )
     .then(({ title, media, bids, description, endsAt, seller }) => {
+      const capitalizedTitle = title
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.substring(1))
+        .join(' ');
+      let listingImg = media[0] ? media[0] : listingPlaceholderImg;
       const listingEndsAt = DateTime.fromISO(endsAt);
       const diffObject = listingEndsAt
         .diff(now, ['days', 'hours', 'minutes'])
         .toObject();
       let timeRemaining = '';
+      let isDescription = description ? description : 'No Description';
+
+      pageTitle.innerText = `Norbid - ${capitalizedTitle}`;
+      titleOfListing.textContent = title;
+      listingImgMain.classList.add(
+        'object-cover',
+        'h-72',
+        'rounded',
+        'lg:grow'
+      );
+      document
+        .querySelector('#listing-img')
+        .insertAdjacentElement('afterbegin', listingImgMain);
+      listingImgMain.setAttribute('src', listingImg);
+      listingImgMain.setAttribute('alt', title);
+      listingBidContainerTitle.textContent = title;
+
+      if (media.length > 1) {
+        listingImgGallery.innerHTML = '';
+        for (let i = 0; i < media.length; i++) {
+          if (i > 4) {
+            break;
+          }
+          listingImgGallery.innerHTML += `<img src="${media[i]}" alt="${title}" class="gallery-img w-full object-cover cursor-pointer h-12 rounded lg:h-20">`;
+        }
+
+        if (listingImgGallery.childElementCount > 1) {
+          document.querySelector('#listing-img').classList.add('gap-4');
+        } else {
+          listingImgGallery.classList.add('hidden');
+        }
+      }
+
+      if (accessToken.length && bids.length) {
+        bidsMadeOnListing.classList.remove('hidden');
+        bidsMadeOnListing.querySelector('#bid-list-details').innerHTML = '';
+        const sortedBids = bids.sort((a, b) => a.amount - b.amount);
+        sortedBids.reverse().forEach(({ amount, bidderName }) => {
+          bidsMadeOnListing.querySelector(
+            '#bid-list-details'
+          ).innerHTML += `<li class="my-1 w-full"><span class="text-emerald-700 font-semibold">${amount} credits</span> by ${bidderName}</li>`;
+        });
+      }
+
+      currentBid.textContent = bids.length
+        ? Math.max(...bids.map((bid) => bid.amount)) + ' Credits'
+        : 'NO BIDS';
 
       for (const property in diffObject) {
         if (diffObject[property] > 0) {
@@ -59,76 +112,33 @@ function getListingDetails(elemScrollTo) {
           document.querySelector('#bid-btn').disabled = true;
         }
       }
+      timeLeft.textContent = timeRemaining;
 
-      let isDescription = description ? description : 'No Description';
+      listingSeller.textContent = seller.name;
+      if (seller.avatar) {
+        sellerAvatar.classList.add(
+          'order-2',
+          'object-cover',
+          'rounded-full',
+          'w-8',
+          'h-8'
+        );
+        sellerAvatar.setAttribute('src', seller.avatar);
+        sellerAvatar.setAttribute('alt', seller.name);
+        sellerAvatar.setAttribute('id', 'seller-avatar');
+        listingSeller.insertAdjacentElement('beforebegin', sellerAvatar);
+      }
+
       isDescription === 'No Description'
         ? listingDescription.classList.add('italic', 'text-gray-400')
         : null;
-      let listingImg = media[0] ? media[0] : listingPlaceholderImg;
-
-      listingImgMain.classList.add(
-        'object-cover',
-        'h-72',
-        'rounded',
-        'lg:grow'
-      );
-      document
-        .querySelector('#listing-img')
-        .insertAdjacentElement('afterbegin', listingImgMain);
-
       isDescription = isDescription.substring(0, 200);
       isDescription.length === 200 ? (isDescription += ' ...') : null;
-
-      const capitalizedTitle = title
-        .split(' ')
-        .map((word) => word[0].toUpperCase() + word.substring(1))
-        .join(' ');
-
-      pageTitle.innerText = `Norbid - ${capitalizedTitle}`;
-      timeLeft.textContent = timeRemaining;
-      titleOfListing.textContent = title;
       listingDescription.textContent = isDescription;
-      listingBidContainerTitle.textContent = title;
-      listingImgMain.setAttribute('src', listingImg);
-      listingImgMain.setAttribute('alt', title);
-      currentBid.textContent = 'NO BIDS';
-      listingSeller.textContent = seller.name;
-
-      if (bids.length) {
-        const highestBid = Math.max(...bids.map((bid) => bid.amount));
-        currentBid.textContent = `${highestBid} Credits`;
-      }
-
-      if (media.length > 1) {
-        listingImgGallery.innerHTML = '';
-        for (let i = 0; i < media.length; i++) {
-          if (i > 4) {
-            break;
-          }
-          listingImgGallery.innerHTML += `<img src="${media[i]}" alt="${title}" class="gallery-img w-full object-cover cursor-pointer h-12 rounded lg:h-20">`;
-        }
-
-        if (listingImgGallery.childElementCount > 1) {
-          document.querySelector('#listing-img').classList.add('gap-4');
-        } else {
-          listingImgGallery.classList.add('hidden');
-        }
-      }
 
       accessToken.length
         ? bidOnListingInput.setAttribute('required', '')
         : null;
-
-      if (accessToken.length && bids.length) {
-        bidsMadeOnListing.classList.remove('hidden');
-        bidsMadeOnListing.querySelector('#bid-list-details').innerHTML = '';
-        const sortedBids = bids.sort((a, b) => a.amount - b.amount);
-        sortedBids.reverse().forEach(({ amount, bidderName }) => {
-          bidsMadeOnListing.querySelector(
-            '#bid-list-details'
-          ).innerHTML += `<li class="my-1 w-full"><span class="text-emerald-700 font-semibold">${amount} credits</span> by ${bidderName}</li>`;
-        });
-      }
 
       listingDetails.querySelector('.container').classList.remove('hidden');
 
@@ -163,6 +173,7 @@ function getListingDetails(elemScrollTo) {
 getListingDetails();
 
 listingImgMain.addEventListener('error', handleImgErrors);
+sellerAvatar.addEventListener('error', (event) => event.target.remove());
 
 bidListingForm.addEventListener('submit', function (event) {
   event.preventDefault();
