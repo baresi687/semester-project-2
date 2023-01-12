@@ -108,6 +108,7 @@ function getProfileListings() {
         if (response.length) {
           profileListingsContainer.classList.remove('hidden');
           noListingsElement.classList.add('hidden');
+          editListingModal.classList.remove('hidden');
 
           response.forEach(({ id, title, media, description }) => {
             let forEditListing = [];
@@ -144,6 +145,12 @@ function getProfileListings() {
       const editListingBtn = document.querySelectorAll('.edit-listing');
       editListingBtn.forEach((listing) => {
         listing.onclick = function () {
+          document.querySelectorAll('.opt-img').forEach((item) => {
+            item.remove();
+          });
+          document
+            .querySelector('#general-error-edit-listing')
+            .classList.add('hidden');
           editlistingId = this.dataset.id;
           editImgArr = this.dataset.media.split(',');
           editListingTitle.value = this.dataset.title;
@@ -164,7 +171,7 @@ function getProfileListings() {
                 editImgArr[i];
             }
           }
-          editListingModal.classList.remove('hidden');
+          editListingModal.classList.remove('invisible', 'opacity-0');
         };
       });
 
@@ -222,10 +229,7 @@ editListingForm.addEventListener('submit', function (event) {
     )
       .then((response) => {
         if (response.id) {
-          editListingModal.classList.add('hidden');
-          document.querySelectorAll('.opt-img').forEach((item) => {
-            item.remove();
-          });
+          editListingModal.classList.add('invisible', 'opacity-0');
           getProfileListings();
         }
         if (response.statusCode === 400) {
@@ -247,11 +251,7 @@ editListingForm.addEventListener('submit', function (event) {
 });
 
 editListingModal.querySelector('#close-edit-modal').onclick = function () {
-  editListingModal.classList.add('hidden');
-  document.querySelector('#general-error-edit-listing').classList.add('hidden');
-  document.querySelectorAll('.opt-img').forEach((item) => {
-    item.remove();
-  });
+  editListingModal.classList.add('invisible', 'opacity-0');
 };
 
 addImgInput.onclick = function () {

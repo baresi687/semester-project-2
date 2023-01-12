@@ -141,6 +141,7 @@ function getListingDetails(elemScrollTo) {
         : null;
 
       listingDetails.querySelector('.container').classList.remove('hidden');
+      bidModal.classList.remove('hidden');
 
       bidOnListingInput.onfocus = clearBiddingErrorMsg;
       bidOnListingInput.onkeydown = clearBiddingErrorMsg;
@@ -185,13 +186,13 @@ bidListingForm.addEventListener('submit', function (event) {
       postData
     );
   } else {
-    bidModal.classList.remove('hidden');
+    bidModal.classList.remove('invisible', 'opacity-0');
   }
   bidListingForm.reset();
 });
 
 bidModal.querySelector('#close-modal').onclick = function () {
-  bidModal.classList.add('hidden');
+  bidModal.classList.add('invisible', 'opacity-0');
 };
 
 async function bidOnlisting(url, postData) {
