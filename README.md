@@ -1,10 +1,16 @@
 # Semester Project 2 - Norbid
 
+<div>
+  <img src="semester-project-2-mobile.jpg" height="500" alt="Semester Project 2 Screenshot mobile">
+  &nbsp&nbsp&nbsp  
+  <img src="semester-project-2-desktop.jpg" height="500" alt="Semester Project 2 Screenshot desktop">
+</div>
+<br/>
 An Auction website where users can add items to be bid on and bid on items other users have put up for auction.
 
 ## Description
 
-A website where users can add items to be bid on and bid on items other users have put up for auction.
+A website where users can add items to be bid on, and bid on items other users have put up for auction.
 When a new user joins the website, they are given 1000 credits to use on the site. They can get credits by selling items
 and use credit by buying items. Non-registered users can search through the listings, but only registered users can make
 bids on listings.

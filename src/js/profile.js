@@ -22,7 +22,7 @@ import { createImginput } from './components/createImgInput';
 const profileSection = document.querySelector('#profile');
 const { name } = getFromStorage('userKey');
 const accessToken = getFromStorage('accessToken');
-const avatarImg = document.querySelector('#avatar-img');
+let avatarImgSrc;
 const userName = document.querySelector('#user-name');
 const availableCredits = document.querySelector('#credits');
 const avatarUpdateForm = document.querySelector('#avatar-update');
@@ -47,6 +47,7 @@ redirectNoToken();
 
 profileSection.classList.add('hidden');
 userName.textContent = name;
+
 getProfileListingsAndUpdate(
   API_BASE_URL + GET_PROFILE,
   getlistingsOptions,
@@ -57,11 +58,9 @@ getProfileListingsAndUpdate(
     if (response.name) {
       const { avatar, credits } = response;
       availableCredits.textContent = credits;
-      if (avatar && isImage(avatar)) {
-        avatarImg.style.backgroundImage = `url('${avatar}')`;
-      } else {
-        avatarImg.style.backgroundImage = `url('${profileImg}')`;
-      }
+      avatar && isImage(avatar)
+        ? (avatarImgSrc = avatar)
+        : (avatarImgSrc = profileImg);
     } else {
       showErrorMsg(
         document.querySelector('#general-error-profile'),
@@ -73,6 +72,12 @@ getProfileListingsAndUpdate(
     showErrorMsg(document.querySelector('#general-error-profile'));
   })
   .finally(() => {
+    profileSection
+      .querySelector('#profile-info')
+      .insertAdjacentHTML(
+        'afterbegin',
+        `<img src="${avatarImgSrc}" alt="${name}" id="avatar-img" class="object-cover m-auto w-40 h-40 rounded-full"/>`
+      );
     profileSection.classList.remove('hidden');
     removeLoader();
   });
@@ -103,26 +108,25 @@ function getProfileListings() {
         if (response.length) {
           profileListingsContainer.classList.remove('hidden');
           noListingsElement.classList.add('hidden');
+          editListingModal.classList.remove('hidden');
 
           response.forEach(({ id, title, media, description }) => {
             let forEditListing = [];
             let isMedia = media[0];
             let isTitle = title.replace(/</g, '&lt');
             media.forEach((item) => forEditListing.push(item.toString()));
-            isTitle = isTitle.substring(0, 40);
-            isTitle.length === 40 ? (isTitle += ' ..') : null;
             !isMedia ? (isMedia = placeHolderImg) : isMedia;
 
             profileListingsContainer.innerHTML += `<div class="flex flex-col gap-4 py-6 px-6 shadow shadow-gray-400 rounded-lg">
                                                      <div class="flex flex-row gap-2 justify-between items-center h-18">
-                                                       <h3 class="break-words overflow-hidden text-xl font-krub font-semibold capitalize">${isTitle}</h3>
-                                                       <div class="flex flex-col gap-2">
+                                                       <h3 class="overflow-hidden whitespace-nowrap text-ellipsis text-xl font-archivo font-medium capitalize">${isTitle}</h3>
+                                                       <div class="flex flex-row gap-2">
                                                          <button data-id=${id} class="delete-listing bg-red-700 shrink-0 text-white rounded py-1 w-16 text-sm hover:bg-red-600">Delete</button>
                                                          <button data-id=${id} data-title="${title}" data-description="${description}" data-media="${forEditListing}" class="edit-listing bg-amber-400 shrink-0 rounded py-1 w-16 text-sm text-gray-900 hover:brightness-110">Edit</button> 
                                                        </div>
                                                      </div>
                                                      <a href="listing-details.html?id=${id}" class="group flex flex-col gap-4">
-                                                       <div class="rounded w-full h-64 bg-cover bg-center" style="background-image: url('${isMedia}')"></div>
+                                                       <img src="${isMedia}" alt="${isTitle}" class="object-cover h-56 rounded sm:h-64 lg:h-72">
                                                        <div class="block bg-blue-700 text-white text-center w-full rounded-md py-2 group-hover:bg-blue-600">Details</div>
                                                      </a>
                                                    </div>`;
@@ -141,6 +145,12 @@ function getProfileListings() {
       const editListingBtn = document.querySelectorAll('.edit-listing');
       editListingBtn.forEach((listing) => {
         listing.onclick = function () {
+          document.querySelectorAll('.opt-img').forEach((item) => {
+            item.remove();
+          });
+          document
+            .querySelector('#general-error-edit-listing')
+            .classList.add('hidden');
           editlistingId = this.dataset.id;
           editImgArr = this.dataset.media.split(',');
           editListingTitle.value = this.dataset.title;
@@ -161,7 +171,7 @@ function getProfileListings() {
                 editImgArr[i];
             }
           }
-          editListingModal.classList.remove('hidden');
+          editListingModal.classList.remove('invisible', 'opacity-0');
         };
       });
 
@@ -219,10 +229,7 @@ editListingForm.addEventListener('submit', function (event) {
     )
       .then((response) => {
         if (response.id) {
-          editListingModal.classList.add('hidden');
-          document.querySelectorAll('.opt-img').forEach((item) => {
-            item.remove();
-          });
+          editListingModal.classList.add('invisible', 'opacity-0');
           getProfileListings();
         }
         if (response.statusCode === 400) {
@@ -244,11 +251,7 @@ editListingForm.addEventListener('submit', function (event) {
 });
 
 editListingModal.querySelector('#close-edit-modal').onclick = function () {
-  editListingModal.classList.add('hidden');
-  document.querySelector('#general-error-edit-listing').classList.add('hidden');
-  document.querySelectorAll('.opt-img').forEach((item) => {
-    item.remove();
-  });
+  editListingModal.classList.add('invisible', 'opacity-0');
 };
 
 addImgInput.onclick = function () {

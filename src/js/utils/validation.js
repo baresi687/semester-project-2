@@ -1,3 +1,5 @@
+import listingPlaceholderImg from '../../img/placeholder-image.svg';
+
 function validateString(elem, callBack, length) {
   if (!callBack(elem, length)) {
     elem.classList.add('bg-red-50');
@@ -35,6 +37,10 @@ function isImage(url) {
   }
 }
 
+function handleImgErrors() {
+  this.src = listingPlaceholderImg;
+}
+
 function clearFormErrorsOnKeyUp(inPutElems, apiError) {
   document.querySelectorAll(inPutElems).forEach((item) => {
     item.onkeyup = function () {
@@ -52,5 +58,6 @@ export {
   checkLength,
   checkConfirmPassword,
   isImage,
+  handleImgErrors,
   clearFormErrorsOnKeyUp,
 };

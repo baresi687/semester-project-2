@@ -3,6 +3,7 @@ import { API_BASE_URL, GET_LISTINGS } from './settings/api';
 import { listingFeedHtml } from './components/listingFeedHtml';
 import { showErrorMsg } from './utils/errorMessages';
 import { removeLoader } from './components/loader';
+import { handleImgErrors } from './utils/validation';
 
 const searchInput = document.querySelector('#search');
 const searchParam = new URLSearchParams(window.location.search).get('search');
@@ -33,12 +34,15 @@ getListings(API_BASE_URL + GET_LISTINGS, null, 'loader', searchResultsContainer)
       const html = listingFeedHtml(filteredResponse);
       searchResultsContainer.innerHTML = html.join(' ');
     } else {
-      searchResultsContainer.innerHTML += `<h2 class="text-xl italic font-extralight font-krub mb-60">No Results Found</h2>`;
+      searchResultsContainer.innerHTML += `<h2 class="text-xl italic font-extralight font-archivo mb-60">No Results Found</h2>`;
     }
   })
   .catch(() => {
     showErrorMsg(document.querySelector('#general-error'));
   })
   .finally(() => {
+    searchResultsContainer.querySelectorAll('img').forEach((img) => {
+      img.addEventListener('error', handleImgErrors);
+    });
     removeLoader();
   });

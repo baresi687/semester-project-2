@@ -5,6 +5,7 @@ import { showErrorMsg } from './utils/errorMessages';
 import { DateTime } from 'luxon';
 import { getFromStorage, saveToStorage } from './utils/storage';
 import { buttonProcessing, removeLoader } from './components/loader';
+import { handleImgErrors } from './utils/validation';
 
 const now = DateTime.now();
 const listingDetails = document.querySelector('#listing-details');
@@ -16,8 +17,9 @@ const listingDescription = document.querySelector('#listing-description p');
 const currentBid = document.querySelector('#current-bid');
 const listingSeller = document.querySelector('#listing-seller');
 const timeLeft = document.querySelector('#bid-remaining');
-const listingImgMain = document.querySelector('#listing-img-main');
+const listingImgMain = document.createElement('img');
 const listingImgGallery = document.querySelector('#listing-img-gallery');
+const sellerAvatar = document.createElement('img');
 const bidListingForm = document.querySelector('#bid-listing-form');
 const bidOnListingInput = document.querySelector('#bid-on-listing');
 const bidBtn = document.querySelector('#bid-btn');
@@ -34,65 +36,32 @@ function getListingDetails(elemScrollTo) {
     listingDetails
   )
     .then(({ title, media, bids, description, endsAt, seller }) => {
+      const capitalizedTitle = title
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.substring(1))
+        .join(' ');
+      let listingImg = media[0] ? media[0] : listingPlaceholderImg;
       const listingEndsAt = DateTime.fromISO(endsAt);
       const diffObject = listingEndsAt
         .diff(now, ['days', 'hours', 'minutes'])
         .toObject();
       let timeRemaining = '';
-
-      for (const property in diffObject) {
-        if (diffObject[property] > 0) {
-          switch (property) {
-            case 'days':
-              timeRemaining += `${diffObject[property]} day(s), `;
-              break;
-            case 'hours':
-              timeRemaining += `${diffObject[property]} hour(s) & `;
-              break;
-            case 'minutes':
-              timeRemaining += `${parseInt(diffObject[property])} ${property}`;
-              break;
-          }
-        } else if (diffObject[property] < 0) {
-          timeRemaining = 'BIDDING HAS ENDED';
-          timeLeft.classList.add('text-red-400');
-          document.querySelector('#bid-btn').disabled = true;
-        }
-      }
-
-      let isTitle = title;
-      let isDescription = description;
-      let listingImg = media[0];
-
-      !isTitle ? (isTitle = 'No Title') : null;
-      !isDescription ? (isDescription = 'No Description') : null;
-      isTitle = isTitle.substring(0, 70);
-      isTitle.length === 70 ? (isTitle += ' ..') : null;
-      isDescription = isDescription.substring(0, 200);
-      isDescription.length === 200 ? (isDescription += ' ..') : null;
-
-      if (!listingImg) {
-        listingImg = listingPlaceholderImg;
-      }
-
-      const capitalizedTitle = isTitle
-        .split(' ')
-        .map((word) => word[0].toUpperCase() + word.substring(1))
-        .join(' ');
+      let isDescription = description ? description : 'No Description';
 
       pageTitle.innerText = `Norbid - ${capitalizedTitle}`;
-      timeLeft.textContent = timeRemaining;
-      titleOfListing.textContent = isTitle;
-      listingDescription.textContent = isDescription;
-      listingBidContainerTitle.textContent = isTitle;
-      listingImgMain.style.backgroundImage = `url('${listingImg}')`;
-      currentBid.textContent = 'NO BIDS';
-      listingSeller.textContent = seller.name;
-
-      if (bids.length) {
-        const highestBid = Math.max(...bids.map((bid) => bid.amount));
-        currentBid.textContent = `${highestBid} Credits`;
-      }
+      titleOfListing.textContent = title;
+      listingImgMain.classList.add(
+        'object-cover',
+        'h-72',
+        'rounded',
+        'lg:grow'
+      );
+      document
+        .querySelector('#listing-img')
+        .insertAdjacentElement('afterbegin', listingImgMain);
+      listingImgMain.setAttribute('src', listingImg);
+      listingImgMain.setAttribute('alt', title);
+      listingBidContainerTitle.textContent = title;
 
       if (media.length > 1) {
         listingImgGallery.innerHTML = '';
@@ -100,8 +69,7 @@ function getListingDetails(elemScrollTo) {
           if (i > 4) {
             break;
           }
-          listingImgGallery.innerHTML += `<div class="gallery-img cursor-pointer h-12 w-full bg-cover bg-center rounded lg:h-20"
-                                               style="background-image: url('${media[i]}')"></div>`;
+          listingImgGallery.innerHTML += `<img src="${media[i]}" alt="${title}" class="gallery-img w-full object-cover cursor-pointer h-12 rounded lg:h-20">`;
         }
 
         if (listingImgGallery.childElementCount > 1) {
@@ -110,10 +78,6 @@ function getListingDetails(elemScrollTo) {
           listingImgGallery.classList.add('hidden');
         }
       }
-
-      accessToken.length
-        ? bidOnListingInput.setAttribute('required', '')
-        : null;
 
       if (accessToken.length && bids.length) {
         bidsMadeOnListing.classList.remove('hidden');
@@ -126,7 +90,58 @@ function getListingDetails(elemScrollTo) {
         });
       }
 
+      currentBid.textContent = bids.length
+        ? Math.max(...bids.map((bid) => bid.amount)) + ' Credits'
+        : 'NO BIDS';
+
+      for (const property in diffObject) {
+        if (diffObject[property] > 0) {
+          switch (property) {
+            case 'days':
+              timeRemaining += `${diffObject[property]}d `;
+              break;
+            case 'hours':
+              timeRemaining += `${diffObject[property]}h `;
+              break;
+            case 'minutes':
+              timeRemaining += `${parseInt(diffObject[property])}min`;
+              break;
+          }
+        } else if (diffObject[property] < 0) {
+          timeRemaining = 'BIDDING HAS ENDED';
+          document.querySelector('#bid-btn').disabled = true;
+        }
+      }
+      timeLeft.textContent = timeRemaining;
+
+      listingSeller.textContent = seller.name;
+      if (seller.avatar) {
+        sellerAvatar.classList.add(
+          'order-2',
+          'object-cover',
+          'rounded-full',
+          'w-8',
+          'h-8'
+        );
+        sellerAvatar.setAttribute('src', seller.avatar);
+        sellerAvatar.setAttribute('alt', seller.name);
+        sellerAvatar.setAttribute('id', 'seller-avatar');
+        listingSeller.insertAdjacentElement('beforebegin', sellerAvatar);
+      }
+
+      isDescription === 'No Description'
+        ? listingDescription.classList.add('italic', 'text-gray-400')
+        : null;
+      isDescription = isDescription.substring(0, 200);
+      isDescription.length === 200 ? (isDescription += ' ...') : null;
+      listingDescription.textContent = isDescription;
+
+      accessToken.length
+        ? bidOnListingInput.setAttribute('required', '')
+        : null;
+
       listingDetails.querySelector('.container').classList.remove('hidden');
+      bidModal.classList.remove('hidden');
 
       bidOnListingInput.onfocus = clearBiddingErrorMsg;
       bidOnListingInput.onkeydown = clearBiddingErrorMsg;
@@ -145,8 +160,7 @@ function getListingDetails(elemScrollTo) {
       const galleryImgs = document.querySelectorAll('.gallery-img');
       galleryImgs.forEach((item) => {
         item.onclick = function (event) {
-          listingImgMain.style.backgroundImage =
-            event.target.style.backgroundImage;
+          listingImgMain.src = event.target.src;
         };
       });
       elemScrollTo
@@ -159,6 +173,9 @@ function getListingDetails(elemScrollTo) {
 
 getListingDetails();
 
+listingImgMain.addEventListener('error', handleImgErrors);
+sellerAvatar.addEventListener('error', (event) => event.target.remove());
+
 bidListingForm.addEventListener('submit', function (event) {
   event.preventDefault();
   if (accessToken.length) {
@@ -169,13 +186,13 @@ bidListingForm.addEventListener('submit', function (event) {
       postData
     );
   } else {
-    bidModal.classList.remove('hidden');
+    bidModal.classList.remove('invisible', 'opacity-0');
   }
   bidListingForm.reset();
 });
 
 bidModal.querySelector('#close-modal').onclick = function () {
-  bidModal.classList.add('hidden');
+  bidModal.classList.add('invisible', 'opacity-0');
 };
 
 async function bidOnlisting(url, postData) {

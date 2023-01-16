@@ -22,16 +22,38 @@
     >
       <div id="header-main">
         <div class="container mx-auto px-4 max-w-7xl xl:px-0">
-          <div class="sm:flex items-center justify-between gap-x-8">
+          <div class="sm:flex items-center justify-between gap-x-10">
             <div class="flex justify-between py-6">
               <a href="/">
-                <div class="w-44">
-                  <img src="img/logo.svg" alt="logo" title="Home" />
+                <div>
+                  <img
+                    src="img/logo.svg"
+                    alt="logo"
+                    title="Home"
+                    class="h-9 sm:mb-0.5"
+                  />
                 </div>
               </a>
-              <div id="hamburger-btn" class="cursor-pointer sm:hidden">
-                <img src="img/hamburger-menu.svg" alt="Open hamburger menu" />
-              </div>
+              <button
+                id="hamburger-btn"
+                aria-label="Menu"
+                class="cursor-pointer sm:hidden"
+              >
+                <svg
+                  aria-hidden="true"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="ease-out duration-300 pointer-events-none"
+                >
+                  <path
+                    d="M0 24.35H24V20.35H0V24.35ZM0 14.35H24V10.35H0V14.35ZM0 0.349976V4.34998H24V0.349976H0Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
             </div>
             <div
               id="search-profile-container"
@@ -56,10 +78,7 @@
                   Search
                 </button>
               </div>
-              <nav
-                id="sign-up-log-in-desktop"
-                class="hidden sm:flex gap-3 ml-auto order-2"
-              >
+              <nav id="sign-up-log-in-desktop" class="hidden">
                 <a
                   href="sign-up.html"
                   class="bg-amber-400 text-black rounded-md py-2 px-4 whitespace-nowrap hover:brightness-110"
@@ -124,18 +143,14 @@
             class="flex flex-col gap-16 sm:flex-row sm:gap-10"
           >
             <div class="shrink-0">
-              <h1 class="text-2xl mb-4 font-krub font-semibold">Profile</h1>
+              <h1 class="text-2xl mb-4 font-archivo font-medium">Profile</h1>
               <div
                 id="profile-info"
                 class="px-10 py-12 shadow shadow-gray-400 rounded-lg sm:max-w-xs h-max"
               >
-                <div
-                  id="avatar-img"
-                  class="m-auto w-40 rounded-full h-40 bg-no-repeat bg-center bg-cover"
-                ></div>
                 <h2
                   id="user-name"
-                  class="text-3xl my-6 font-krub italic text-center"
+                  class="text-3xl my-6 font-archivo italic text-center"
                 >
                   John
                 </h2>
@@ -173,7 +188,9 @@
               </div>
             </div>
             <div id="profile-listings" class="pb-8 rounded-lg sm:grow sm:mt-0">
-              <h2 class="text-2xl mb-4 font-krub font-semibold">My Listings</h2>
+              <h2 class="text-2xl mb-4 font-archivo font-medium">
+                My Listings
+              </h2>
               <div
                 id="no-listings"
                 class="shadow shadow-gray-400 rounded-lg w-full p-6 sm:w-fit"
@@ -199,7 +216,7 @@
       </section>
       <section
         id="modal"
-        class="hidden fixed flex justify-center items-center overflow-auto z-10 w-full h-full top-0 bg-neutral-900/90"
+        class="hidden invisible opacity-0 ease-in-out duration-300 fixed flex justify-center items-center overflow-auto z-10 w-full h-full top-0 bg-neutral-900/90"
       >
         <div id="modal-content" class="max-w-md w-full m-auto">
           <div class="rounded-md overflow-hidden">
@@ -207,20 +224,25 @@
               class="flex justify-between items-center bg-amber-400 py-3 px-4"
             >
               <p class="text-lg">Edit Listing</p>
-              <svg
+              <button
                 id="close-edit-modal"
                 class="cursor-pointer hover:text-gray-600"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
+                aria-label="Close Edit Modal"
               >
-                <path
-                  d="M24 2.41714L21.5829 0L12 9.58286L2.41714 0L0 2.41714L9.58286 12L0 21.5829L2.41714 24L12 14.4171L21.5829 24L24 21.5829L14.4171 12L24 2.41714Z"
+                <svg
+                  class="pointer-events-none"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
                   fill="currentColor"
-                />
-              </svg>
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M24 2.41714L21.5829 0L12 9.58286L2.41714 0L0 2.41714L9.58286 12L0 21.5829L2.41714 24L12 14.4171L21.5829 24L24 21.5829L14.4171 12L24 2.41714Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
             </div>
             <div class="bg-white">
               <div id="edit-listing-container" class="">
@@ -228,7 +250,7 @@
                   id="edit-listing-form"
                   class="flex flex-col gap-6 p-12 shadow shadow-gray-400 rounded-lg sm:max-w-md sm:m-0 sm:m-auto"
                 >
-                  <h1 class="text-3xl font-krub font-semibold mb-4">
+                  <h1 class="text-3xl font-archivo font-medium mb-4">
                     Edit Listing
                   </h1>
                   <div class="flex flex-col gap-2">
@@ -308,9 +330,12 @@
           id="footer-content"
           class="flex flex-col gap-14 pb-28 sm:flex-row justify-between"
         >
-          <div id="footer-logo-description" class="sm:w-40">
+          <div
+            id="footer-logo-description"
+            class="flex flex-col items-start gap-3 sm:w-40"
+          >
             <a href="/">
-              <div class="pb-4"><img src="img/logo.svg" alt="logo" /></div>
+              <img src="img/logo.svg" alt="logo" />
             </a>
             <p class="font-extralight">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
