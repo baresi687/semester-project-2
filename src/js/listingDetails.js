@@ -157,6 +157,9 @@ function getListingDetails(elemScrollTo) {
     })
     .finally(() => {
       removeLoader();
+      document.querySelectorAll('.gallery-img').forEach((img) => {
+        img.addEventListener('error', handleImgErrors);
+      });
       const galleryImgs = document.querySelectorAll('.gallery-img');
       galleryImgs.forEach((item) => {
         item.onclick = function (event) {
