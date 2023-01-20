@@ -39,6 +39,6 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
-    "src/**/.js": "eslint"
+    "src/**/*.js": "eslint"
   }
 }
