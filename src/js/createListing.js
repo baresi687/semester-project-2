@@ -1,12 +1,5 @@
-import {
-  API_BASE_URL,
-  GET_LISTING_DETAILS as POST_LISTING,
-} from './settings/api';
-import {
-  clearFormErrorsOnKeyUp,
-  isImage,
-  validateString,
-} from './utils/validation';
+import { API_BASE_URL, GET_LISTING_DETAILS as POST_LISTING } from './settings/api';
+import { clearFormErrorsOnKeyUp, isImage, validateString } from './utils/validation';
 import { getListings as createListing } from './settings/getListings';
 import { getFromStorage } from './utils/storage';
 import { DateTime } from 'luxon';
@@ -35,18 +28,13 @@ createListingForm.addEventListener('submit', function (event) {
 
   if (optionalImg.length) {
     for (let i = 0; i < optionalImg.length; i++) {
-      optionalImgBool.push(
-        !optionalImg[i].value || validateString(optionalImg[i], isImage)
-      );
+      optionalImgBool.push(!optionalImg[i].value || validateString(optionalImg[i], isImage));
     }
   }
 
   if (isImageValid && optionalImgBool.every((item) => item)) {
     createListingForm.querySelector('button').innerHTML = buttonProcessing;
-    const dateValue = DateTime.fromISO(listingDatePicker.value)
-      .minus({ hour: 1 })
-      .toISO()
-      .slice(0, -13);
+    const dateValue = DateTime.fromISO(listingDatePicker.value).minus({ hour: 1 }).toISO().slice(0, -13);
     const postData = {
       title: document.querySelector('#item-title').value.trim(),
       description: document.querySelector('#item-description').value.trim(),
@@ -72,10 +60,7 @@ createListingForm.addEventListener('submit', function (event) {
           location.href = `listing-details.html?id=${response.id}`;
         }
         if (response.statusCode === 400) {
-          showErrorMsg(
-            document.querySelector('#general-error'),
-            response.errors[0].message
-          );
+          showErrorMsg(document.querySelector('#general-error'), response.errors[0].message);
         } else if (response.statusCode === 404) {
           showErrorMsg(document.querySelector('#general-error'));
         }

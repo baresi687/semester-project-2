@@ -7,9 +7,7 @@ import { handleImgErrors } from './utils/validation';
 
 const searchInput = document.querySelector('#search');
 const searchParam = new URLSearchParams(window.location.search).get('search');
-const searchResultsContainer = document.querySelector(
-  '#search-results-container'
-);
+const searchResultsContainer = document.querySelector('#search-results-container');
 searchInput.value = searchParam;
 searchInput.focus();
 
@@ -19,14 +17,10 @@ getListings(API_BASE_URL + GET_LISTINGS, null, 'loader', searchResultsContainer)
       if (item.description) {
         return (
           item.title.toLowerCase().includes(searchParam.toLowerCase().trim()) ||
-          item.description
-            .toLowerCase()
-            .includes(searchParam.toLowerCase().trim())
+          item.description.toLowerCase().includes(searchParam.toLowerCase().trim())
         );
       } else {
-        return item.title
-          .toLowerCase()
-          .includes(searchParam.toLowerCase().trim());
+        return item.title.toLowerCase().includes(searchParam.toLowerCase().trim());
       }
     });
 

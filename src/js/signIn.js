@@ -1,9 +1,4 @@
-import {
-  validateString,
-  checkLength,
-  checkEmail,
-  clearFormErrorsOnKeyUp,
-} from './utils/validation';
+import { validateString, checkLength, checkEmail, clearFormErrorsOnKeyUp } from './utils/validation';
 import { API_BASE_URL, SIGN_IN } from './settings/api';
 import { showErrorMsg } from './utils/errorMessages';
 import { buttonProcessing } from './components/loader';
@@ -20,9 +15,7 @@ signInForm.addEventListener('submit', function (event) {
   event.preventDefault();
   document.querySelector('#general-error').classList.add('hidden');
 
-  const isFormValid =
-    validateString(email, checkEmail) &&
-    validateString(password, checkLength, 8);
+  const isFormValid = validateString(email, checkEmail) && validateString(password, checkLength, 8);
 
   if (isFormValid) {
     const formData = {
@@ -57,10 +50,7 @@ async function signIn(url, postData) {
       saveToStorage('userKey', userKey);
       location.href = '/';
     } else {
-      showErrorMsg(
-        document.querySelector('#general-error'),
-        responseJSON.errors[0].message
-      );
+      showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message);
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'));

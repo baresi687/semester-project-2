@@ -1,16 +1,6 @@
 import { getFromStorage, saveToStorage } from './utils/storage';
-import {
-  clearFormErrorsOnKeyUp,
-  isImage,
-  validateString,
-} from './utils/validation';
-import {
-  API_BASE_URL,
-  AVATAR_UPDATE,
-  PROFILE_LISTINGS,
-  GET_PROFILE,
-  GET_LISTING_DETAILS,
-} from './settings/api';
+import { clearFormErrorsOnKeyUp, isImage, validateString } from './utils/validation';
+import { API_BASE_URL, AVATAR_UPDATE, PROFILE_LISTINGS, GET_PROFILE, GET_LISTING_DETAILS } from './settings/api';
 import { showErrorMsg } from './utils/errorMessages';
 import { buttonProcessing, removeLoader } from './components/loader';
 import { getListings as getProfileListingsAndUpdate } from './settings/getListings';
@@ -48,19 +38,12 @@ redirectNoToken();
 profileSection.classList.add('hidden');
 userName.textContent = name;
 
-getProfileListingsAndUpdate(
-  API_BASE_URL + GET_PROFILE,
-  getlistingsOptions,
-  'loader',
-  profileSection
-)
+getProfileListingsAndUpdate(API_BASE_URL + GET_PROFILE, getlistingsOptions, 'loader', profileSection)
   .then((response) => {
     if (response.name) {
       const { avatar, credits } = response;
       availableCredits.textContent = credits;
-      avatar && isImage(avatar)
-        ? (avatarImgSrc = avatar)
-        : (avatarImgSrc = profileImg);
+      avatar && isImage(avatar) ? (avatarImgSrc = avatar) : (avatarImgSrc = profileImg);
     } else {
       showErrorMsg(
         document.querySelector('#general-error-profile'),
@@ -95,10 +78,7 @@ avatarUpdateForm.addEventListener('submit', function (event) {
 });
 
 function getProfileListings() {
-  getProfileListingsAndUpdate(
-    API_BASE_URL + PROFILE_LISTINGS,
-    getlistingsOptions
-  )
+  getProfileListingsAndUpdate(API_BASE_URL + PROFILE_LISTINGS, getlistingsOptions)
     .then((response) => {
       profileListingsContainer.innerHTML = '';
       noListingsElement.classList.remove('hidden');
@@ -148,16 +128,12 @@ function getProfileListings() {
           document.querySelectorAll('.opt-img').forEach((item) => {
             item.remove();
           });
-          document
-            .querySelector('#general-error-edit-listing')
-            .classList.add('hidden');
+          document.querySelector('#general-error-edit-listing').classList.add('hidden');
           editlistingId = this.dataset.id;
           editImgArr = this.dataset.media.split(',');
           editListingTitle.value = this.dataset.title;
           editListingDesc.value = this.dataset.description;
-          editListingDesc.value =
-            editListingDesc.value.charAt(0).toUpperCase() +
-            editListingDesc.value.slice(1);
+          editListingDesc.value = editListingDesc.value.charAt(0).toUpperCase() + editListingDesc.value.slice(1);
           editListingImg.value = editImgArr[0];
 
           if (editImgArr.length) {
@@ -167,8 +143,7 @@ function getProfileListings() {
                 '#edit-listing-container form .input-val',
                 '#general-error-edit-listing'
               );
-              document.querySelector(`#item-img-${i + 1}`).value =
-                editImgArr[i];
+              document.querySelector(`#item-img-${i + 1}`).value = editImgArr[i];
             }
           }
           editListingModal.classList.remove('invisible', 'opacity-0');
@@ -196,9 +171,7 @@ editListingForm.addEventListener('submit', function (event) {
 
   if (optionalImg.length) {
     for (let i = 0; i < optionalImg.length; i++) {
-      optionalImgBool.push(
-        !optionalImg[i].value || validateString(optionalImg[i], isImage)
-      );
+      optionalImgBool.push(!optionalImg[i].value || validateString(optionalImg[i], isImage));
     }
   }
 
@@ -223,20 +196,14 @@ editListingForm.addEventListener('submit', function (event) {
       body: JSON.stringify(putData),
     };
 
-    getProfileListingsAndUpdate(
-      API_BASE_URL + GET_LISTING_DETAILS + editlistingId,
-      options
-    )
+    getProfileListingsAndUpdate(API_BASE_URL + GET_LISTING_DETAILS + editlistingId, options)
       .then((response) => {
         if (response.id) {
           editListingModal.classList.add('invisible', 'opacity-0');
           getProfileListings();
         }
         if (response.statusCode === 400) {
-          showErrorMsg(
-            document.querySelector('#general-error-edit-listing'),
-            response.errors[0].message
-          );
+          showErrorMsg(document.querySelector('#general-error-edit-listing'), response.errors[0].message);
         } else if (response.statusCode === 404) {
           showErrorMsg(document.querySelector('#general-error-edit-listing'));
         }
@@ -255,11 +222,7 @@ editListingModal.querySelector('#close-edit-modal').onclick = function () {
 };
 
 addImgInput.onclick = function () {
-  createImginput(
-    mainEditImgContainer,
-    '#edit-listing-container form .input-val',
-    '#general-error-edit-listing'
-  );
+  createImginput(mainEditImgContainer, '#edit-listing-container form .input-val', '#general-error-edit-listing');
 };
 
 async function updateAvatar(url, putData) {
@@ -286,10 +249,7 @@ async function updateAvatar(url, putData) {
       saveToStorage('userKey', userKey);
       location.href = '/profile.html';
     } else if (response.status === 400) {
-      showErrorMsg(
-        document.querySelector('#general-error-profile'),
-        responseJSON.errors[0].message
-      );
+      showErrorMsg(document.querySelector('#general-error-profile'), responseJSON.errors[0].message);
     } else {
       showErrorMsg(document.querySelector('#general-error-profile'));
     }
@@ -309,19 +269,11 @@ async function deleteListing(url) {
       },
     };
     const response = await fetch(url, options);
-    response.ok
-      ? getProfileListings()
-      : showErrorMsg(document.querySelector('#general-error-listings'));
+    response.ok ? getProfileListings() : showErrorMsg(document.querySelector('#general-error-listings'));
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error-listings'));
   }
 }
 
-clearFormErrorsOnKeyUp(
-  '#avatar-update-container form input',
-  '#general-error-profile'
-);
-clearFormErrorsOnKeyUp(
-  '#edit-listing-container form .input-val',
-  '#general-error-edit-listing'
-);
+clearFormErrorsOnKeyUp('#avatar-update-container form input', '#general-error-profile');
+clearFormErrorsOnKeyUp('#edit-listing-container form .input-val', '#general-error-edit-listing');

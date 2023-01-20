@@ -1,10 +1,6 @@
 import { clearFormErrorsOnKeyUp } from '../utils/validation';
 
-function createImginput(
-  elem,
-  inputs = 'form .input-val',
-  errorElem = '#general-error'
-) {
+function createImginput(elem, inputs = 'form .input-val', errorElem = '#general-error') {
   const imageInputs = document.querySelectorAll('.input-val');
   const imageId = imageInputs.length + 1;
   if (imageInputs.length < 5) {
@@ -48,15 +44,8 @@ function createImginput(
     );
 
     let inputError = document.createElement('span');
-    inputError.classList.add(
-      'hidden',
-      'order-3',
-      'validation-error',
-      'text-rose-700',
-      'py-1.5'
-    );
-    inputError.textContent =
-      'Image URL must have an image ending (eg .jpg .gif .png etc)';
+    inputError.classList.add('hidden', 'order-3', 'validation-error', 'text-rose-700', 'py-1.5');
+    inputError.textContent = 'Image URL must have an image ending (eg .jpg .gif .png etc)';
 
     labelImg.append(spanRemove, inputImg, inputError);
 
