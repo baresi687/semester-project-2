@@ -8,8 +8,8 @@
     "build": "vite build --emptyOutDir",
     "preview": "vite preview",
     "format": "npx prettier --write src/**/*.{html,css,js}",
-    "lint": "npx eslint src/**/*.js",
-    "lint-fix": "npx eslint src/**/*.js --fix",
+    "lint": "npx eslint 'src/js/**/*.js'",
+    "lint-fix": "npx eslint --fix 'src/js/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
@@ -39,6 +39,6 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
-    "src/**/*.js": "eslint"
+    "src/js/**/*.js": "eslint"
   }
 }
