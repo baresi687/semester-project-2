@@ -1,5 +1,5 @@
-import {resolve} from 'path'
-import {defineConfig} from 'vite'
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: resolve(__dirname, 'src'),
@@ -12,9 +12,9 @@ export default defineConfig({
         signUp: resolve(__dirname, './src/sign-up.html'),
         signIn: resolve(__dirname, './src/sign-in.html'),
         profile: resolve(__dirname, './src/profile.html'),
-        createListing: resolve(__dirname, './src/create-listing.html')
-      }
+        createListing: resolve(__dirname, './src/create-listing.html'),
+      },
     },
-    outDir: '../dist'
-  }
-})
+    outDir: '../dist',
+  },
+});
