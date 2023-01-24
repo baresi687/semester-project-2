@@ -40,7 +40,7 @@ function getListingDetails(elemScrollTo) {
         .split(' ')
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ');
-      let listingImg = media[0] ? media[0] : listingPlaceholderImg;
+      const listingImg = media[0] ? media[0] : listingPlaceholderImg;
       const listingEndsAt = DateTime.fromISO(endsAt);
       const diffObject = listingEndsAt.diff(now, ['days', 'hours', 'minutes']).toObject();
       let timeRemaining = '';

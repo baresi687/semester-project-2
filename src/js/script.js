@@ -50,7 +50,7 @@ if (document.querySelector('#sign-out')) {
 let prevScrollPos = window.scrollY;
 
 window.addEventListener('scroll', function () {
-  let currScrollPos = window.scrollY;
+  const currScrollPos = window.scrollY;
   if (currScrollPos > prevScrollPos) {
     document.querySelector('header').style.top = '-100%';
   } else {

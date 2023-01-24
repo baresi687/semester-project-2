@@ -24,7 +24,7 @@ createListingForm.addEventListener('submit', function (event) {
 
   const isImageValid = validateString(listingImgOne, isImage);
   const optionalImg = document.querySelectorAll('.optional-img');
-  let optionalImgBool = [];
+  const optionalImgBool = [];
 
   if (optionalImg.length) {
     for (let i = 0; i < optionalImg.length; i++) {

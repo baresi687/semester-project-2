@@ -91,9 +91,9 @@ function getProfileListings() {
           editListingModal.classList.remove('hidden');
 
           response.forEach(({ id, title, media, description }) => {
-            let forEditListing = [];
+            const forEditListing = [];
             let isMedia = media[0];
-            let isTitle = title.replace(/</g, '&lt');
+            const isTitle = title.replace(/</g, '&lt');
             media.forEach((item) => forEditListing.push(item.toString()));
             !isMedia ? (isMedia = placeHolderImg) : isMedia;
 
@@ -167,7 +167,7 @@ editListingForm.addEventListener('submit', function (event) {
 
   const isImageValid = validateString(editListingImg, isImage);
   const optionalImg = document.querySelectorAll('.optional-img');
-  let optionalImgBool = [];
+  const optionalImgBool = [];
 
   if (optionalImg.length) {
     for (let i = 0; i < optionalImg.length; i++) {
