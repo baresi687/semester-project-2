@@ -1,21 +1,17 @@
 import { clearFormErrorsOnKeyUp } from '../utils/validation';
 
-function createImginput(
-  elem,
-  inputs = 'form .input-val',
-  errorElem = '#general-error'
-) {
+function createImginput(elem, inputs = 'form .input-val', errorElem = '#general-error') {
   const imageInputs = document.querySelectorAll('.input-val');
   const imageId = imageInputs.length + 1;
   if (imageInputs.length < 5) {
-    let divContainer = document.createElement('div');
+    const divContainer = document.createElement('div');
     divContainer.classList.add('flex', 'flex-col', 'gap-2', 'opt-img', 'mt-2');
 
-    let labelImg = document.createElement('label');
+    const labelImg = document.createElement('label');
     labelImg.setAttribute('for', `item-img-${imageId}`);
     labelImg.classList.add('flex', 'flex-row', 'flex-wrap', 'gap-2');
 
-    let spanRemove = document.createElement('span');
+    const spanRemove = document.createElement('span');
     spanRemove.classList.add(
       'remove-input',
       'order-2',
@@ -31,7 +27,7 @@ function createImginput(
     );
     spanRemove.innerHTML = '<span>-</span>';
 
-    let inputImg = document.createElement('input');
+    const inputImg = document.createElement('input');
     inputImg.id = `item-img-${imageId}`;
     inputImg.setAttribute('type', 'text');
     inputImg.setAttribute('placeholder', 'Image URL');
@@ -47,16 +43,9 @@ function createImginput(
       'w-full'
     );
 
-    let inputError = document.createElement('span');
-    inputError.classList.add(
-      'hidden',
-      'order-3',
-      'validation-error',
-      'text-rose-700',
-      'py-1.5'
-    );
-    inputError.textContent =
-      'Image URL must have an image ending (eg .jpg .gif .png etc)';
+    const inputError = document.createElement('span');
+    inputError.classList.add('hidden', 'order-3', 'validation-error', 'text-rose-700', 'py-1.5');
+    inputError.textContent = 'Image URL must have an image ending (eg .jpg .gif .png etc)';
 
     labelImg.append(spanRemove, inputImg, inputError);
 

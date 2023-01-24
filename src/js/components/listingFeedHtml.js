@@ -4,8 +4,8 @@ export function listingFeedHtml(arr) {
   return arr
     .filter(({ title }) => title)
     .map(({ id, media, title, bids }) => {
-      let listingImg = media[0] ? media[0] : listingPlaceholderImg;
-      let titleOfListing = title.replace(/</g, '&lt');
+      const listingImg = media[0] ? media[0] : listingPlaceholderImg;
+      const titleOfListing = title.replace(/</g, '&lt');
       let currentBid = 'NO BIDS';
 
       if (bids.length) {

@@ -54,10 +54,7 @@ async function signUp(url, postData) {
     if (response.ok) {
       location.href = '../sign-in.html';
     } else {
-      showErrorMsg(
-        document.querySelector('#general-error'),
-        responseJSON.errors[0].message
-      );
+      showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message);
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'));

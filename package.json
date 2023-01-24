@@ -7,8 +7,11 @@
     "dev": "vite",
     "build": "vite build --emptyOutDir",
     "preview": "vite preview",
-    "format": "npx prettier --write src/**/*.{html,js}",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "npx prettier --write src/**/*.{html,css,js} *.js",
+    "lint": "npx eslint 'src/js/**/*.js'",
+    "lint-fix": "npx eslint --fix 'src/js/**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,10 @@
   "homepage": "https://github.com/baresi687/semester-project-2#readme",
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
     "postcss": "^8.4.19",
     "prettier": "2.8.1",
     "tailwindcss": "^3.2.4",
@@ -29,5 +36,9 @@
   },
   "dependencies": {
     "luxon": "^3.1.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown",
+    "src/js/**/*.js": "eslint"
   }
 }

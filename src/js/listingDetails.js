@@ -40,25 +40,16 @@ function getListingDetails(elemScrollTo) {
         .split(' ')
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ');
-      let listingImg = media[0] ? media[0] : listingPlaceholderImg;
+      const listingImg = media[0] ? media[0] : listingPlaceholderImg;
       const listingEndsAt = DateTime.fromISO(endsAt);
-      const diffObject = listingEndsAt
-        .diff(now, ['days', 'hours', 'minutes'])
-        .toObject();
+      const diffObject = listingEndsAt.diff(now, ['days', 'hours', 'minutes']).toObject();
       let timeRemaining = '';
       let isDescription = description ? description : 'No Description';
 
       pageTitle.innerText = `Norbid - ${capitalizedTitle}`;
       titleOfListing.textContent = title;
-      listingImgMain.classList.add(
-        'object-cover',
-        'h-72',
-        'rounded',
-        'lg:grow'
-      );
-      document
-        .querySelector('#listing-img')
-        .insertAdjacentElement('afterbegin', listingImgMain);
+      listingImgMain.classList.add('object-cover', 'h-72', 'rounded', 'lg:grow');
+      document.querySelector('#listing-img').insertAdjacentElement('afterbegin', listingImgMain);
       listingImgMain.setAttribute('src', listingImg);
       listingImgMain.setAttribute('alt', title);
       listingBidContainerTitle.textContent = title;
@@ -90,9 +81,7 @@ function getListingDetails(elemScrollTo) {
         });
       }
 
-      currentBid.textContent = bids.length
-        ? Math.max(...bids.map((bid) => bid.amount)) + ' Credits'
-        : 'NO BIDS';
+      currentBid.textContent = bids.length ? Math.max(...bids.map((bid) => bid.amount)) + ' Credits' : 'NO BIDS';
 
       for (const property in diffObject) {
         if (diffObject[property] > 0) {
@@ -116,29 +105,19 @@ function getListingDetails(elemScrollTo) {
 
       listingSeller.textContent = seller.name;
       if (seller.avatar) {
-        sellerAvatar.classList.add(
-          'order-2',
-          'object-cover',
-          'rounded-full',
-          'w-8',
-          'h-8'
-        );
+        sellerAvatar.classList.add('order-2', 'object-cover', 'rounded-full', 'w-8', 'h-8');
         sellerAvatar.setAttribute('src', seller.avatar);
         sellerAvatar.setAttribute('alt', seller.name);
         sellerAvatar.setAttribute('id', 'seller-avatar');
         listingSeller.insertAdjacentElement('beforebegin', sellerAvatar);
       }
 
-      isDescription === 'No Description'
-        ? listingDescription.classList.add('italic', 'text-gray-400')
-        : null;
+      isDescription === 'No Description' ? listingDescription.classList.add('italic', 'text-gray-400') : null;
       isDescription = isDescription.substring(0, 200);
       isDescription.length === 200 ? (isDescription += ' ...') : null;
       listingDescription.textContent = isDescription;
 
-      accessToken.length
-        ? bidOnListingInput.setAttribute('required', '')
-        : null;
+      accessToken.length ? bidOnListingInput.setAttribute('required', '') : null;
 
       listingDetails.querySelector('.container').classList.remove('hidden');
       bidModal.classList.remove('hidden');
@@ -184,10 +163,7 @@ bidListingForm.addEventListener('submit', function (event) {
   if (accessToken.length) {
     bidBtn.innerHTML = buttonProcessing;
     const postData = { amount: Number(bidOnListingInput.value) };
-    bidOnlisting(
-      API_BASE_URL + GET_LISTING_DETAILS + listingID + '/bids',
-      postData
-    );
+    bidOnlisting(API_BASE_URL + GET_LISTING_DETAILS + listingID + '/bids', postData);
   } else {
     bidModal.classList.remove('invisible', 'opacity-0');
   }
@@ -216,10 +192,7 @@ async function bidOnlisting(url, postData) {
       saveToStorage('userKey', userKey);
       getListingDetails('scrollTo');
     } else if (response.status === 400 || response.status === 403) {
-      showErrorMsg(
-        document.querySelector('.bidding-error'),
-        responseJSON.errors[0].message
-      );
+      showErrorMsg(document.querySelector('.bidding-error'), responseJSON.errors[0].message);
     } else {
       showErrorMsg(document.querySelector('.bidding-error'));
     }
