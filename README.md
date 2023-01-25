@@ -1,9 +1,9 @@
 # Semester Project 2 - Norbid
 
 <div>
-  <img src="semester-project-2-mobile.jpg" height="500" alt="Semester Project 2 Screenshot mobile">
-  &nbsp&nbsp&nbsp  
-  <img src="semester-project-2-desktop.jpg" height="500" alt="Semester Project 2 Screenshot desktop">
+ <img src="semester-project-2-mobile.jpg" height="500px" alt="Semester Project 2 Screenshot mobile"> 
+ &nbsp&nbsp&nbsp 
+ <img src="semester-project-2-desktop.jpg" height="auto" width="528" alt="Semester Project 2 Screenshot desktop">
 </div>
 <br/>
 An Auction website where users can add items to be bid on and bid on items other users have put up for auction.
@@ -69,5 +69,3 @@ Note: On signing up the email does not have to be a real email address. It just 
 ## Contact
 
 [My LinkedIn page](https://www.linkedin.com/in/hreinn-gylfason-b9a48521a/)
-
-
