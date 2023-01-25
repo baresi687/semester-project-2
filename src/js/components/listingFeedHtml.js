@@ -1,10 +1,8 @@
-import listingPlaceholderImg from '../../img/placeholder-image.svg';
-
 export function listingFeedHtml(arr) {
   return arr
-    .filter(({ title }) => title)
+    .filter(({ title, media }) => title && media.length)
     .map(({ id, media, title, bids }) => {
-      const listingImg = media[0] ? media[0] : listingPlaceholderImg;
+      const listingImg = media[0];
       const titleOfListing = title.replace(/</g, '&lt');
       let currentBid = 'NO BIDS';
 

@@ -3,7 +3,6 @@ import { API_BASE_URL, GET_LISTINGS } from './settings/api';
 import { showErrorMsg } from './utils/errorMessages';
 import { listingFeedHtml } from './components/listingFeedHtml';
 import { removeLoader } from './components/loader';
-import { handleImgErrors } from './utils/validation';
 
 const listingsContainer = document.querySelector('#listings-container');
 
@@ -17,7 +16,7 @@ getListings(API_BASE_URL + GET_LISTINGS, null, 'loader', listingsContainer)
   })
   .finally(() => {
     listingsContainer.querySelectorAll('img').forEach((img) => {
-      img.addEventListener('error', handleImgErrors);
+      img.addEventListener('error', (event) => event.target.parentElement.parentElement.remove());
     });
     removeLoader();
   });
