@@ -1,6 +1,5 @@
 import { API_BASE_URL, GET_LISTING_DETAILS } from './settings/api';
 import { getListings } from './settings/getListings';
-import listingPlaceholderImg from '../img/placeholder-image.svg';
 import { showErrorMsg } from './utils/errorMessages';
 import { DateTime } from 'luxon';
 import { getFromStorage, saveToStorage } from './utils/storage';
@@ -40,7 +39,7 @@ function getListingDetails(elemScrollTo) {
         .split(' ')
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ');
-      const listingImg = media[0] ? media[0] : listingPlaceholderImg;
+      const listingImg = media[0];
       const listingEndsAt = DateTime.fromISO(endsAt);
       const diffObject = listingEndsAt.diff(now, ['days', 'hours', 'minutes']).toObject();
       let timeRemaining = '';
@@ -137,7 +136,11 @@ function getListingDetails(elemScrollTo) {
     .finally(() => {
       removeLoader();
       document.querySelectorAll('.gallery-img').forEach((img) => {
-        img.addEventListener('error', handleImgErrors);
+        img.addEventListener('error', (event) => {
+          event.target.remove();
+          listingImgGallery.classList.add('hidden');
+          document.querySelector('#listing-img').classList.remove('gap-4');
+        });
       });
       const galleryImgs = document.querySelectorAll('.gallery-img');
       galleryImgs.forEach((item) => {
