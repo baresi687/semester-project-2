@@ -35,7 +35,6 @@ const addImgInput = document.querySelector('#add-img');
 
 redirectNoToken();
 
-profileSection.classList.add('hidden');
 userName.textContent = name;
 
 getProfileListingsAndUpdate(API_BASE_URL + GET_PROFILE, getlistingsOptions, 'loader', profileSection)

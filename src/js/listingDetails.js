@@ -153,6 +153,7 @@ function getListingDetails(elemScrollTo) {
             block: 'center',
           })
         : null;
+      listingDetails.classList.remove('hidden');
     });
 }
 
