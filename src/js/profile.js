@@ -61,6 +61,7 @@ getProfileListingsAndUpdate(API_BASE_URL + GET_PROFILE, getlistingsOptions, 'loa
         `<img src="${avatarImgSrc}" alt="${name}" id="avatar-img" class="object-cover m-auto w-40 h-40 rounded-full"/>`
       );
     profileSection.classList.remove('hidden');
+    document.querySelector('main').classList.remove('min-h-screen');
     removeLoader();
   });
 
@@ -246,7 +247,7 @@ async function updateAvatar(url, putData) {
         avatar: responseJSON.avatar,
       };
       saveToStorage('userKey', userKey);
-      location.href = '/profile.html';
+      location.reload();
     } else if (response.status === 400) {
       showErrorMsg(document.querySelector('#general-error-profile'), responseJSON.errors[0].message);
     } else {
