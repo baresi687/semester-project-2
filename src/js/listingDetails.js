@@ -154,6 +154,7 @@ function getListingDetails(elemScrollTo) {
           })
         : null;
       listingDetails.classList.remove('hidden');
+      document.querySelector('main').classList.remove('min-h-screen');
     });
 }
 
