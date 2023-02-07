@@ -6,6 +6,7 @@ const hamburgerBtn = document.querySelector('#hamburger-btn');
 const hamburgerMenu = document.querySelector('#hamburger-menu');
 const searchInput = document.querySelector('#search');
 const searchBtn = document.querySelector('#search-btn');
+const header = document.querySelector('header');
 
 createNavHeaderBar();
 
@@ -51,10 +52,11 @@ let prevScrollPos = window.scrollY;
 
 window.addEventListener('scroll', function () {
   const currScrollPos = window.scrollY;
+  const headerHeight = '-' + header.offsetHeight + 'px';
   if (currScrollPos > prevScrollPos) {
-    document.querySelector('header').style.top = '-100%';
+    header.style.top = headerHeight;
   } else {
-    document.querySelector('header').style.top = '0';
+    header.style.top = '0';
   }
   prevScrollPos = currScrollPos;
 });
